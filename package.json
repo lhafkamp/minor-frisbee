@@ -1,0 +1,31 @@
+{
+  "name": "minor-frisbee",
+  "version": "1.0.0",
+  "description": "real-time app for ultimate frisbee tournaments",
+  "main": "app.js",
+  "scripts": {
+    "watch": "watchify public/js/app.js -o public/js/bundle.js",
+    "build": "browserify public/js/app.js -o public/js/bundle.js",
+    "start": "nodemon app.js && npm run watch"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lhafkamp/minor-frisbee.git"
+  },
+  "author": "Luuk Hafkamp",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/lhafkamp/minor-frisbee/issues"
+  },
+  "homepage": "https://github.com/lhafkamp/minor-frisbee#readme",
+  "dependencies": {
+    "ejs": "^2.5.6",
+    "express": "^4.15.2",
+    "request": "^2.81.0"
+  },
+  "devDependencies": {
+    "browserify": "^14.3.0",
+    "nodemon": "^1.11.0",
+    "watchify": "^3.9.0"
+  }
+}
