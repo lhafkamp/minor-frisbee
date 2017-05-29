@@ -1,4 +1,5 @@
 const express = require('express');
+const session = require('express-session');
 const path = require('path');
 
 // require routes
@@ -13,6 +14,14 @@ app.use(express.static(path.join(__dirname, 'public')));
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
+
+// store data from request to request
+app.use(session({
+	secret: process.env.SES_SECRET,
+	key: process.env.SES_KEY,
+	resave: false,
+	saveUninitialized: false,
+}));
 
 // handle routes
 app.use('/', routes);

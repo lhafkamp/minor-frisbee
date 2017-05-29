@@ -27,9 +27,15 @@ exports.authSuccess = (req, res) => {
 			console.error('everything is wrong');
 		} else {
 			const data = JSON.parse(body);
-			console.log(body);
+			req.session.token = data.access_token;
 
-			res.redirect('main');
+			request(`https://api.leaguevine.com/v1/tournament_teams/?tournament_ids=%5B19526%5D&access_token=${data.access_token}`, (err, response, body) => {
+				const data = JSON.parse(body);
+				data.objects.forEach(obj => {
+					console.log(obj.team.name);
+				})
+				res.redirect('main');
+			});
 		}
 	});
 }
