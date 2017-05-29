@@ -1,5 +1,3 @@
-const request = require('request');
-
-exports.homePage = (req, res) => {
-	res.render('index');
+exports.mainPage = (req, res) => {
+	res.render('main')
 }
