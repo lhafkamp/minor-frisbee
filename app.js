@@ -8,16 +8,14 @@ const routes = require('./routes/index');
 const app = express();
 
 // get the public files
-app.use(express.static('public'));
+app.use(express.static(path.join(__dirname, 'public')));
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
-// render the index page
-app.get('/', (req, res) => {
-	res.render('index');
-});
+// handle routes
+app.use('/', routes);
 
 // run the app
 app.listen(3000, () => {
