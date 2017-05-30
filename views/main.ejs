@@ -1,28 +1,5 @@
 <%- include ./part/header.ejs %>
 
-<h1>Score</h1>
-
-<div id="score">
-	<div>
-		<button>+1</button>
-		<button>no</button>
-	</div>
-	<p></p>
-	<p>-</p>
-	<p></p>
-	<div>
-		<button>+1</button>
-		<button>no</button>
-	</div>
-</div>
-
-<button class="done">Done</button>
-
-<form class="hide" method="POST" action="/main/score/">
-	<h2>Final score</h2>
-	<input type="text" name="team_1_score" value="">
-	<input type="text" name="team_2_score" value="">
-	<button type="submit" name="submit">Submit</button>
-</form>
+<a href="/score">Team Luuk vs Team notLuuk</a>
 
 <%- include ./part/footer.ejs %>
