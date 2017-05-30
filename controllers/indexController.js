@@ -13,8 +13,9 @@ exports.homePage = (req, res) => {
 }
 
 exports.authSuccess = (req, res) => {
-	request.post({
+	request({
 		url: `http://www.playwithlv.com/oauth2/token`,
+		method: "POST",
 		form: {
 			client_id: client_id,
 			client_secret: client_secret,
@@ -28,14 +29,7 @@ exports.authSuccess = (req, res) => {
 		} else {
 			const data = JSON.parse(body);
 			req.session.token = data.access_token;
-
-			request(`http://api.playwithlv.com/v1/tournament_teams/?tournament_ids=%5B20059%5D&access_token=${data.access_token}`, (err, response, body) => {
-				const data = JSON.parse(body);
-				data.objects.forEach(obj => {
-					console.log(obj.team.name);
-				});
-				res.redirect('main');
-			});
+			res.redirect('main');
 		}
 	});
 }
