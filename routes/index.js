@@ -1,11 +1,11 @@
 const express = require('express')
 const router = express.Router()
-const indexController = require('../controllers/indexController');
+const authController = require('../controllers/authController');
 const mainController = require('../controllers/mainController');
 const scoreController = require('../controllers/scoreController');
 
-router.get('/', indexController.homePage);
-router.get('/success', indexController.authSuccess);
+router.get('/', authController.homePage);
+router.get('/success', authController.authSuccess);
 
 router.get('/main', mainController.mainPage);
 

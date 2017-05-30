@@ -24,9 +24,9 @@ exports.form = (req, res) => {
 		body: score
 	}, (err, response, body) => {
 		if (err) {
-			console.error('Updating scores failed');
+			console.error('Updating result failed');
 		} else {
-			console.log('Scores updated!');
+			console.log('Result updated!');
 			res.redirect('/main');
 		}
 	});
