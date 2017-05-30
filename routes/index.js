@@ -3,12 +3,10 @@ const router = express.Router()
 const indexController = require('../controllers/indexController');
 const mainController = require('../controllers/mainController');
 
-router.get('/', indexController.dev);
-router.post('/test', indexController.form);
-
-// router.get('/', indexController.homePage);
+router.get('/', indexController.homePage);
 router.get('/success', indexController.authSuccess);
 
 router.get('/main', mainController.mainPage);
+router.post('/main/score/', mainController.form);
 
 module.exports = router;
