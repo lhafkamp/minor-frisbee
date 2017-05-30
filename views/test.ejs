@@ -1,0 +1,19 @@
+<%- include ./part/header.ejs %>
+
+<h1>Development</h1>
+
+<div id="score">
+	<p>1</p>
+	<p>4</p>
+</div>
+
+<button class="done">Done</button>
+
+<form method="POST" action="/test/">
+	<h2>Final score</h2>
+	<input type="text" name="scoreA" value="">
+	<input type="text" name="scoreB" value="">
+	<button type="submit" name="submit">Submit</button>
+</form>
+
+<%- include ./part/footer.ejs %>

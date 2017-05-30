@@ -19,10 +19,11 @@
   },
   "homepage": "https://github.com/lhafkamp/minor-frisbee#readme",
   "dependencies": {
+    "body-parser": "^1.17.2",
+    "dotenv": "^4.0.0",
     "ejs": "^2.5.6",
     "express": "^4.15.2",
-    "request": "^2.81.0",
-    "dotenv": "^4.0.0"
+    "request": "^2.81.0"
   },
   "devDependencies": {
     "browserify": "^14.3.0",

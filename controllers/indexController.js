@@ -5,6 +5,14 @@ const client_id = process.env.CLIENT_ID;
 const client_secret = process.env.CLIENT_SECRET;
 const redirect_uri = process.env.REDIRECT_URI;
 
+exports.dev = (req, res) => {
+	res.render('test');
+}
+
+exports.form = (req, res) => {
+	res.json(req.body);
+}
+
 exports.homePage = (req, res) => {
 	const auth_url = `http://www.playwithlv.com/oauth2/authorize/?client_id=${client_id}&response_type=code&redirect_uri=${redirect_uri}&scope=universal`;
 	res.render('index', {
