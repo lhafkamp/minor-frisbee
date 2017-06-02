@@ -1,1 +1,2 @@
+require('./percentage');
 require('./score');
