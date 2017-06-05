@@ -1,1 +1,2 @@
+require('./io');
 require('./score');

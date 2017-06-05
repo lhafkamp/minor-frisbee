@@ -2,8 +2,11 @@
 
 <h1>Score</h1>
 
+<button class="start">Start event</button>
+
 <div id="score">
 	<div>
+		<h3 class="leftPrc">0</h3>
 		<button>+1</button>
 		<button>no</button>
 	</div>
@@ -11,10 +14,13 @@
 	<p>-</p>
 	<p></p>
 	<div>
+		<h3 class="rightPrc">0</h3>
 		<button>+1</button>
 		<button>no</button>
 	</div>
 </div>
+
+<h2 class="timer">0</h2>
 
 <button class="done">Done</button>
 
@@ -25,4 +31,5 @@
 	<button type="submit" name="submit">Submit</button>
 </form>
 
+<script src="/js/bundle.js"></script>
 <%- include ./part/footer.ejs %>
