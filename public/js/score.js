@@ -4,10 +4,10 @@ const inputs = document.querySelectorAll('form input');
 const numbers = document.querySelectorAll('#score p');
 
 // start out with 0
-let leftNumber = 0;
-let rightNumber = 0;
-numbers[0].innerHTML = leftNumber;
-numbers[2].innerHTML = rightNumber;
+// let leftNumber = 0;
+// let rightNumber = 0;
+// numbers[0].innerHTML = leftNumber;
+// numbers[2].innerHTML = rightNumber;
 
 // fill in form when done
 function fillInForm() {

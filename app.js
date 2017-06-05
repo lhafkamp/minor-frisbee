@@ -30,7 +30,7 @@ app.use(session({
 	saveUninitialized: false,
 }));
 
-// socket connections
+// socket vars
 const connections = [];
 let score = 0;
 let upVotes = 0;
@@ -80,6 +80,8 @@ io.on('connection', (socket) => {
 			io.sockets.emit('voteResult', score);
 			upVotes = 0;
 			downVotes = 0;
+		} else {
+			io.sockets.emit('percentage', 0);
 		}
 	});
 });

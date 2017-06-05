@@ -16,7 +16,7 @@ start.addEventListener('click', sendEvent);
 
 // show time event to the clients
 socket.on('timeStarted', () => {
-	let counter = 10;
+	let counter = 5;
 	let interval = setInterval(() => {
 		counter -= 1;
 		if (counter === 0) {
@@ -29,6 +29,7 @@ socket.on('timeStarted', () => {
 
 socket.on('voteResult', score => {
 	numbers[0].innerHTML = score;
+	leftPercentage.innerHTML = 0;
 });
 
 function sendScore() {
