@@ -40,6 +40,11 @@ io.on('connection', (socket) => {
 		connections.splice(connections.indexOf(socket), 1);
 		console.log(`A socket disconnected, ${connections.length} remaining socket(s) connected`);
 	});
+
+	socket.on('timeEvent', () => {
+		const started = 'time event started';
+		io.sockets.emit('timeStarted', started)
+	});
 });
 
 // handle routes
