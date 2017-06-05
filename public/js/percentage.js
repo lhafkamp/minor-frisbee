@@ -13,10 +13,10 @@ function startEvent() {
 	leftVotes.disabled = false;
 	rightVotes.disabled = false;
 
-	let timesRun = 0;
+	let timesRun = 10;
 	let interval = setInterval(() => {
-	    timesRun += 1;
-	    if(timesRun === 10){
+	    timesRun -= 1;
+	    if(timesRun === 0){
 	        clearInterval(interval);
 	    }
 	    document.querySelector('.timer').innerHTML = timesRun;

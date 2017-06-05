@@ -23,7 +23,9 @@
     "dotenv": "^4.0.0",
     "ejs": "^2.5.6",
     "express": "^4.15.2",
-    "request": "^2.81.0"
+    "request": "^2.81.0",
+    "socket.io": "^2.0.2",
+    "socket.io-client": "^2.0.2"
   },
   "devDependencies": {
     "browserify": "^14.3.0",

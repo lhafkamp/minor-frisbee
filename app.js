@@ -1,13 +1,15 @@
+const path = require('path');
+const http = require('http').Server;
 const express = require('express');
+const socketio = require('socket.io');
 const session = require('express-session');
 const bodyParser = require('body-parser');
-const path = require('path');
 
-// require routes
 const routes = require('./routes/index');
-
-// define app
 const app = express();
+const server = http(app);
+const io = socketio(server);
+const port = process.env.PORT || 3000;
 
 // get the public files
 app.use(express.static(path.join(__dirname, 'public')));
@@ -28,10 +30,22 @@ app.use(session({
 	saveUninitialized: false,
 }));
 
+// socket connections
+const connections = [];
+
+io.on('connection', (socket) => {
+	connections.push(socket);
+	console.log(`${connections.length} socket(s) connected`);
+	socket.on('disconnect', () => {
+		connections.splice(connections.indexOf(socket), 1);
+		console.log(`A socket disconnected, ${connections.length} remaining socket(s) connected`);
+	});
+});
+
 // handle routes
 app.use('/', routes);
 
 // run the app
-app.listen(3000, () => {
+server.listen(port, () => {
 	console.log('Running on http://localhost:3000');
 });
