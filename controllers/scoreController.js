@@ -1,7 +1,12 @@
 const request = require('request');
 
 exports.scorePage = (req, res) => {
-	res.render('score');
+	request(`http://api.playwithlv.com/v1/games/?game_ids=%5B${req.params.id}%5D&tournament_id=20254&pool_id=20177&access_token=${req.session.token}`, (err, response, body) => {
+		const data = JSON.parse(body);
+		res.render('score', {
+			teams: data
+		});
+	})
 }
 
 exports.form = (req, res) => {

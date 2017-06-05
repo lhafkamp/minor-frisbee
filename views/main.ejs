@@ -1,6 +1,9 @@
 <%- include ./part/header.ejs %>
 
 <h1>Matches</h1>
-<a href="/score">Team Luuk vs Team notLuuk</a>
+
+<% teams.objects.forEach(team => { %>
+	<a href="/score/<%= team.id %>"><%= team.team_1.name %> vs <%= team.team_2.name %></a>
+<% }); %>
 
 <%- include ./part/footer.ejs %>

@@ -1,5 +1,9 @@
 <%- include ./part/header.ejs %>
 
+<% teams.objects.forEach(team => { %>
+	<p><%= team.team_1.name %> vs <%= team.team_2.name %></p>
+<% }); %>
+
 <h1>Score</h1>
 
 <button class="start">Start event</button>
