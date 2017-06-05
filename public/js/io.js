@@ -4,6 +4,7 @@ const start = document.querySelector('.start');
 const timer = document.querySelector('.timer');
 const leftVotes = document.querySelectorAll('#score div:first-of-type button');
 const numbers = document.querySelectorAll('#score p');
+const leftPercentage = document.querySelector('.leftPrc');
 
 // send time event to the server
 function sendEvent() {
@@ -37,5 +38,9 @@ function sendScore() {
 		socket.emit('downVote');
  	}
 }
+
+socket.on('percentage', percentage => {
+	leftPercentage.innerHTML = percentage;
+});
 
 leftVotes.forEach(vote => vote.addEventListener('click', sendScore));
