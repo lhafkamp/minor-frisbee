@@ -1,7 +1,9 @@
 const request = require('request');
 
 exports.scorePage = (req, res) => {
-	res.render('score');
+	res.render('score', {
+		score: score
+	});
 }
 
 exports.form = (req, res) => {
