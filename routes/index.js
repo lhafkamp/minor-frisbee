@@ -9,7 +9,7 @@ router.get('/success', authController.authSuccess);
 
 router.get('/main', mainController.mainPage);
 
-router.get('/score', scoreController.scorePage);
+router.get('/score/:id/', scoreController.scorePage);
 router.post('/score/result', scoreController.form);
 
 module.exports = router;

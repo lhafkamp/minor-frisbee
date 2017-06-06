@@ -6,6 +6,16 @@ const leftVotes = document.querySelectorAll('#score div:first-of-type button');
 const numbers = document.querySelectorAll('#score p');
 const leftPercentage = document.querySelector('.leftPrc');
 
+const location = window.location.href;
+const locationIndex = location.indexOf('/score/');
+const params = location.slice(locationIndex + 7);
+
+socket.emit('create', params);
+
+socket.on('event', () => {
+	console.log('someone joined the room');
+})
+
 // send time event to the server
 function sendEvent() {
 	socket.emit('timeEvent');
