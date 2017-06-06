@@ -4,13 +4,6 @@ exports.scorePage = (req, res) => {
 	const params = req.params.id;
 	const gameData = poolData.filter(data => data.id === Number(params));
 
-
-	// const io = req.app.get('io');
-	// io.sockets.on('create', (room) => {
-	// 	socket.join(room);
-	// 	console.log('room joined', room);
-	// });
-
 	res.render('score', {
 		teams: gameData
 	});

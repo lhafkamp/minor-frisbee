@@ -10,8 +10,8 @@ const location = window.location.href;
 const locationIndex = location.indexOf('/score/');
 const params = location.slice(locationIndex + 7);
 
+// create room
 socket.emit('create', params);
-
 socket.on('event', () => {
 	console.log('someone joined the room');
 })
@@ -37,8 +37,14 @@ socket.on('timeStarted', () => {
 	}, 1000);
 });
 
+// Lockr tryout
+numbers[0].innerHTML = Lockr.get(params).score || 0;
+
 socket.on('voteResult', score => {
-	numbers[0].innerHTML = score;
+	// numbers[0].innerHTML = score;
+	Lockr.set(params, { score: score });
+	numbers[0].innerHTML = Lockr.get(params).score;
+
 	leftPercentage.innerHTML = 0;
 });
 
