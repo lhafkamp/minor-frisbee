@@ -32,9 +32,6 @@ app.use(session({
 
 // socket vars
 const connections = [];
-let score = 0;
-let upVotes = 0;
-let downVotes = 0;
 
 io.on('connection', (socket) => {
 	connections.push(socket);
@@ -44,45 +41,55 @@ io.on('connection', (socket) => {
 		console.log(`A socket disconnected, ${connections.length} remaining socket(s) connected`);
 	});
 
-	// emit time event to the clients
-	socket.on('timeEvent', () => {
-		const started = 'time event started';
-		io.sockets.emit('timeStarted', started);
-	});
+	socket.on('create', (room) => {
+		let score = 0;
+		let upVotes = 0;
+		let downVotes = 0;
+		
+		console.log(`someone entered room: ${room}`);
+		socket.join(room);
+		io.sockets.in(room).emit('event');
 
-	// update votes
-	socket.on('upVote', () => {
-		upVotes += 1;
-		const total = upVotes + downVotes;
-		const percentage = Math.round(upVotes / total * 100);
-		console.log(`current score: ${percentage}`);
-		io.sockets.emit('percentage', percentage);
-	});
+		// emit time event to the clients
+		socket.on('timeEvent', () => {
+			const started = 'time event started';
+			io.sockets.in(room).emit('timeStarted', started);
+		});
 
-	// update votes
-	socket.on('downVote', () => {
-		downVotes += 1;
-		const total = upVotes + downVotes;
-		const percentage = Math.round(upVotes / total * 100);
-		console.log(`current score: ${percentage}`);
-		io.sockets.emit('percentage', percentage);
-	});
+		// update votes
+		socket.on('upVote', () => {
+			upVotes += 1;
+			const total = upVotes + downVotes;
+			const percentage = Math.round(upVotes / total * 100);
+			console.log(`current score: ${percentage}`);
+			io.sockets.in(room).emit('percentage', percentage);
+		});
 
-	// on vote end send final result
-	socket.on('voteEnd', () => {
-		const total = upVotes + downVotes;
-		const percentage = Math.round(upVotes / total * 100);
-		console.log(`final percentage: ${percentage}`);
+		// update votes
+		socket.on('downVote', () => {
+			downVotes += 1;
+			const total = upVotes + downVotes;
+			const percentage = Math.round(upVotes / total * 100);
+			console.log(`current score: ${percentage}`);
+			io.sockets.in(room).emit('percentage', percentage);
+		});
 
-		if (percentage > 50) {
-			score += 1;
-			console.log(`score updated to: ${score}`);
-			io.sockets.emit('voteResult', score);
-			upVotes = 0;
-			downVotes = 0;
-		} else {
-			io.sockets.emit('percentage', 0);
-		}
+		// on vote end send final result
+		socket.on('voteEnd', () => {
+			const total = upVotes + downVotes;
+			const percentage = Math.round(upVotes / total * 100);
+			console.log(`final percentage: ${percentage}`);
+
+			if (percentage > 50) {
+				score += 1;
+				console.log(`score updated to: ${score}`);
+				io.sockets.in(room).emit('voteResult', score);
+				upVotes = 0;
+				downVotes = 0;
+			} else {
+				io.sockets.in(room).emit('percentage', 0);
+			}
+		});
 	});
 });
 
