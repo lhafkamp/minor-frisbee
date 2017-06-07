@@ -59,7 +59,7 @@ io.on('connection', (socket) => {
 		Game.find({ game_id: room }, async (err, game) => {
 			if (err) throw err;
 			let score = game[0].score;
-			let upVotes = 0;
+			let upVotes = game[0].upVotes;
 			let downVotes = 0;
 			
 			console.log(`someone entered room: ${room}`);
@@ -73,7 +73,7 @@ io.on('connection', (socket) => {
 					counter -= 1;
 
 					// COUNTER TEST *****
-					Game.findOneAndUpdate({ game_id: room }, { counter: counter }, { upsert: true}, (err, result) => {
+					Game.findOneAndUpdate({ game_id: room }, { counter: counter }, { upsert: true }, (err, result) => {
 						if (err) throw err;
 					});
 					// ******************
@@ -88,6 +88,14 @@ io.on('connection', (socket) => {
 			// update votes
 			socket.on('upVote', () => {
 				upVotes += 1;
+
+				// UPVOTE TEST *****
+				Game.findOneAndUpdate({ game_id: room }, { upVotes: upVotes }, { upsert: true }, (err, result) => {
+					if (err) throw err;
+					console.log(result);
+				});
+				// *****************
+
 				const total = upVotes + downVotes;
 				const percentage = Math.round(upVotes / total * 100);
 				console.log(`current score: ${percentage}`);
@@ -115,7 +123,7 @@ io.on('connection', (socket) => {
 					upVotes = 0;
 					downVotes = 0;
 
-					Game.findOneAndUpdate({ game_id: room }, { score: score }, { upsert: true}, (err, result) => {
+					Game.findOneAndUpdate({ game_id: room }, { score: score }, { upsert: true }, (err, result) => {
 						if (err) throw err;
 						console.log(`score updated to: ${score}`);
 					});

@@ -32,7 +32,8 @@ exports.scorePage = (req, res) => {
 		function redirectNew() {
 			res.render('score', {
 				teams: gameData,
-				score: 0
+				score: 0,
+				counter: 0
 			});
 		}
 
