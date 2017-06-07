@@ -43,7 +43,9 @@ The first week I started out by getting to know the Leaguevine API. I set up the
 -  [x] simple increment/decrement interface where users could raise/lower the score of each team
 -  [x] a final score form where the changed numbers are put in as values, can still be changed by the user
 -  [x] POST the final score to the API
--  [x] made a client side time event prototype
+-  [x] made a client side time-based event prototype
+-  [x] voting percentage changes depending on how many upvotes/downvotes there are
+-  [x] score gets updated if the voting percentages is higher than 50%
 
 ### Week 2
 This week it was important that the time-based events could be done in real-time. The biggest challenge was getting multiple rooms to show unique events, next to socket rooms I had to add a database so that users would see the same data when they just entered an ongoing socket event. I tried out Lockr, a server side version of localStorage but it didn't live up to my standards because I would lose all data when the client/Javascript would not work for some reason. I decided to stick to MongoDB and carry on. 
