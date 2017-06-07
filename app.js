@@ -60,7 +60,7 @@ io.on('connection', (socket) => {
 			if (err) throw err;
 			let score = game[0].score;
 			let upVotes = game[0].upVotes;
-			let downVotes = 0;
+			let downVotes = game[0].downVotes;
 			
 			console.log(`someone entered room: ${room}`);
 			socket.join(room);
@@ -72,15 +72,18 @@ io.on('connection', (socket) => {
 				let interval = setInterval(() => {
 					counter -= 1;
 
+					if (counter === 0) {
+						clearInterval(interval);
+					}
+
 					// COUNTER TEST *****
-					Game.findOneAndUpdate({ game_id: room }, { counter: counter }, { upsert: true }, (err, result) => {
+					Game.findOneAndUpdate({ game_id: room }, 
+						{ counter: counter }, 
+						{ upsert: true }, (err, result) => {
 						if (err) throw err;
 					});
 					// ******************
 
-					if (counter === 0) {
-						clearInterval(interval);
-					}
 					io.sockets.in(room).emit('timeStarted', counter);
 				}, 1000);
 			});
@@ -90,14 +93,24 @@ io.on('connection', (socket) => {
 				upVotes += 1;
 
 				// UPVOTE TEST *****
-				Game.findOneAndUpdate({ game_id: room }, { upVotes: upVotes }, { upsert: true }, (err, result) => {
+				Game.findOneAndUpdate({ game_id: room }, 
+					{ upVotes: upVotes }, 
+					{ upsert: true }, (err, result) => {
 					if (err) throw err;
-					console.log(result);
 				});
 				// *****************
 
 				const total = upVotes + downVotes;
 				const percentage = Math.round(upVotes / total * 100);
+
+				// PERCENTAGE TEST *****
+				Game.findOneAndUpdate({ game_id: room }, 
+					{ percentage: percentage }, 
+					{ upsert: true }, (err, result) => {
+					if (err) throw err;
+				});
+				// *****************
+
 				console.log(`current score: ${percentage}`);
 				io.sockets.in(room).emit('percentage', percentage);
 			});
@@ -105,8 +118,26 @@ io.on('connection', (socket) => {
 			// update votes
 			socket.on('downVote', () => {
 				downVotes += 1;
+
+				// DOWNVOTE TEST *****
+				Game.findOneAndUpdate({ game_id: room }, 
+					{ upVotes: upVotes }, 
+					{ upsert: true }, (err, result) => {
+					if (err) throw err;
+				});
+				// *****************
+
 				const total = upVotes + downVotes;
 				const percentage = Math.round(upVotes / total * 100);
+
+				// PERCENTAGE TEST *****
+				Game.findOneAndUpdate({ game_id: room }, 
+					{ percentage: percentage }, 
+					{ upsert: true }, (err, result) => {
+					if (err) throw err;
+				});
+				// *****************
+
 				console.log(`current score: ${percentage}`);
 				io.sockets.in(room).emit('percentage', percentage);
 			});
@@ -117,20 +148,24 @@ io.on('connection', (socket) => {
 				const percentage = Math.round(upVotes / total * 100);
 				console.log(`final percentage: ${percentage}`);
 
-				if (percentage > 50) {
+				if (percentage > 70) {
+					// update score
 					score += 1;
 					io.sockets.in(room).emit('voteResult', score);
-					upVotes = 0;
-					downVotes = 0;
-
-					Game.findOneAndUpdate({ game_id: room }, { score: score }, { upsert: true }, (err, result) => {
-						if (err) throw err;
-						console.log(`score updated to: ${score}`);
-					});
-
 				} else {
 					io.sockets.in(room).emit('percentage', 0);
 				}
+
+				// clear voting process
+				upVotes = 0;
+				downVotes = 0;
+
+				Game.findOneAndUpdate({ game_id: room }, 
+					{ score: score, upVotes: 0, downVotes: 0, percentage: 0 }, 
+					{ upsert: true }, (err, result) => {
+					if (err) throw err;
+					console.log(`score updated to: ${score}`);
+				});
 			});
 		});
 	});

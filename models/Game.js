@@ -7,6 +7,7 @@ const gameSchema = new Schema({
 	score: Number,
 	upVotes: Number,
 	downVotes: Number,
+	percentage: Number,
 	counter: Number
 });
 
