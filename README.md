@@ -26,13 +26,15 @@ One of the most remarkable things about Ultimate Frisbee is that there is no ref
 ## TODO
 -  [x] saving the voting events/game rooms in a database
 -  [ ] synchronise the voting system or let incoming users wait
+-  [ ] enable the interface during the time-based event, disable it otherwise
+-  [ ] users should only be able to vote once during a time-based event
 -  [ ] feedback about the voting process
 -  [ ] loading indicator
 -  [ ] styling
 -  [ ] UX
 -  [ ] feature detection where a user that cannot vote won't see the voting interface
 
-## Process
+## Coding process
 ### Week 1
 The first week I started out by getting to know the Leaguevine API. I set up the OAuth 2.0 protocol so that users can log in with Leaguevine in order to get the correct data/rights for the app. The most important thing I had to check was to see if I could make a POST to the API with an adjustable score. The way I did this that was to move the adjustable score into another "final score" form where the user could still adjust it if the event/scoring would have gone wrong. After I fixed that I knew I could start making the app.
 
