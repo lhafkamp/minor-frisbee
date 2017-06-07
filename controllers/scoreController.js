@@ -1,19 +1,38 @@
+const mongoose = require('mongoose');
+const Room = mongoose.model('Room');
 const request = require('request');
 
 exports.scorePage = (req, res) => {
 	const params = req.params.id;
 	const gameData = poolData.filter(data => data.id === Number(params));
 
+	Room.find({ room_id: params }, async (err, room) => {
+		if (room.length > 0) {
+			console.log('room found');
+			redirect();
+		} else {
+			console.log('new room, creating room..');
+			const newRoom = await new Room({
+				room_id: params,
+				score: 0,
+				upVotes: 0,
+				downVotes: 0,
+				counter: 0
+			});
 
-	// const io = req.app.get('io');
-	// io.sockets.on('create', (room) => {
-	// 	socket.join(room);
-	// 	console.log('room joined', room);
-	// });
-
-	res.render('score', {
-		teams: gameData
+			await newRoom.save((err) => {
+				if (err) throw err;
+				console.log('new room created!');
+				redirect();
+			});
+		}
 	});
+
+	function redirect() {
+		res.render('score', {
+			teams: gameData
+		});
+	}
 }
 
 exports.form = (req, res) => {

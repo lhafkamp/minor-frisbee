@@ -3,7 +3,11 @@ const http = require('http').Server;
 const express = require('express');
 const socketio = require('socket.io');
 const session = require('express-session');
+const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
+
+// require models
+require('./models/Room');
 
 const routes = require('./routes/index');
 const app = express();
@@ -22,6 +26,13 @@ app.set('view engine', 'ejs');
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
+// connect to the database
+mongoose.connect(process.env.DATABASE);
+mongoose.Promise = global.Promise;
+mongoose.connection.on('error', (err) => {
+	console.error('mongoose is not connecting');
+});
+
 // store data from request to request
 app.use(session({
 	secret: process.env.SES_SECRET,
@@ -32,6 +43,7 @@ app.use(session({
 
 // socket vars
 const connections = [];
+const Room = mongoose.model('Room');
 
 io.on('connection', (socket) => {
 	connections.push(socket);
@@ -52,8 +64,14 @@ io.on('connection', (socket) => {
 
 		// emit time event to the clients
 		socket.on('timeEvent', () => {
-			const started = 'time event started';
-			io.sockets.in(room).emit('timeStarted', started);
+			let counter = 5;
+			let interval = setInterval(() => {
+				counter -= 1;
+				if (counter === 0) {
+					clearInterval(interval);
+				}
+				io.sockets.in(room).emit('timeStarted', counter);
+			}, 1000);
 		});
 
 		// update votes
