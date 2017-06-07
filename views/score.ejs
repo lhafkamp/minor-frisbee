@@ -28,7 +28,7 @@
 
 <button class="done">Done</button>
 
-<form class="hide" method="POST" action="/score/result">
+<form class="hide" method="POST" action="/score/<%= teams[0].id %>/result">
 	<h2>Final score</h2>
 	<input type="text" name="team_1_score" value="">
 	<input type="text" name="team_2_score" value="">

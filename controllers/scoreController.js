@@ -46,10 +46,9 @@ exports.scorePage = (req, res) => {
 }
 
 exports.form = (req, res) => {
-	// TODO game_id as a variable
 	// TODO is_final = true
 	const score = {
-		"game_id": "199769",
+		"game_id": req.params.id,
 	    "team_1_score": req.body.team_1_score,
 	    "team_2_score": req.body.team_2_score,
 	    "is_final": "False"

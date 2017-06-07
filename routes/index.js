@@ -10,6 +10,6 @@ router.get('/success', authController.authSuccess);
 router.get('/main', mainController.mainPage);
 
 router.get('/score/:id/', scoreController.scorePage);
-router.post('/score/result', scoreController.form);
+router.post('/score/:id/result', scoreController.form);
 
 module.exports = router;
