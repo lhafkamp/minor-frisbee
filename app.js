@@ -7,7 +7,7 @@ const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 
 // require models
-require('./models/Room');
+require('./models/Game');
 
 const routes = require('./routes/index');
 const app = express();
@@ -43,9 +43,10 @@ app.use(session({
 
 // socket vars
 const connections = [];
-const Room = mongoose.model('Room');
+const Game = mongoose.model('Game');
 
 io.on('connection', (socket) => {
+	// socket connection info
 	connections.push(socket);
 	console.log(`${connections.length} socket(s) connected`);
 	socket.on('disconnect', () => {
@@ -53,10 +54,11 @@ io.on('connection', (socket) => {
 		console.log(`A socket disconnected, ${connections.length} remaining socket(s) connected`);
 	});
 
+	// socket rooms
 	socket.on('create', (room) => {
-		Room.find({ room_id: room }, async (err, data) => {
+		Game.find({ game_id: room }, async (err, game) => {
 			if (err) throw err;
-			let score = data[0].score;
+			let score = game[0].score;
 			let upVotes = 0;
 			let downVotes = 0;
 			
@@ -106,7 +108,7 @@ io.on('connection', (socket) => {
 					upVotes = 0;
 					downVotes = 0;
 
-					Room.findOneAndUpdate({ room_id: room }, { score: score }, { upsert: true}, (err, result) => {
+					Game.findOneAndUpdate({ game_id: room }, { score: score }, { upsert: true}, (err, result) => {
 						if (err) throw err;
 						console.log(`score updated to: ${score}`);
 					});
