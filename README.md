@@ -8,7 +8,7 @@ One of the most remarkable things about Ultimate Frisbee is that there is no ref
 -  [x] oauth2 login with the Leaguevine API
 -  [x] a page that displays the matches in the tournament
 -  [x] the ability to go to that match in order to participate in the score event
--  [ ] a 30 second time-based event where users can vote real-time to increase/halt the score
+-  [ ] a 30 second time-based event where users can vote real-time to increase/halt the score of both teams
 -  [ ] socket rooms with their own unique time-based events
 -  [ ] voting interface is only enabled during the time-based event
 -  [x] an option to adjust the score
@@ -23,6 +23,10 @@ One of the most remarkable things about Ultimate Frisbee is that there is no ref
 -  [ ] different roles for players/organizers
 
 ## TODO
+-  [x] saving the voting events/game rooms in a database
+-  [ ] synchronise the voting system or let incoming users wait
+-  [ ] feedback about the voting process
+-  [ ] loading indicator
 -  [ ] styling
 -  [ ] UX
 -  [ ] feature detection where a user that cannot vote won't see the voting interface
