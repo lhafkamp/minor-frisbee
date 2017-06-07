@@ -21,6 +21,7 @@ One of the most remarkable things about Ultimate Frisbee is that there is no ref
 -  [ ] real-time percentage of votes in the time-based events
 -  [ ] display all tournament matches (pools/brackets/finals etc)
 -  [ ] different roles for players/organizers
+-  [ ] stats on the teams that are competing during the voting event
 
 ## TODO
 -  [x] saving the voting events/game rooms in a database
