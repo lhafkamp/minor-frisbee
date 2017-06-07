@@ -71,6 +71,13 @@ io.on('connection', (socket) => {
 				let counter = 5;
 				let interval = setInterval(() => {
 					counter -= 1;
+
+					// COUNTER TEST *****
+					Game.findOneAndUpdate({ game_id: room }, { counter: counter }, { upsert: true}, (err, result) => {
+						if (err) throw err;
+					});
+					// ******************
+
 					if (counter === 0) {
 						clearInterval(interval);
 					}

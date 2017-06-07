@@ -39,7 +39,8 @@ exports.scorePage = (req, res) => {
 		function redirectRoom() {
 			res.render('score', {
 				teams: gameData,
-				score: game[0].score
+				score: game[0].score,
+				counter: game[0].counter
 			});
 		}
 	});
