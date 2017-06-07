@@ -7,6 +7,8 @@ exports.scorePage = (req, res) => {
 	const gameData = poolData.filter(data => data.id === Number(params));
 
 	Room.find({ room_id: params }, async (err, room) => {
+		if (err) throw err;
+
 		if (room.length > 0) {
 			console.log('room found');
 			redirect();
@@ -26,13 +28,14 @@ exports.scorePage = (req, res) => {
 				redirect();
 			});
 		}
-	});
 
-	function redirect() {
-		res.render('score', {
-			teams: gameData
-		});
-	}
+		function redirect() {
+			res.render('score', {
+				teams: gameData,
+				score: room[0].score
+			});
+		}
+	});
 }
 
 exports.form = (req, res) => {
