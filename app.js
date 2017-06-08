@@ -1,10 +1,8 @@
-const path = require('path');
-const http = require('http').Server;
 const express = require('express');
-const socketio = require('socket.io');
 const session = require('express-session');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
+const path = require('path');
 
 // require models
 require('./models/Game');
@@ -15,13 +13,15 @@ const app = express();
 // get the public files
 app.use(express.static(path.join(__dirname, 'public')));
 
-const server = http(app);
-const io = socketio(server);
-const port = process.env.PORT || 3000;
-
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
+
+const http = require('http').Server;
+const socketio = require('socket.io');
+const server = http(app);
+const io = socketio(server);
+const port = process.env.PORT || 3000;
 
 // takes the raw requests and turns them into usable properties on req.body
 app.use(bodyParser.json());
