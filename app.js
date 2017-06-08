@@ -35,6 +35,7 @@ mongoose.connection.on('error', (err) => {
 
 // store data from request to request
 app.use(session({
+	cookie: { maxAge: 1200000 },
 	secret: process.env.SES_SECRET,
 	key: process.env.SES_KEY,
 	resave: false,
