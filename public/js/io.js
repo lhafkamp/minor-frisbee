@@ -25,16 +25,11 @@ function sendEvent() {
 start.addEventListener('click', sendEvent);
 
 // show time event to the clients
-socket.on('timeStarted', () => {
-	let counter = 5;
-	let interval = setInterval(() => {
-		counter -= 1;
-		if (counter === 0) {
-			socket.emit('voteEnd');
-			clearInterval(interval);
-		}
-		timer.innerHTML = counter;
-	}, 1000);
+socket.on('timeStarted', counter => {
+	timer.innerHTML = counter;
+	if (counter === 0) {
+		socket.emit('voteEnd');
+	}
 });
 
 socket.on('voteResult', score => {
