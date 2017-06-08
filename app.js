@@ -203,5 +203,5 @@ app.use('/', routes);
 
 // run the app
 server.listen(port, () => {
-	console.log('Running on http://localhost:3000');
+	console.log(`Running on ${port}`);
 });

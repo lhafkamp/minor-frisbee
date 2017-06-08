@@ -6,7 +6,7 @@ const client_secret = process.env.CLIENT_SECRET;
 const redirect_uri = process.env.REDIRECT_URI;
 
 exports.homePage = (req, res) => {
-	const auth_url = `http://www.playwithlv.com/oauth2/authorize/?client_id=${client_id}&response_type=code&redirect_uri=${redirect_uri}&scope=universal`;
+	const auth_url = `http://www.leaguevine.com/oauth2/authorize/?client_id=${client_id}&response_type=code&redirect_uri=${redirect_uri}&scope=universal`;
 	res.render('index', {
 		auth_url
 	});
@@ -14,7 +14,7 @@ exports.homePage = (req, res) => {
 
 exports.authSuccess = (req, res) => {
 	request({
-		url: `http://www.playwithlv.com/oauth2/token`,
+		url: `http://www.leaguevine.com/oauth2/token`,
 		method: "POST",
 		form: {
 			client_id: client_id,
