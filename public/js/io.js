@@ -2,7 +2,7 @@ const io = require('socket.io-client');
 const socket = io.connect();
 const start = document.querySelector('.start');
 const timer = document.querySelector('.timer');
-const leftVotes = document.querySelectorAll('#score div:first-of-type button');
+const votes = document.querySelectorAll('#score div button');
 const numbers = document.querySelectorAll('#score p');
 const leftPercentage = document.querySelector('.leftPrc');
 
@@ -35,10 +35,38 @@ socket.on('voteResult', score => {
 });
 
 function sendScore() {
-	if (this === leftVotes[0]) {
-		socket.emit('upVote');
-	} else {
-		socket.emit('downVote');
+	if (this === votes[0]) {
+		scoreObj = {
+			leftUpVotes: 1,
+			leftDownVotes: 0,
+			rightUpVotes: 0,
+			rightDownVotes: 0
+		}
+		socket.emit('upVote', scoreObj);
+	} else if (this === votes[1]) {
+		scoreObj = {
+			leftUpVotes: 0,
+			leftDownVotes: 1,
+			rightUpVotes: 0,
+			rightDownVotes: 0
+		}
+		socket.emit('downVote', scoreObj);
+ 	} else if (this === votes[2]) {
+ 		scoreObj = {
+			leftUpVotes: 0,
+			leftDownVotes: 0,
+			rightUpVotes: 1,
+			rightDownVotes: 0
+		}
+ 		socket.emit('upVote', scoreObj);
+ 	} else {
+ 		scoreObj = {
+			leftUpVotes: 0,
+			leftDownVotes: 0,
+			rightUpVotes: 0,
+			rightDownVotes: 1
+		}
+		socket.emit('downVote', scoreObj);
  	}
 }
 
@@ -46,4 +74,4 @@ socket.on('percentage', percentage => {
 	leftPercentage.innerHTML = percentage;
 });
 
-leftVotes.forEach(vote => vote.addEventListener('click', sendScore));
+votes.forEach(vote => vote.addEventListener('click', sendScore));

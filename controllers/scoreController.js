@@ -17,8 +17,10 @@ exports.scorePage = (req, res) => {
 			const newGame = await new Game({
 				game_id: params,
 				score: 0,
-				upVotes: 0,
-				downVotes: 0,
+				leftUpVotes: 0,
+				leftDownVotes: 0,
+				rightUpVotes: 0,
+				rightDownVotes: 0,
 				percentage: 0,
 				counter: 0
 			});

@@ -59,8 +59,10 @@ io.on('connection', (socket) => {
 		Game.find({ game_id: room }, async (err, game) => {
 			if (err) throw err;
 			let score = game[0].score;
-			let upVotes = game[0].upVotes;
-			let downVotes = game[0].downVotes;
+			let leftUpVotes = game[0].leftUpVotes;
+			let leftDownVotes = game[0].leftDownVotes;
+			let rightUpVotes = game[0].rightUpVotes;
+			let rightDownVotes = game[0].rightDownVotes;
 			
 			console.log(`someone entered room: ${room}`);
 			socket.join(room);
@@ -75,17 +77,19 @@ io.on('connection', (socket) => {
 					// when the time event ends
 					if (counter === 0) {
 						clearInterval(interval);
-						const total = upVotes + downVotes;
-						const percentage = Math.round(upVotes / total * 100);
+						const total = leftUpVotes + leftDownVotes;
+						const percentage = Math.round(leftUpVotes / total * 100);
 						console.log(`final percentage: ${percentage}`);
 
 						// clear voting process
-						upVotes = 0;
-						downVotes = 0;
+						leftUpVotes = 0;
+						leftDownVotes = 0;
+						rightUpVotes = 0;
+						rightDownVotes = 0;
 
 						// update the score or not
 						Game.findOneAndUpdate({ game_id: room }, 
-							{ score: score, upVotes: 0, downVotes: 0, percentage: 0 }, 
+							{ score: score, leftUpVotes: 0, leftDownVotes: 0, rightUpVotes: 0, rightDownVotes: 0, percentage: 0 }, 
 							{ upsert: true }, (err, result) => {
 							if (err) throw err;
 
@@ -111,17 +115,18 @@ io.on('connection', (socket) => {
 			});
 
 			// update votes
-			socket.on('upVote', () => {
-				upVotes += 1;
+			socket.on('upVote', (obj) => {
+				leftUpVotes += obj.leftUpVotes;
+				rightUpVotes += obj.rightUpVotes;
 
 				Game.findOneAndUpdate({ game_id: room }, 
-					{ upVotes: upVotes }, 
+					{ leftUpVotes: leftUpVotes, rightUpVotes: rightUpVotes }, 
 					{ upsert: true }, (err, result) => {
 					if (err) throw err;
 				});
 
-				const total = upVotes + downVotes;
-				const percentage = Math.round(upVotes / total * 100);
+				const total = leftUpVotes + leftDownVotes;
+				const percentage = Math.round(leftUpVotes / total * 100);
 
 				Game.findOneAndUpdate({ game_id: room }, 
 					{ percentage: percentage }, 
@@ -134,17 +139,18 @@ io.on('connection', (socket) => {
 			});
 
 			// update votes
-			socket.on('downVote', () => {
-				downVotes += 1;
+			socket.on('downVote', (obj) => {
+				leftDownVotes += obj.leftDownVotes;
+				rightDownVotes += obj.rightDownVotes;
 
 				Game.findOneAndUpdate({ game_id: room }, 
-					{ upVotes: upVotes }, 
+					{ leftDownVotes: leftDownVotes, rightDownVotes: rightDownVotes }, 
 					{ upsert: true }, (err, result) => {
 					if (err) throw err;
 				});
 
-				const total = upVotes + downVotes;
-				const percentage = Math.round(upVotes / total * 100);
+				const total = leftUpVotes + leftDownVotes;
+				const percentage = Math.round(leftUpVotes / total * 100);
 
 				Game.findOneAndUpdate({ game_id: room }, 
 					{ percentage: percentage }, 
