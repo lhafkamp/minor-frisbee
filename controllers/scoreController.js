@@ -68,7 +68,7 @@ exports.form = (req, res) => {
 	}
 
 	request({
-		url: `http://api.leaguevine.com/v1/game_scores/`,
+		url: `http://api.playwithlv.com/v1/game_scores/`,
 		method: "POST",
 		headers: {
 			"Authorization": `bearer ${req.session.token}`
