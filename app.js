@@ -141,7 +141,7 @@ io.on('connection', (socket) => {
 
 			// emit time event to the clients
 			socket.on('timeEvent', () => {
-				let counter = 5;
+				let counter = 30;
 				let interval = setInterval(() => {
 					counter -= 1;
 					// when the time event ends
