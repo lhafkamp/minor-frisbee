@@ -9,7 +9,8 @@ const gameSchema = new Schema({
 	leftDownVotes: Number,
 	rightUpVotes: Number,
 	rightDownVotes: Number,
-	percentage: Number,
+	leftPercentage: Number,
+	rightPercentage: Number,
 	counter: Number
 });
 

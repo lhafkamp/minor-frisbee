@@ -21,7 +21,8 @@ exports.scorePage = (req, res) => {
 				leftDownVotes: 0,
 				rightUpVotes: 0,
 				rightDownVotes: 0,
-				percentage: 0,
+				leftPercentage: 0,
+				rightPercentage: 0,
 				counter: 0
 			});
 
@@ -36,7 +37,8 @@ exports.scorePage = (req, res) => {
 			res.render('score', {
 				teams: gameData,
 				score: 0,
-				percentage: 0,
+				leftPercentage: 0,
+				rightPercentage: 0,
 				counter: 0,
 			});
 		}
@@ -45,7 +47,8 @@ exports.scorePage = (req, res) => {
 			res.render('score', {
 				teams: gameData,
 				score: game[0].score,
-				percentage: game[0].percentage,
+				leftPercentage: game[0].leftPercentage,
+				rightPercentage: game[0].rightPercentage,
 				counter: game[0].counter
 			});
 		}

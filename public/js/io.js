@@ -5,6 +5,7 @@ const timer = document.querySelector('.timer');
 const votes = document.querySelectorAll('#score div button');
 const numbers = document.querySelectorAll('#score p');
 const leftPercentage = document.querySelector('.leftPrc');
+const rightPercentage = document.querySelector('.rightPrc');
 
 const location = window.location.href;
 const locationIndex = location.indexOf('/score/');
@@ -12,17 +13,10 @@ const params = location.slice(locationIndex + 7);
 
 socket.emit('create', params);
 
-socket.on('event', () => {
-	console.log('someone joined the room');
-})
-
 // send time event to the server
 function sendEvent() {
 	socket.emit('timeEvent');
-	console.log('event to the server');
 }
-
-start.addEventListener('click', sendEvent);
 
 // show time event to the clients
 socket.on('timeStarted', counter => {
@@ -32,6 +26,7 @@ socket.on('timeStarted', counter => {
 socket.on('voteResult', score => {
 	numbers[0].innerHTML = score;
 	leftPercentage.innerHTML = 0;
+	rightPercentage.innerHTML = 0;
 });
 
 function sendScore() {
@@ -70,8 +65,10 @@ function sendScore() {
  	}
 }
 
-socket.on('percentage', percentage => {
-	leftPercentage.innerHTML = percentage;
+socket.on('percentage', obj => {
+	leftPercentage.innerHTML = obj.leftPercentage;
+	rightPercentage.innerHTML = obj.rightPercentage;
 });
 
+start.addEventListener('click', sendEvent);
 votes.forEach(vote => vote.addEventListener('click', sendScore));
