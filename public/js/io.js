@@ -27,9 +27,6 @@ start.addEventListener('click', sendEvent);
 // show time event to the clients
 socket.on('timeStarted', counter => {
 	timer.innerHTML = counter;
-	if (counter === 0) {
-		socket.emit('voteEnd');
-	}
 });
 
 socket.on('voteResult', score => {
