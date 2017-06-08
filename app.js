@@ -11,12 +11,13 @@ require('./models/Game');
 
 const routes = require('./routes/index');
 const app = express();
-const server = http(app);
-const io = socketio(server);
-const port = process.env.PORT || 3000;
 
 // get the public files
 app.use(express.static(path.join(__dirname, 'public')));
+
+const server = http(app);
+const io = socketio(server);
+const port = process.env.PORT || 3000;
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
