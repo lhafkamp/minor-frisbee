@@ -23,8 +23,14 @@ socket.on('timeStarted', counter => {
 	timer.innerHTML = counter;
 });
 
-socket.on('voteResult', score => {
+socket.on('leftVoteResult', score => {
 	numbers[0].innerHTML = score;
+	leftPercentage.innerHTML = 0;
+	rightPercentage.innerHTML = 0;
+});
+
+socket.on('rightVoteResult', score => {
+	numbers[2].innerHTML = score;
 	leftPercentage.innerHTML = 0;
 	rightPercentage.innerHTML = 0;
 });

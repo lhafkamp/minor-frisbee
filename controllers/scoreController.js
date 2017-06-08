@@ -16,7 +16,8 @@ exports.scorePage = (req, res) => {
 			console.log('new game, creating game..');
 			const newGame = await new Game({
 				game_id: params,
-				score: 0,
+				leftScore: 0,
+				rightScore: 0,
 				leftUpVotes: 0,
 				leftDownVotes: 0,
 				rightUpVotes: 0,
@@ -36,7 +37,8 @@ exports.scorePage = (req, res) => {
 		function redirectNew() {
 			res.render('score', {
 				teams: gameData,
-				score: 0,
+				leftScore: 0,
+				rightScore: 0,
 				leftPercentage: 0,
 				rightPercentage: 0,
 				counter: 0,
@@ -46,7 +48,8 @@ exports.scorePage = (req, res) => {
 		function redirectRoom() {
 			res.render('score', {
 				teams: gameData,
-				score: game[0].score,
+				leftScore: game[0].leftScore,
+				rightScore: game[0].rightScore,
 				leftPercentage: game[0].leftPercentage,
 				rightPercentage: game[0].rightPercentage,
 				counter: game[0].counter

@@ -4,7 +4,8 @@ mongoose.Promise = global.Promise;
 
 const gameSchema = new Schema({
 	game_id: String,
-	score: Number,
+	leftScore: Number,
+	rightScore: Number,
 	leftUpVotes: Number,
 	leftDownVotes: Number,
 	rightUpVotes: Number,

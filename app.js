@@ -58,7 +58,8 @@ io.on('connection', (socket) => {
 	socket.on('create', (room) => {
 		Game.find({ game_id: room }, async (err, game) => {
 			if (err) throw err;
-			let score = game[0].score;
+			let leftScore = game[0].leftScore;
+			let rightScore = game[0].rightScore;
 			let leftUpVotes = game[0].leftUpVotes;
 			let leftDownVotes = game[0].leftDownVotes;
 			let rightUpVotes = game[0].rightUpVotes;
@@ -146,25 +147,34 @@ io.on('connection', (socket) => {
 						console.log(`final percentage: ${leftPercentage} - ${rightPercentage}`);
 
 						// clear voting process
-						leftUpVotes = 0;
+						leftUpVotes  = 0;
 						leftDownVotes = 0;
 						rightUpVotes = 0;
 						rightDownVotes = 0;
 
+						// handle final scores
+						if (leftPercentage > 50 && rightPercentage > 50) {
+							leftScore += 1;
+							rightScore += 1;
+							io.sockets.in(room).emit('leftVoteResult', leftScore);
+							io.sockets.in(room).emit('rightVoteResult', rightScore);
+						} else if (rightPercentage > 50) {
+							rightScore += 1;
+							io.sockets.in(room).emit('rightVoteResult', rightScore);
+						} else if (leftPercentage > 50) {
+							leftScore += 1;
+							io.sockets.in(room).emit('leftVoteResult', leftScore);
+						} else {
+							io.sockets.in(room).emit('percentage', 0);
+						}
+
+						console.log(`final score: ${leftScore} - ${rightScore}`);
+
 						// update the score or not
 						Game.findOneAndUpdate({ game_id: room }, 
-							{ score: score, leftUpVotes: 0, leftDownVotes: 0, rightUpVotes: 0, rightDownVotes: 0, leftPercentage: 0, rightPercentage: 0 }, 
+							{ leftScore: leftScore, rightScore: rightScore, leftUpVotes: 0, leftDownVotes: 0, rightUpVotes: 0, rightDownVotes: 0, leftPercentage: 0, rightPercentage: 0 }, 
 							{ upsert: true }, (err, result) => {
 							if (err) throw err;
-
-							console.log(`final score: ${score}`);
-
-							if (leftPercentage > 50) {
-								score += 1;
-								io.sockets.in(room).emit('voteResult', score);
-							} else {
-								io.sockets.in(room).emit('leftPercentage', 0);
-							}
 						});
 					}
 
