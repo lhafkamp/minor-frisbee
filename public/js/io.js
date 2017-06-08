@@ -13,12 +13,6 @@ const params = location.slice(locationIndex + 7);
 
 socket.emit('create', params);
 
-// send time event to the server
-function sendEvent() {
-	socket.emit('timeEvent');
-}
-
-// show time event to the clients
 socket.on('timeStarted', counter => {
 	timer.innerHTML = counter;
 });
@@ -35,46 +29,42 @@ socket.on('rightVoteResult', score => {
 	rightPercentage.innerHTML = 0;
 });
 
+socket.on('percentage', obj => {
+	leftPercentage.innerHTML = obj.leftPercentage;
+	rightPercentage.innerHTML = obj.rightPercentage;
+});
+
+function sendEvent() {
+	socket.emit('timeEvent');
+}
+
 function sendScore() {
 	if (this === votes[0]) {
 		scoreObj = {
-			leftUpVotes: 1,
-			leftDownVotes: 0,
 			rightUpVotes: 0,
-			rightDownVotes: 0
+			leftUpVotes: 1
 		}
 		socket.emit('upVote', scoreObj);
 	} else if (this === votes[1]) {
 		scoreObj = {
 			leftUpVotes: 0,
-			leftDownVotes: 1,
-			rightUpVotes: 0,
-			rightDownVotes: 0
+			leftDownVotes: 1
 		}
 		socket.emit('downVote', scoreObj);
  	} else if (this === votes[2]) {
  		scoreObj = {
-			leftUpVotes: 0,
-			leftDownVotes: 0,
+ 			leftUpVotes: 0,
 			rightUpVotes: 1,
-			rightDownVotes: 0
 		}
  		socket.emit('upVote', scoreObj);
  	} else {
  		scoreObj = {
-			leftUpVotes: 0,
-			leftDownVotes: 0,
-			rightUpVotes: 0,
+ 			rightDownVotes: 0,
 			rightDownVotes: 1
 		}
 		socket.emit('downVote', scoreObj);
  	}
 }
-
-socket.on('percentage', obj => {
-	leftPercentage.innerHTML = obj.leftPercentage;
-	rightPercentage.innerHTML = obj.rightPercentage;
-});
 
 start.addEventListener('click', sendEvent);
 votes.forEach(vote => vote.addEventListener('click', sendScore));

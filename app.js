@@ -70,8 +70,11 @@ io.on('connection', (socket) => {
 
 			// update votes
 			socket.on('upVote', (obj) => {
-				leftUpVotes += obj.leftUpVotes;
-				rightUpVotes += obj.rightUpVotes;
+				if (obj.leftUpVotes === 1) {
+					leftUpVotes += obj.leftUpVotes;
+				} else {
+					rightUpVotes += obj.rightUpVotes;
+				}
 
 				Game.findOneAndUpdate({ game_id: room }, 
 					{ leftUpVotes: leftUpVotes, rightUpVotes: rightUpVotes }, 
@@ -102,8 +105,11 @@ io.on('connection', (socket) => {
 
 			// update votes
 			socket.on('downVote', (obj) => {
-				leftDownVotes += obj.leftDownVotes;
-				rightDownVotes += obj.rightDownVotes;
+				if (obj.leftDownVotes === 1) {
+					leftDownVotes += obj.leftDownVotes;
+				} else {
+					rightDownVotes += obj.rightDownVotes;
+				}
 
 				Game.findOneAndUpdate({ game_id: room }, 
 					{ leftDownVotes: leftDownVotes, rightDownVotes: rightDownVotes }, 
