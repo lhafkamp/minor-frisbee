@@ -141,7 +141,7 @@ io.on('connection', (socket) => {
 
 			// emit time event to the clients
 			socket.on('timeEvent', () => {
-				let counter = 30;
+				let counter = 7;
 				let interval = setInterval(() => {
 					counter -= 1;
 					// when the time event ends
@@ -172,14 +172,24 @@ io.on('connection', (socket) => {
 							leftScore += 1;
 							io.sockets.in(room).emit('leftVoteResult', leftScore);
 						} else {
-							io.sockets.in(room).emit('percentage', 0);
+							const obj = {
+								leftPercentage: 0,
+								rightPercentage: 0
+							}
+							io.sockets.in(room).emit('percentage', obj);
 						}
 
 						console.log(`final score: ${leftScore} - ${rightScore}`);
 
 						// update the score or not
 						Game.findOneAndUpdate({ game_id: room }, 
-							{ leftScore: leftScore, rightScore: rightScore, leftUpVotes: 0, leftDownVotes: 0, rightUpVotes: 0, rightDownVotes: 0, leftPercentage: 0, rightPercentage: 0 }, 
+							{ leftScore: leftScore, rightScore: rightScore, 
+								leftUpVotes: 0, 
+								leftDownVotes: 0, 
+								rightUpVotes: 0, 
+								rightDownVotes: 0, 
+								leftPercentage: 0, 
+								rightPercentage: 0 }, 
 							{ upsert: true }, (err, result) => {
 							if (err) throw err;
 						});
