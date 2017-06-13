@@ -66,6 +66,9 @@ io.on('connection', (socket) => {
 
 			// update votes
 			socket.on('upVote', (obj) => {
+				// 1 vote per user per event
+				socket.emit('endVoting');
+
 				Game.findOne({ game_id: room }, (err, result) => {
 					let leftUpVotes;
 					let rightUpVotes;
@@ -107,6 +110,9 @@ io.on('connection', (socket) => {
 			});
 
 			socket.on('downVote', (obj) => {
+				// 1 vote per user per event
+				io.sockets.in(room).emit('endVoting');
+
 				Game.findOne({ game_id: room }, (err, result) => {
 					let leftDownVotes;
 					let rightDownVotes;
@@ -171,15 +177,15 @@ io.on('connection', (socket) => {
 							console.log(`final percentage: ${leftPercentage} - 0`);
 
 							// handle final scores
-							if (leftPercentage > 50 && rightPercentage > 50) {
+							if (leftPercentage >= 50 && rightPercentage >= 50) {
 								leftScore += 1;
 								rightScore += 1;
 								io.sockets.in(room).emit('leftVoteResult', leftScore);
 								io.sockets.in(room).emit('rightVoteResult', rightScore);
-							} else if (rightPercentage > 50) {
+							} else if (rightPercentage >= 50) {
 								rightScore += 1;
 								io.sockets.in(room).emit('rightVoteResult', rightScore);
-							} else if (leftPercentage > 50) {
+							} else if (leftPercentage >= 50) {
 								leftScore += 1;
 								io.sockets.in(room).emit('leftVoteResult', leftScore);
 							} else {
