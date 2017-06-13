@@ -35,7 +35,6 @@ mongoose.connection.on('error', (err) => {
 
 // store data from request to request
 app.use(session({
-	cookie: { maxAge: 1200000 },
 	secret: process.env.SES_SECRET,
 	key: process.env.SES_KEY,
 	resave: false,
@@ -57,86 +56,96 @@ io.on('connection', (socket) => {
 
 	// socket rooms
 	socket.on('create', (room) => {
-		Game.find({ game_id: room }, async (err, game) => {
+		Game.find({ game_id: room }, (err, game) => {
 			if (err) throw err;
 			let leftScore = game[0].leftScore;
 			let rightScore = game[0].rightScore;
-			let leftUpVotes = game[0].leftUpVotes;
-			let leftDownVotes = game[0].leftDownVotes;
-			let rightUpVotes = game[0].rightUpVotes;
-			let rightDownVotes = game[0].rightDownVotes;
 			
 			socket.join(room);
 			console.log(`someone entered room: ${room}`);
 
 			// update votes
 			socket.on('upVote', (obj) => {
-				if (obj.leftUpVotes === 1) {
-					leftUpVotes += obj.leftUpVotes;
-				} else {
-					rightUpVotes += obj.rightUpVotes;
-				}
+				Game.findOne({ game_id: room }, (err, result) => {
+					let leftUpVotes;
+					let rightUpVotes;
 
-				Game.findOneAndUpdate({ game_id: room }, 
-					{ leftUpVotes: leftUpVotes, rightUpVotes: rightUpVotes }, 
-					{ upsert: true }, (err, result) => {
-					if (err) throw err;
+					if (obj.leftUpVotes === 1) {
+						leftUpVotes = result.leftUpVotes + 1;
+						rightUpVotes = result.rightUpVotes;
+
+						Game.findOneAndUpdate({ game_id: room }, 
+							{ leftUpVotes: leftUpVotes }, 
+							{ upsert: true }, (err, data) => {
+							if (err) throw err;
+						});
+					} else {
+						rightUpVotes = result.rightUpVotes + 1;
+						leftUpVotes = result.leftUpVotes;
+
+						Game.findOneAndUpdate({ game_id: room }, 
+							{ rightUpVotes: rightUpVotes }, 
+							{ upsert: true }, (err, data) => {
+							if (err) throw err;
+						});
+					}
+
+					const leftTotal = leftUpVotes + result.leftDownVotes;
+					const rightTotal = rightUpVotes + result.rightDownVotes;
+					const leftPercentage = Math.round(leftUpVotes / leftTotal * 100) || 0;
+					const rightPercentage = Math.round(rightUpVotes / rightTotal * 100) || 0;
+
+					console.log(`current score: ${leftPercentage} - ${rightPercentage}`);
+
+					const percentageObj = {
+						leftPercentage: leftPercentage,
+						rightPercentage: rightPercentage
+					}
+
+					io.sockets.in(room).emit('percentage', percentageObj);
 				});
-
-				const leftTotal = leftUpVotes + leftDownVotes;
-				const rightTotal = rightUpVotes + rightDownVotes;
-				const leftPercentage = Math.round(leftUpVotes / leftTotal * 100) || 0;
-				const rightPercentage = Math.round(rightUpVotes / rightTotal * 100) || 0;
-
-				Game.findOneAndUpdate({ game_id: room }, 
-					{ leftPercentage: leftPercentage, rightPercentage: rightPercentage }, 
-					{ upsert: true }, (err, result) => {
-					if (err) throw err;
-				});
-
-				console.log(`current score: ${leftPercentage} - ${rightPercentage}`);
-
-				const percentageObj = {
-					leftPercentage: leftPercentage,
-					rightPercentage: rightPercentage
-				}
-
-				io.sockets.in(room).emit('percentage', percentageObj);
 			});
 
-			// update votes
 			socket.on('downVote', (obj) => {
-				if (obj.leftDownVotes === 1) {
-					leftDownVotes += obj.leftDownVotes;
-				} else {
-					rightDownVotes += obj.rightDownVotes;
-				}
+				Game.findOne({ game_id: room }, (err, result) => {
+					let leftDownVotes;
+					let rightDownVotes;
 
-				Game.findOneAndUpdate({ game_id: room }, 
-					{ leftDownVotes: leftDownVotes, rightDownVotes: rightDownVotes }, 
-					{ upsert: true }, (err, result) => {
-					if (err) throw err;
+					if (obj.leftDownVotes === 1) {
+						leftDownVotes = result.leftDownVotes + 1;
+						rightDownVotes = result.rightDownVotes;
+
+						Game.findOneAndUpdate({ game_id: room }, 
+							{ leftDownVotes: leftDownVotes }, 
+							{ upsert: true }, (err, data) => {
+							if (err) throw err;
+						});
+
+					} else {
+						rightDownVotes = result.rightDownVotes + 1;
+						leftDownVotes = result.leftDownVotes;
+
+						Game.findOneAndUpdate({ game_id: room }, 
+							{ rightDownVotes: rightDownVotes }, 
+							{ upsert: true }, (err, data) => {
+							if (err) throw err;
+						});
+					}
+
+					const leftTotal = result.leftUpVotes + leftDownVotes;
+					const rightTotal = result.rightUpVotes + rightDownVotes;
+					const leftPercentage = Math.round(result.leftUpVotes / leftTotal * 100) || 0;
+					const rightPercentage = Math.round(result.rightUpVotes / rightTotal * 100) || 0;
+
+					console.log(`current score: ${leftPercentage} - ${rightPercentage}`);
+
+					const percentageObj = {
+						leftPercentage: leftPercentage,
+						rightPercentage: rightPercentage
+					}
+
+					io.sockets.in(room).emit('percentage', percentageObj);
 				});
-
-				const leftTotal = leftUpVotes + leftDownVotes;
-				const rightTotal = rightUpVotes + rightDownVotes;
-				const leftPercentage = Math.round(leftUpVotes / leftTotal * 100) || 0;
-				const rightPercentage = Math.round(rightUpVotes / rightTotal * 100) || 0;
-
-				Game.findOneAndUpdate({ game_id: room }, 
-					{ leftPercentage: leftPercentage, rightPercentage: rightPercentage }, 
-					{ upsert: true }, (err, result) => {
-					if (err) throw err;
-				});
-
-				console.log(`current score: ${leftPercentage} - ${rightPercentage}`);
-
-				const percentageObj = {
-					leftPercentage: leftPercentage,
-					rightPercentage: rightPercentage
-				}
-
-				io.sockets.in(room).emit('percentage', percentageObj);
 			});
 
 			// emit time event to the clients
@@ -147,51 +156,48 @@ io.on('connection', (socket) => {
 					// when the time event ends
 					if (counter === 0) {
 						clearInterval(interval);
-						const leftTotal = leftUpVotes + leftDownVotes;
-						const rightTotal = rightUpVotes + rightDownVotes;
-						const leftPercentage = Math.round(leftUpVotes / leftTotal * 100) || 0;
-						const rightPercentage = Math.round(rightUpVotes / rightTotal * 100) || 0;
-						console.log(`final percentage: ${leftPercentage} - ${rightPercentage}`);
 
-						// clear voting process
-						leftUpVotes  = 0;
-						leftDownVotes = 0;
-						rightUpVotes = 0;
-						rightDownVotes = 0;
+						Game.findOne({ game_id: room }, (err, result) => {
+							const leftTotal = result.leftUpVotes + result.leftDownVotes;
+							const leftPercentage = Math.round(result.leftUpVotes / leftTotal * 100) || 0;
+							const rightTotal = result.rightUpVotes + result.rightDownVotes;
+							const rightPercentage = Math.round(result.rightUpVotes / rightTotal * 100) || 0;
+							console.log(`final percentage: ${leftPercentage} - 0`);
 
-						// handle final scores
-						if (leftPercentage > 50 && rightPercentage > 50) {
-							leftScore += 1;
-							rightScore += 1;
-							io.sockets.in(room).emit('leftVoteResult', leftScore);
-							io.sockets.in(room).emit('rightVoteResult', rightScore);
-						} else if (rightPercentage > 50) {
-							rightScore += 1;
-							io.sockets.in(room).emit('rightVoteResult', rightScore);
-						} else if (leftPercentage > 50) {
-							leftScore += 1;
-							io.sockets.in(room).emit('leftVoteResult', leftScore);
-						} else {
-							const obj = {
-								leftPercentage: 0,
-								rightPercentage: 0
+							// handle final scores
+							if (leftPercentage > 50 && rightPercentage > 50) {
+								leftScore += 1;
+								rightScore += 1;
+								io.sockets.in(room).emit('leftVoteResult', leftScore);
+								io.sockets.in(room).emit('rightVoteResult', rightScore);
+							} else if (rightPercentage > 50) {
+								rightScore += 1;
+								io.sockets.in(room).emit('rightVoteResult', rightScore);
+							} else if (leftPercentage > 50) {
+								leftScore += 1;
+								io.sockets.in(room).emit('leftVoteResult', leftScore);
+							} else {
+								const obj = {
+									leftPercentage: 0,
+									rightPercentage: 0
+								}
+								io.sockets.in(room).emit('percentage', obj);
 							}
-							io.sockets.in(room).emit('percentage', obj);
-						}
 
-						console.log(`final score: ${leftScore} - ${rightScore}`);
+							console.log(`final score: ${leftScore} - ${rightScore}`);
 
-						// update the score or not
-						Game.findOneAndUpdate({ game_id: room }, 
-							{ leftScore: leftScore, rightScore: rightScore, 
-								leftUpVotes: 0, 
-								leftDownVotes: 0, 
-								rightUpVotes: 0, 
-								rightDownVotes: 0, 
-								leftPercentage: 0, 
-								rightPercentage: 0 }, 
-							{ upsert: true }, (err, result) => {
-							if (err) throw err;
+							// update the score or not
+							Game.findOneAndUpdate({ game_id: room }, 
+								{ leftScore: leftScore, rightScore: rightScore, 
+									leftUpVotes: 0, 
+									leftDownVotes: 0, 
+									rightUpVotes: 0, 
+									rightDownVotes: 0, 
+									leftPercentage: 0, 
+									rightPercentage: 0 }, 
+								{ upsert: true }, (err, result) => {
+								if (err) throw err;
+							});
 						});
 					}
 
