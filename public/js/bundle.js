@@ -6433,6 +6433,14 @@ const params = location.slice(locationIndex + 7);
 
 socket.emit('create', params);
 
+socket.on('startVoting', () => {
+	votes.forEach(vote => vote.disabled = false);
+});
+
+socket.on('endVoting', () => {
+	votes.forEach(vote => vote.disabled = true);
+});
+
 socket.on('timeStarted', counter => {
 	timer.innerHTML = counter;
 });

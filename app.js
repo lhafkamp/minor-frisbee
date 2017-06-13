@@ -150,12 +150,18 @@ io.on('connection', (socket) => {
 
 			// emit time event to the clients
 			socket.on('timeEvent', () => {
+				// enable all buttons
+				io.sockets.in(room).emit('startVoting');
+
 				let counter = 7;
 				let interval = setInterval(() => {
 					counter -= 1;
 					// when the time event ends
 					if (counter === 0) {
 						clearInterval(interval);
+
+						// disable all buttons again
+						io.sockets.in(room).emit('endVoting');
 
 						Game.findOne({ game_id: room }, (err, result) => {
 							const leftTotal = result.leftUpVotes + result.leftDownVotes;
