@@ -15,6 +15,7 @@ body {
 	font-family: 'OSans', 'sans-serif';
 	margin: 0;
 	padding: 0;
+	background: #FEFEFE;
 }
 
 /* navigation */
@@ -64,6 +65,7 @@ nav a {
 #score {
 	color: #666;
 	display: flex;
+	height: 13em;
 }
 
 #score p {
@@ -77,10 +79,19 @@ nav a {
 	flex-direction: column;
 }
 
+#score div .leftPrc,
+#score div .rightPrc {
+	background: #4ADB95;
+	color: white;
+    border-radius: .2em;
+    padding: .3em;
+    text-align: center;
+}
+
 #score div:nth-child(2) {
 	display: flex;
     flex-direction: initial;
-    margin: 2em 1em 1em 1em;
+    margin: 2.5em 1em 1em 1em;
     font-size: 1.4em;
 }
 
