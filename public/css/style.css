@@ -81,11 +81,12 @@ nav a {
 
 #score div .leftPrc,
 #score div .rightPrc {
-	background: #4ADB95;
+	background: #EA5906;
 	color: white;
     border-radius: .2em;
     padding: .3em;
     text-align: center;
+    transition: background .5s;
 }
 
 #score div:nth-child(2) {
@@ -177,8 +178,12 @@ h2 {
     font-size: 1em;
 }
 
-/* hide */
+/* classList */
 
 .hide {
 	display: none;
+}
+
+.green {
+	background: #4ADB95 !important;
 }
