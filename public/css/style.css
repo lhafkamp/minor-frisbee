@@ -15,6 +15,8 @@ body {
 	font-family: 'OSans', 'sans-serif';
 }
 
+/* score buttons */
+
 #score {
 	display: flex;
 }
@@ -33,33 +35,67 @@ body {
 
 #score div button {
 	margin-top: .5em;
-	border: none;
-    padding: 1em 1.5em;
-    border-radius: 50%;
     margin-bottom: .5em;
-    background-color: #CCC;
-    box-shadow: 0 2px grey;
+	border: none;
+    padding: 1em 1.4em;
+    font-size: 1em;
+    border-radius: 50%;
+    background-color: #4ADB95;
+    box-shadow: 0 4px #3FB47E;
+    color: white;
+    transition: background 1s;
 }
 
 #score div button:hover {
 	margin-top: .6em;
 	margin-bottom: .4em;
-    box-shadow: 0 1px grey;
+    box-shadow: 0 2px #3FB47E;
 }
 
-.hide {
-	display: none;
+#score div button:last-of-type {
+	background-color: #EA5906;
+    box-shadow: 0 4px #983903;
 }
+
+#score div button:last-of-type:hover {
+	margin-top: .6em;
+	margin-bottom: .4em;
+    box-shadow: 0 2px #983903;
+}
+
+#score div button:disabled {
+	background: #CCC;
+    box-shadow: 0 4px grey;
+    color: grey;
+}
+
+#score div button:disabled:hover {
+	margin-top: .5em;
+	margin-bottom: .5em;
+	background: #CCC;
+    box-shadow: 0 4px grey;
+    color: grey;
+}
+
+/* done button */
 
 .done {
 	border: none;
+	border-radius: .4em;
     color: white;
     background-color: #4ADB95;
     box-shadow: 0 4px #3FB47E;
     padding: 1em 4em 1em 4em;
+    font-size: 1em;
 }
 
 .done:hover {
 	margin-top: 0.2em;
     box-shadow: 0 2px #3FB47E;
+}
+
+/* hide */
+
+.hide {
+	display: none;
 }
