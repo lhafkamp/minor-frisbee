@@ -111,7 +111,7 @@ io.on('connection', (socket) => {
 
 			socket.on('downVote', (obj) => {
 				// 1 vote per user per event
-				io.sockets.in(room).emit('endVoting');
+				socket.emit('endVoting');
 
 				Game.findOne({ game_id: room }, (err, result) => {
 					let leftDownVotes;
