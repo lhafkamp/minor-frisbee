@@ -4,23 +4,21 @@
 	<p><%= team.team_1.name %> vs <%= team.team_2.name %></p>
 <% }); %>
 
-<h1>Score</h1>
-
 <button class="start">Start event</button>
 
 <div id="score">
 	<div>
 		<h3 class="leftPrc"><%= leftPercentage || 0 %></h3>
-		<button disabled="true">+1</button>
-		<button disabled="true">no</button>
+		<button disabled="true">v</button>
+		<button disabled="true">x</button>
 	</div>
 	<p><%= leftScore || 0 %></p>
 	<p>-</p>
 	<p><%= rightScore || 0 %></p>
 	<div>
 		<h3 class="rightPrc"><%= rightPercentage || 0 %></h3>
-		<button disabled="true">+1</button>
-		<button disabled="true">no</button>
+		<button disabled="true">v</button>
+		<button disabled="true">x</button>
 	</div>
 </div>
 
