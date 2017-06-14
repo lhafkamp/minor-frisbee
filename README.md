@@ -5,7 +5,7 @@ Assignment for Windmill, a real-time score app for the upcoming ultimate frisbee
 The progress of my app is going well! Here are 3 issues that I'm currently facing. If its too much I can just take a harder look at it myself.
 
 ### DRY
-In <a href="https://github.com/lhafkamp/minor-frisbee/blob/master/app.js">app.js</a> there is an upVote and a downVote sockets who now (almost) do the same thing. But because of variables like:
+In <a href="https://github.com/lhafkamp/minor-frisbee/blob/master/app.js">app.js</a> there are 2 sockets (upVotes/downVotes) who now (almost) do the same thing. But because of variables like:
 ```javascript
 leftDownVotes = result.leftDownVotes + 1;
 ```
