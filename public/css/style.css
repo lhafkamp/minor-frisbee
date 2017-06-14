@@ -27,7 +27,7 @@ nav {
     height: 3em;
     width: 100vw;
     background: #4ADB95;
-    margin-bottom: .5em;
+    margin-bottom: 1em;
 }
 
 nav a {
@@ -38,26 +38,35 @@ nav a {
 /* x vs y */
 
 #vs {
-	color: #666;
+	color: grey;
 	display: flex;
 	justify-content: center;
-	align-items: baseline;
-	border-bottom: 3px solid #ccc;
-    width: 100vw;
-	font-family: 'BoldSans', 'sans-serif';
+	align-items: center;
+	font-family: 'OSans', 'sans-serif';
 }
 
 #vs p {
-	font-size: .9em;
-	margin-bottom: 0em;
+	font-size: .7em;
+	border-bottom: 2px solid grey;
+}
+
+#vs p:first-of-type {
+	min-width: 100%;
+	text-align: right;
+}
+
+#vs p:last-of-type {
+	min-width: 100%;
 }
 
 #vs p:nth-child(2) {
-	height: 1.3em;
+	font-family: 'BoldSans', 'sans-serif';
+	font-size: 2.5em;
+	top: 2em;
 	color: #4ADB95;
-	font-size: 3em;
 	font-style: italic;
 	margin: 0em .2em 0em 0em;
+	border-bottom: none;
 }
 
 /* score buttons */
