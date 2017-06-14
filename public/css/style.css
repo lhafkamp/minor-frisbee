@@ -194,6 +194,55 @@ h2 {
     font-size: 1em;
 }
 
+/* progress bar */
+
+progress[value] {
+	width: 15em;
+	height: 1em;
+	border: none;
+	background: #efefef;
+	border-radius: .2em;
+	margin: 3em 0 1em;
+}
+
+progress::-webkit-progress-bar {
+	background: #efefef;
+	border-radius: .2em;
+}
+
+progress::-webkit-progress-value {
+	background: #4ADB95;
+	border-radius: .2em;
+}
+
+/* TODO test if this is a better progress option */
+
+.test {
+	height: 1em;
+	width: 15em;
+	background: #efefef;
+	margin: 3em 0 1em;
+	border-radius: .2em;
+}
+
+.countdown {
+	position: absolute;
+	height: 1em;
+	background: #4ADB95;
+	animation: timer 15s;
+	border-radius: .2em;
+}
+
+@keyframes timer {
+	0% {
+		width: 15em;
+	}
+	100% {
+		width: 0em;
+	}
+}
+
+
 /* classList */
 
 .hide {
@@ -203,4 +252,23 @@ h2 {
 .green {
 	background: #4ADB95 !important;
 	color: white !important;
+}
+
+@keyframes score {
+	0% {
+		transform: rotate(-370deg);
+		color: #4ADB95;
+	}
+	30% {
+		transform: rotate(0deg);
+		color: #4ADB95;
+	}
+
+	100% {
+		color: #666;
+	}
+}
+
+.scoreUpdate {
+	animation: score 2s;
 }
