@@ -204,3 +204,22 @@ h2 {
 	background: #4ADB95 !important;
 	color: white !important;
 }
+
+@keyframes score {
+	0% {
+		transform: rotate(-370deg);
+		color: #4ADB95;
+	}
+	40% {
+		transform: rotate(0deg);
+		color: #4ADB95;
+	}
+
+	100% {
+		color: #666;
+	}
+}
+
+.scoreUpdate {
+	animation: score 2s;
+}
