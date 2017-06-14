@@ -1,6 +1,29 @@
 # minor-frisbee
 Assignment for Windmill, a real-time score app for the upcoming ultimate frisbee tournaments.
 
+## Code review (Joost/Laurens/Titus)
+The progress of my app is going well! Here are 3 issues that I'm currently facing. If its too much I can just take a harder look at it myself.
+
+### DRY
+In <a href="https://github.com/lhafkamp/minor-frisbee/blob/master/app.js">app.js</a> there is an upVote and a downVote sockets who now (almost) do the same thing. But because of variables like:
+```javascript
+leftDownVotes = result.leftDownVotes + 1;
+```
+
+and
+
+```javascript
+rightDownVotes = result.rightDownVotes;
+```
+
+I still had a hard time to make it "DRY" because I feel like they both need to be in their seperate sockets. You can find the client side socket file <a href="https://github.com/lhafkamp/minor-frisbee/blob/master/public/js/io.js">here</a>.  
+  
+### request
+The Leagevine API that I'm using is pretty slow. Problem is that sometimes its so slow it doesn't return JSON to my <a href="https://github.com/lhafkamp/minor-frisbee/blob/master/controllers/mainController.js">request</a>. It doesn't happen a lot but my question is: is there a way to let the request run again when it fails?
+
+### poolData
+In the same function where I do the request I set a global variable so that I can reuse the data for different games without making extra requests. Works fine besides that if a user comes back to a game URL it doesn't have the data because he didn't went through the main page first. Should I also store this variable in a session or MongoDB (or instead of the global variable)?
+
 ## Concept
 One of the most remarkable things about Ultimate Frisbee is that there is no referee on the field to blow a whistle when something goes wrongs. In Ultimate Frisbee, anyone can decide whether it was a goal or not. In this app I want to enhance this honorable task by giving the users the option to vote for goals. The users can all decide if a point should be increased or stay the same whether on what they think is right, the majority vote wins and settles the score.
 
@@ -8,17 +31,21 @@ One of the most remarkable things about Ultimate Frisbee is that there is no ref
 -  [x] oauth2 login with the Leaguevine API
 -  [x] a page that displays the matches in the tournament
 -  [x] the ability to go to that match in order to participate in the score event
--  [ ] a 30 second time-based event where users can vote real-time to increase/halt the score of both teams
--  [ ] socket rooms with their own unique time-based events
--  [ ] voting interface is only enabled during the time-based event
+-  [x] a 15 second time-based event where users can vote real-time to increase/halt the score of both teams
+-  [x] socket rooms with their own unique time-based events
+-  [x] voting interface is only enabled during the time-based event
 -  [x] an option to adjust the score
 -  [x] an option to send the score to the Leaguevine API
+-  [ ] user needs to be notified when entering a room when there's an ongoing time event
+-  [ ] time event button shouldn't be accessible during the time even
 
 ## Core flow
 <img src="media/coreflow.png"/>
 
 ## Extra features
--  [ ] real-time percentage of votes in the time-based events
+-  [x] real-time percentage of votes in the time-based events
+-  [x] cool animations
+-  [x] a progress bar for the time event
 -  [ ] display all tournament matches (pools/brackets/finals etc)
 -  [ ] different roles for players/organizers
 -  [ ] stats on the teams that are competing during the voting event
@@ -26,13 +53,17 @@ One of the most remarkable things about Ultimate Frisbee is that there is no ref
 ## TODO
 -  [x] saving the voting events/game rooms in a database
 -  [ ] synchronise the voting system or let incoming users wait
--  [ ] enable the interface during the time-based event, disable it otherwise
--  [ ] users should only be able to vote once during a time-based event
--  [ ] feedback about the voting process
+-  [x] enable the interface during the time-based event, disable it otherwise
+-  [x] users should only be able to vote once during a time-based event
+-  [x] feedback about the voting process
 -  [ ] loading indicator
 -  [ ] styling
 -  [ ] UX
 -  [ ] feature detection where a user that cannot vote won't see the voting interface
+-  [ ] feature detection for sockets
+-  [ ] see if a client is still online by polling every second
+-  [ ] request doesn't work sometimes, probably the API but should look into it
+-  [ ] save poolData somewhere for if users come back to a room
 
 ## Coding process
 ### Week 1
@@ -58,3 +89,61 @@ To my suprise I managed to get a lot of the technical difficulties working which
 -  [x] made the voting event timer server side instead of client side
 -  [x] all voting data gets saved real-time so a user can join a room while a voting event is being played and still participate (there are still some sync issues)
 
+### Week 3
+This week I tested my app on the Windmill tournament. Long story short there were a couple of tiny bugs to fix and I found out that 30 seconds was way too long for the time event. I also found out that I needed to use a progress bar instead of a countdown because the client doesn't always sync well.
+
+This week I made some good progress on the core functionality. The voting interface is only enabled during time events and every user has 1 vote per event. I also started with CSS and made some cool animations.
+
+Only a few things left to do. I have to make a 'wait for voting' screen for when the user comes into a room where the time event is already ticking. Besides that I also have to make sure that the event button can only be used once during an event.
+
+-  [x] fixed a bug where the percentage was reset on different clients
+-  [x] voting interface is only enabled during an event
+-  [x] 1 vote per event per user
+-  [x] made a progress bar instead of a countdown for the time event
+-  [x] styling for the score page
+-  [x] sweet animations for score updates/events
+
+## Build
+To run the application:
+```bash
+git clone
+```
+
+In order to get this app working you need to fill in the following <a href="https://www.npmjs.com/package/dotenv">dotenv</a> variables:  
+
+```bash
+CLIENT_ID={your client id here}
+```  
+```bash
+CLIENT_SECRET={your client secret here}
+```  
+```bash
+REDIRECT_URI={your redirect uri here}
+```  
+
+You can receive theses variables by making a new "Sandbox" on the Leaguevine development site:  
+<a href="http://www.playwithlv.com/docs/api/">http://www.playwithlv.com/docs/api/</a>  
+  
+Now you only have to make sure to pass in your <a href="https://www.mongodb.com/">MongoDB</a> database. Simply place your database link inside the mongoose.connect braces:
+
+```javascript
+mongoose.connect({your link here})
+```  
+
+Finally, to use the app you need to run the following commands:  
+```bash
+npm install
+```
+To install the Node dependencies.
+
+```bash
+npm start
+```  
+
+To start the server.
+
+## License
+
+MIT License  
+
+Copyright © 2017 Luuk Hafkamp
