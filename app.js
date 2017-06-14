@@ -159,7 +159,7 @@ io.on('connection', (socket) => {
 				// enable all buttons
 				io.sockets.in(room).emit('startVoting');
 
-				let counter = 7;
+				let counter = 15;
 				let interval = setInterval(() => {
 					counter -= 1;
 					// when the time event ends

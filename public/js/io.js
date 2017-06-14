@@ -30,7 +30,18 @@ socket.on('endVoting', () => {
 });
 
 socket.on('timeStarted', counter => {
-	timer.innerHTML = counter;
+	// small logic for a better visual experience
+	// let visual = 1;
+	// if (counter < 14) {
+	// 	visual = 0;
+	// }
+	// timer.value = counter + visual;
+
+	// TODO test if this is a better progress option
+	document.querySelector('.test span').classList.add('countdown');
+	if (counter < 1) {
+		document.querySelector('.test span').classList.remove('countdown');
+	}
 });
 
 socket.on('leftVoteResult', score => {
