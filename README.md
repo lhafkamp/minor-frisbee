@@ -1,8 +1,8 @@
 <h1 align="center">
-  <img src="media/demo.png" alt="demo">
+  <img width="70%" src="media/demo.png" alt="demo">
   <br>
   <br>
-  Score app (beta)
+  Windmill score app
 </h1>
 <br>
 
