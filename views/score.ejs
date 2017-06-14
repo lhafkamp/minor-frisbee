@@ -1,31 +1,33 @@
 <%- include ./part/header.ejs %>
 
 <% teams.forEach(team => { %>
-	<p><%= team.team_1.name %> vs <%= team.team_2.name %></p>
+	<div id="vs">
+		<p><%= team.team_1.name %></p> 
+		<p>VS</p> 
+		<p><%= team.team_2.name %></p>
+	</div>
 <% }); %>
-
-<h1>Score</h1>
-
-<button class="start">Start event</button>
 
 <div id="score">
 	<div>
 		<h3 class="leftPrc"><%= leftPercentage || 0 %></h3>
-		<button disabled="true">+1</button>
-		<button disabled="true">no</button>
+		<button disabled="true">v</button>
+		<button disabled="true">x</button>
 	</div>
-	<p><%= leftScore || 0 %></p>
-	<p>-</p>
-	<p><%= rightScore || 0 %></p>
+	<div>
+		<p><%= leftScore || 0 %></p>
+		<p>-</p>
+		<p><%= rightScore || 0 %></p>
+	</div>
 	<div>
 		<h3 class="rightPrc"><%= rightPercentage || 0 %></h3>
-		<button disabled="true">+1</button>
-		<button disabled="true">no</button>
+		<button disabled="true">v</button>
+		<button disabled="true">x</button>
 	</div>
 </div>
 
 <h2 class="timer"><%= counter || 0 %></h2>
-
+<button class="start">Start voting</button>
 <button class="done">Done</button>
 
 <form class="hide" method="POST" action="/score/<%= teams[0].id %>/result">

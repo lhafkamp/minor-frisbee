@@ -6449,17 +6449,24 @@ socket.on('leftVoteResult', score => {
 	numbers[0].innerHTML = score;
 	leftPercentage.innerHTML = 0;
 	rightPercentage.innerHTML = 0;
+	leftPercentage.classList.remove('green');
 });
 
 socket.on('rightVoteResult', score => {
 	numbers[2].innerHTML = score;
 	leftPercentage.innerHTML = 0;
 	rightPercentage.innerHTML = 0;
+	rightPercentage.classList.remove('green');
 });
 
 socket.on('percentage', obj => {
 	leftPercentage.innerHTML = obj.leftPercentage;
 	rightPercentage.innerHTML = obj.rightPercentage;
+	if (obj.leftPercentage >= 50) {
+		leftPercentage.classList.add('green');
+	} else if (obj.rightPercentage >= 50) {
+		rightPercentage.classList.add('green');
+	}
 });
 
 function sendEvent() {
