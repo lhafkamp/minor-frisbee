@@ -46,8 +46,8 @@ nav a {
 }
 
 #vs p {
-	font-size: .7em;
-	border-bottom: 2px solid grey;
+	font-size: 80%;
+	border-bottom: 2px solid #3FB47E;
 }
 
 #vs p:first-of-type {
@@ -67,6 +67,7 @@ nav a {
 	font-style: italic;
 	margin: 0em .2em 0em 0em;
 	border-bottom: none;
+	text-shadow: -.5px 3px #3FB47E;
 }
 
 /* score buttons */
@@ -90,8 +91,8 @@ nav a {
 
 #score div .leftPrc,
 #score div .rightPrc {
-	background: #EA5906;
-	color: white;
+	background: #ccc;
+	color: grey;
     border-radius: .2em;
     padding: .3em;
     text-align: center;
@@ -118,10 +119,12 @@ nav a {
     transition: background 1s;
 }
 
-#score div button:hover {
+#score div button:hover,
+#score div button:focus {
 	margin-top: .6em;
 	margin-bottom: .4em;
     box-shadow: 0 2px #3FB47E;
+    outline: none;
 }
 
 #score div button:last-of-type {
@@ -129,10 +132,12 @@ nav a {
     box-shadow: 0 4px #983903;
 }
 
-#score div button:last-of-type:hover {
+#score div button:last-of-type:hover,
+#score div button:last-of-type:focus {
 	margin-top: .6em;
 	margin-bottom: .4em;
     box-shadow: 0 2px #983903;
+    outline: none;
 }
 
 #score div button:disabled {
@@ -169,10 +174,12 @@ h2 {
     font-size: 1em;
 }
 
-.start:hover {
+.start:hover,
+.start:focus {
 	margin-top: .6em;
 	margin-bottom: .4em;
     box-shadow: 0 2px #3FB47E;
+    outline: none;
 }
 
 .done {
@@ -195,4 +202,5 @@ h2 {
 
 .green {
 	background: #4ADB95 !important;
+	color: white !important;
 }
