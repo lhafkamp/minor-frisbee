@@ -1,5 +1,10 @@
-# minor-frisbee
-Assignment for Windmill, a real-time score app for the upcoming ultimate frisbee tournaments.
+<h1 align="center">
+  <img src="media/demo.png" alt="demo">
+  <br>
+  <br>
+  Score app (beta)
+</h1>
+<br>
 
 ## Code review (Joost/Laurens/Titus)
 The progress of my app is going well! Here are 3 issues that I'm currently facing. If its too much I can just take a harder look at it myself.
