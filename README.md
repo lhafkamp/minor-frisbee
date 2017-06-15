@@ -6,28 +6,8 @@
 </h1>
 <br>
 
-## Code review (Joost/Laurens/Titus)
-The progress of my app is going well! Here are 3 issues that I'm currently facing. If its too much I can just take a harder look at it myself.
-
-### DRY
-In <a href="https://github.com/lhafkamp/minor-frisbee/blob/master/app.js">app.js</a> there are 2 sockets (upVotes/downVotes) who now (almost) do the same thing. But because of variables like:
-```javascript
-leftDownVotes = result.leftDownVotes + 1;
-```
-
-and
-
-```javascript
-rightDownVotes = result.rightDownVotes;
-```
-
-I still had a hard time to make it "DRY" because I feel like they both need to be in their seperate sockets. You can find the client side socket file <a href="https://github.com/lhafkamp/minor-frisbee/blob/master/public/js/io.js">here</a>.  
-  
-### request
-The Leagevine API that I'm using is pretty slow. Problem is that sometimes its so slow it doesn't return JSON to my <a href="https://github.com/lhafkamp/minor-frisbee/blob/master/controllers/mainController.js">request</a>. It doesn't happen a lot but my question is: is there a way to let the request run again when it fails?
-
-### poolData
-In the same function where I do the request I set a global variable so that I can reuse the data for different games without making extra requests. Works fine besides that if a user comes back to a game URL it doesn't have the data because he didn't went through the main page first. Should I also store this variable in a session or MongoDB (or instead of the global variable)?
+## Live version
+<a href="http://minor-frisbee.herokuapp.com/">Live demo here</a>
 
 ## Concept
 One of the most remarkable things about Ultimate Frisbee is that there is no referee on the field to blow a whistle when something goes wrongs. In Ultimate Frisbee, anyone can decide whether it was a goal or not. In this app I want to enhance this honorable task by giving the users the option to vote for goals. The users can all decide if a point should be increased or stay the same whether on what they think is right, the majority vote wins and settles the score.
