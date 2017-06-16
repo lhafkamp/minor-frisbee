@@ -2,9 +2,9 @@
 
 <% teams.forEach(team => { %>
 	<div id="vs">
-		<p style="color: rgb(<%= leftTeamColor %>);"><%= team.team_1.name %></p> 
+		<p style="border-bottom: 2px solid rgb(<%= leftTeamColor %>);"><%= team.team_1.name %></p> 
 		<p>VS</p> 
-		<p style="color: rgb(<%= rightTeamColor %>);"><%= team.team_2.name %></p>
+		<p style="border-bottom: 2px solid rgb(<%= rightTeamColor %>);"><%= team.team_2.name %></p>
 	</div>
 <% }); %>
 
