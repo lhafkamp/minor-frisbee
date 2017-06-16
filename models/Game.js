@@ -7,9 +7,7 @@ const gameSchema = new Schema({
 	leftScore: Number,
 	rightScore: Number,
 	leftUpVotes: Number,
-	leftDownVotes: Number,
 	rightUpVotes: Number,
-	rightDownVotes: Number,
 	leftPercentage: Number,
 	rightPercentage: Number,
 	counter: Number
