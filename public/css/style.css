@@ -51,12 +51,12 @@ nav a {
 }
 
 #vs p:first-of-type {
-	min-width: 100%;
+	min-width: 50%;
 	text-align: right;
 }
 
 #vs p:last-of-type {
-	min-width: 100%;
+	min-width: 50%;
 }
 
 #vs p:nth-child(2) {
