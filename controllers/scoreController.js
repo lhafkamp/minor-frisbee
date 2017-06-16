@@ -5,6 +5,11 @@ const request = require('request');
 exports.scorePage = (req, res) => {
 	const params = req.params.id;
 	const gameData = poolData.filter(data => data.id === Number(params));
+	let admin;
+
+	if (!req.session.token) {
+		admin = 'hide';
+	}
 
 	Game.find({ game_id: params }, async (err, game) => {
 		if (err) throw err;
@@ -42,6 +47,7 @@ exports.scorePage = (req, res) => {
 				leftPercentage: 0,
 				rightPercentage: 0,
 				counter: 0,
+				admin: admin
 			});
 		}
 
@@ -52,7 +58,8 @@ exports.scorePage = (req, res) => {
 				rightScore: game[0].rightScore,
 				leftPercentage: game[0].leftPercentage,
 				rightPercentage: game[0].rightPercentage,
-				counter: game[0].counter
+				counter: game[0].counter,
+				admin: admin
 			});
 		}
 	});

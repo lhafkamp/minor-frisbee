@@ -29,7 +29,7 @@ exports.authSuccess = (req, res) => {
 		} else {
 			const data = JSON.parse(body);
 			req.session.token = data.access_token;
-			res.redirect('main');
+			res.redirect('/');
 		}
 	});
 }
