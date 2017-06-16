@@ -2,16 +2,16 @@
 
 <% teams.forEach(team => { %>
 	<div id="vs">
-		<p><%= team.team_1.name %></p> 
+		<p style="color: rgb(<%= leftTeamColor %>);"><%= team.team_1.name %></p> 
 		<p>VS</p> 
-		<p><%= team.team_2.name %></p>
+		<p style="color: rgb(<%= rightTeamColor %>);"><%= team.team_2.name %></p>
 	</div>
 <% }); %>
 
 <div id="score">
 	<div>
 		<h3 class="leftPrc"><%= leftPercentage || 0 %></h3>
-		<button disabled="true">v</button>
+		<button style="background: rgb(<%= leftTeamColor %>);" disabled="true">v</button>
 	</div>
 	<div>
 		<p><%= leftScore || 0 %></p>
@@ -20,7 +20,7 @@
 	</div>
 	<div>
 		<h3 class="rightPrc"><%= rightPercentage || 0 %></h3>
-		<button disabled="true">v</button>
+		<button style="background: rgb(<%= rightTeamColor %>);" disabled="true">v</button>
 	</div>
 </div>
 

@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 const Game = mongoose.model('Game');
 const request = require('request');
+const vibrant = require('node-vibrant');
 
 exports.scorePage = (req, res) => {
 	const params = req.params.id;
@@ -11,57 +12,91 @@ exports.scorePage = (req, res) => {
 		admin = 'hide';
 	}
 
-	Game.find({ game_id: params }, async (err, game) => {
+	request(`http://api.playwithlv.com/v1/teams/?team_ids=%5B${gameData[0].team_1.id}%2C%20${gameData[0].team_2.id}%5D&access_token=${req.session.token}`, async (err, response, body) => {
 		if (err) throw err;
 
-		if (game.length > 0) {
-			console.log('game found');
-			redirectRoom();
-		} else {
-			console.log('new game, creating game..');
-			const newGame = await new Game({
-				game_id: params,
-				leftScore: 0,
-				rightScore: 0,
-				leftUpVotes: 0,
-				leftDownVotes: 0,
-				rightUpVotes: 0,
-				rightDownVotes: 0,
-				leftPercentage: 0,
-				rightPercentage: 0,
-				counter: 0
-			});
+		const data = JSON.parse(body);
+		
+		let leftTeamColor;
+		let rightTeamColor;
+		const teamArray = [];
 
-			await newGame.save((err) => {
-				if (err) throw err;
-				console.log('new game created!');
-				redirectNew();
-			});
-		}
+		await data.objects.forEach(team => {
+			teamArray.push(team.profile_image_50);
+		});
 
-		function redirectNew() {
-			res.render('score', {
-				teams: gameData,
-				leftScore: 0,
-				rightScore: 0,
-				leftPercentage: 0,
-				rightPercentage: 0,
-				counter: 0,
-				admin: admin
-			});
-		}
+		// extract the main color of the image
+		await vibrant.from(teamArray[0]).getPalette((err, palette) => {
+			try {
+				leftTeamColor = palette.Vibrant._rgb;
+			} catch(err) {
+				console.error(err);
+			}
+		});
 
-		function redirectRoom() {
-			res.render('score', {
-				teams: gameData,
-				leftScore: game[0].leftScore,
-				rightScore: game[0].rightScore,
-				leftPercentage: game[0].leftPercentage,
-				rightPercentage: game[0].rightPercentage,
-				counter: game[0].counter,
-				admin: admin
-			});
-		}
+		await vibrant.from(teamArray[1]).getPalette((err, palette) => {
+			try {
+				rightTeamColor = palette.Vibrant._rgb;
+			} catch(err) {
+				console.error(err);
+			}
+		});
+
+		// find game
+		Game.find({ game_id: params }, async (err, game) => {
+			if (err) throw err;
+
+			if (game.length > 0) {
+				console.log('game found');
+				redirectRoom();
+			} else {
+				console.log('new game, creating game..');
+				const newGame = await new Game({
+					game_id: params,
+					leftScore: 0,
+					rightScore: 0,
+					leftUpVotes: 0,
+					rightUpVotes: 0,
+					leftPercentage: 0,
+					rightPercentage: 0,
+					counter: 0
+				});
+
+				await newGame.save((err) => {
+					if (err) throw err;
+					console.log('new game created!');
+					redirectNew();
+				});
+			}
+
+			function redirectNew() {
+				res.render('score', {
+					teams: gameData,
+					leftScore: 0,
+					rightScore: 0,
+					leftPercentage: 0,
+					rightPercentage: 0,
+					leftTeamColor: leftTeamColor,
+					rightTeamColor: rightTeamColor,
+					counter: 0,
+					admin: admin
+				});
+			}
+
+			function redirectRoom() {
+				res.render('score', {
+					teams: gameData,
+					leftScore: game[0].leftScore,
+					rightScore: game[0].rightScore,
+					leftPercentage: game[0].leftPercentage,
+					rightPercentage: game[0].rightPercentage,
+					leftTeamColor: leftTeamColor,
+					rightTeamColor: rightTeamColor,
+					counter: game[0].counter,
+					admin: admin
+				});
+			}
+		});
 	});
 }
 
