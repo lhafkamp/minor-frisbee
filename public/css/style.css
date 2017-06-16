@@ -15,7 +15,7 @@ body {
 	font-family: 'OSans', 'sans-serif';
 	margin: 0;
 	padding: 0;
-	background: #FEFEFE;
+	background: #fbfbfb;
 }
 
 /* navigation */
@@ -26,12 +26,13 @@ nav {
     align-items: center;
     height: 3em;
     width: 100vw;
-    background: #4ADB95;
+    background: white;
     margin-bottom: 1em;
+    border-bottom: 1px solid rgba(0,0,0,0.05);
 }
 
 nav a {
-	color: white;
+	color: grey;
     text-decoration: none;
 }
 
