@@ -6489,13 +6489,13 @@ socket.on('percentage', obj => {
 	rightPercentage.innerHTML = obj.rightPercentage;
 
 	// change percentage box color based on the percentage
-	if (obj.rightPercentage >= 50 && obj.leftPercentage >= 50) {
+	if (obj.leftPercentage > 50) {
 		leftPercentage.classList.add('green');
+	} else if (obj.rightPercentage > 50) {
 		rightPercentage.classList.add('green');
-	} else if (obj.rightPercentage >= 50) {
-		rightPercentage.classList.add('green');
-	} else if (obj.leftPercentage >= 50) {
-		leftPercentage.classList.add('green');
+	} else {
+		leftPercentage.classList.remove('green');
+		rightPercentage.classList.remove('green');
 	}
 });
 
@@ -6508,28 +6508,14 @@ function sendEvent() {
 function sendScore() {
 	if (this === votes[0]) {
 		scoreObj = {
-			rightUpVotes: 0,
 			leftUpVotes: 1
 		}
 		socket.emit('upVote', scoreObj);
-	} else if (this === votes[1]) {
+	} else {
 		scoreObj = {
-			leftUpVotes: 0,
-			leftDownVotes: 1
+			rightUpVotes: 1
 		}
-		socket.emit('downVote', scoreObj);
- 	} else if (this === votes[2]) {
- 		scoreObj = {
- 			leftUpVotes: 0,
-			rightUpVotes: 1,
-		}
- 		socket.emit('upVote', scoreObj);
- 	} else {
- 		scoreObj = {
- 			rightDownVotes: 0,
-			rightDownVotes: 1
-		}
-		socket.emit('downVote', scoreObj);
+		socket.emit('upVote', scoreObj);
  	}
 }
 
