@@ -14,19 +14,17 @@ exports.scorePage = (req, res) => {
 
 	request(`http://api.playwithlv.com/v1/teams/?team_ids=%5B${gameData[0].team_1.id}%2C%20${gameData[0].team_2.id}%5D&access_token=${req.session.token}`, async (err, response, body) => {
 		if (err) throw err;
-
 		const data = JSON.parse(body);
-		
 		let leftTeamColor;
 		let rightTeamColor;
 		const teamArray = [];
 
-		await data.objects.forEach(team => {
+		data.objects.forEach(team => {
 			teamArray.push(team.profile_image_50);
 		});
 
 		// extract the main color of the image
-		await vibrant.from(teamArray[0]).getPalette((err, palette) => {
+		vibrant.from(teamArray[0]).getPalette((err, palette) => {
 			try {
 				leftTeamColor = palette.Vibrant._rgb;
 			} catch(err) {
