@@ -1,9 +1,15 @@
 <%- include ./part/header.ejs %>
 
-<h1>Matches</h1>
+<h1 class="pool">Pool matches</h1>
 
 <% teams.objects.forEach(team => { %>
-	<a href="/score/<%= team.id %>"><%= team.team_1.name %> vs <%= team.team_2.name %></a>
+	<a href="/score/<%= team.id %>">
+		<div class="match">
+			<p><%= team.team_1.name %> </p>
+			<p>vs</p>
+			<p><%= team.team_2.name %></p>
+		</div>
+	</a>
 <% }); %>
 
 <%- include ./part/footer.ejs %>
