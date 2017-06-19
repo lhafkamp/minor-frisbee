@@ -1,35 +1,39 @@
-const io = require('socket.io-client');
-const socket = io.connect();
-const start = document.querySelector('.start');
-const timer = document.querySelector('.timer');
-const votes = document.querySelectorAll('#score div button');
-const numbers = document.querySelectorAll('#score p');
-const leftPercentage = document.querySelector('.leftPrc');
-const rightPercentage = document.querySelector('.rightPrc');
+var io = require('socket.io-client');
+var socket = io.connect();
+var start = document.querySelector('.start');
+var timer = document.querySelector('.timer');
+var votes = document.querySelectorAll('#score div button');
+var numbers = document.querySelectorAll('#score p');
+var leftPercentage = document.querySelector('.leftPrc');
+var rightPercentage = document.querySelector('.rightPrc');
 
 // get the unique game number from the URL
-const location = window.location.href;
-const locationIndex = location.indexOf('/score/');
-const params = location.slice(locationIndex + 7);
+var location = window.location.href;
+var locationIndex = location.indexOf('/score/');
+var params = location.slice(locationIndex + 7);
 
 // create socket room
 socket.emit('create', params);
 
-socket.on('startVoting', () => {
+socket.on('startVoting', function() {
 	// remove eventual scoreUpdate classes
 	numbers[0].classList.remove('scoreUpdate');
 	numbers[2].classList.remove('scoreUpdate');
 
 	// enable voting options
-	votes.forEach(vote => vote.disabled = false);
+	votes.forEach(function(vote) {
+		return vote.disabled = true;
+	});
 });
 
-socket.on('endVoting', () => {
+socket.on('endVoting', function() {
 	// disable voting options
-	votes.forEach(vote => vote.disabled = true);
+	votes.forEach(function(vote) {
+		return vote.disabled = true;
+	});
 });
 
-socket.on('timeStarted', counter => {
+socket.on('timeStarted', function(counter) {
 	// small logic for a better visual experience
 	// let visual = 1;
 	// if (counter < 14) {
@@ -44,7 +48,7 @@ socket.on('timeStarted', counter => {
 	}
 });
 
-socket.on('leftVoteResult', score => {
+socket.on('leftVoteResult', function(score) {
 	// set score
 	numbers[0].innerHTML = score;
 	leftPercentage.innerHTML = 0;
@@ -55,7 +59,7 @@ socket.on('leftVoteResult', score => {
 	leftPercentage.classList.remove('green');
 });
 
-socket.on('rightVoteResult', score => {
+socket.on('rightVoteResult', function(score) {
 	numbers[2].innerHTML = score;
 	leftPercentage.innerHTML = 0;
 	rightPercentage.innerHTML = 0;
@@ -64,7 +68,7 @@ socket.on('rightVoteResult', score => {
 	rightPercentage.classList.remove('green');
 });
 
-socket.on('percentage', obj => {
+socket.on('percentage', function(obj) {
 	leftPercentage.innerHTML = obj.leftPercentage;
 	rightPercentage.innerHTML = obj.rightPercentage;
 
@@ -100,4 +104,6 @@ function sendScore() {
 }
 
 start.addEventListener('click', sendEvent);
-votes.forEach(vote => vote.addEventListener('click', sendScore));
+votes.forEach(function(vote) {
+	return vote.addEventListener('click', sendScore);
+});
