@@ -112,11 +112,11 @@ votes.forEach(function (vote) {
 if ('classList' in document.documentElement) {
 	console.log('test');
 } else {
-	for (var i = 0; i < votes.length, i++) {
+	for (var i = 0; i < votes.length; i++) {
 		return vote[i].style.display = 'none';
 	}
 
-	for (var i = 0; i < numbers.length, i++) {
+	for (var i = 0; i < numbers.length; i++) {
 		return number[i].style.display = 'none';
 	}
 
