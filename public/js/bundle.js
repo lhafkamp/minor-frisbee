@@ -6528,6 +6528,22 @@ votes.forEach(function (vote) {
 	return vote.addEventListener('click', sendScore);
 });
 
+// feature detection
+if (!('classList' in document.documentElement)) {
+	votes.forEach(function(vote) {
+		return vote.style.display = 'none';
+	});
+
+	numbers.forEach(function(number) {
+		return number.style.display = 'none';
+	});
+
+	leftPercentage.style.display = 'none';
+	rightPercentage.style.display = 'none';
+
+	start.style.display = 'none';	
+}
+
 },{"socket.io-client":34}],47:[function(require,module,exports){
 var done = document.querySelector('.done');
 var form = document.querySelector('form');

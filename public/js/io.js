@@ -107,3 +107,19 @@ start.addEventListener('click', sendEvent);
 votes.forEach(function (vote) {
 	return vote.addEventListener('click', sendScore);
 });
+
+// feature detection
+if (!('classList' in document.documentElement)) {
+	votes.forEach(function(vote) {
+		return vote.style.display = 'none';
+	});
+
+	numbers.forEach(function(number) {
+		return number.style.display = 'none';
+	});
+
+	leftPercentage.style.display = 'none';
+	rightPercentage.style.display = 'none';
+
+	start.style.display = 'none';	
+}
