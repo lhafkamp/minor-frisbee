@@ -109,7 +109,9 @@ votes.forEach(function (vote) {
 });
 
 // feature detection
-if (!('classList' in document.documentElement)) {
+if ('classList' in document.documentElement) {
+	console.log('test');
+} else {
 	for (var i = 0; i < votes.length, i++) {
 		return vote[i].style.display = 'none';
 	}

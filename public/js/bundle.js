@@ -1,1 +1,1 @@
-console.error("Error: Parsing file /Users/Luuk/Documents/Git/minor/minor-frisbee/public/js/io.js: Unexpected token (113:38)");
+console.error("Error: Parsing file /Users/Luuk/Documents/Git/minor/minor-frisbee/public/js/io.js: Unexpected token (115:38)");
