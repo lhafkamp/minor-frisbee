@@ -110,13 +110,13 @@ votes.forEach(function (vote) {
 
 // feature detection
 if (!('classList' in document.documentElement)) {
-	votes.forEach(function(vote) {
-		return vote.style.display = 'none';
-	});
+	for (var i = 0; i < votes.length, i++) {
+		return vote[i].style.display = 'none';
+	}
 
-	numbers.forEach(function(number) {
-		return number.style.display = 'none';
-	});
+	for (var i = 0; i < numbers.length, i++) {
+		return number[i].style.display = 'none';
+	}
 
 	leftPercentage.style.display = 'none';
 	rightPercentage.style.display = 'none';
