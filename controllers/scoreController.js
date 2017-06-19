@@ -87,7 +87,7 @@ exports.form = (req, res) => {
 			console.error('Updating result failed');
 		} else {
 			console.log('Result updated!');
-			res.redirect('/main');
+			res.redirect('/');
 		}
 	});
 }
