@@ -6435,25 +6435,25 @@ var params = location.slice(locationIndex + 7);
 // create socket room
 socket.emit('create', params);
 
-socket.on('startVoting', function() {
+socket.on('startVoting', function () {
 	// remove eventual scoreUpdate classes
 	numbers[0].classList.remove('scoreUpdate');
 	numbers[2].classList.remove('scoreUpdate');
 
 	// enable voting options
-	votes.forEach(function(vote) {
-		return vote.disabled = true;
+	votes.forEach(function (vote) {
+		return vote.disabled = false;
 	});
 });
 
-socket.on('endVoting', function() {
+socket.on('endVoting', function () {
 	// disable voting options
-	votes.forEach(function(vote) {
+	votes.forEach(function (vote) {
 		return vote.disabled = true;
 	});
 });
 
-socket.on('timeStarted', function(counter) {
+socket.on('timeStarted', function (counter) {
 	// small logic for a better visual experience
 	// let visual = 1;
 	// if (counter < 14) {
@@ -6468,7 +6468,7 @@ socket.on('timeStarted', function(counter) {
 	}
 });
 
-socket.on('leftVoteResult', function(score) {
+socket.on('leftVoteResult', function (score) {
 	// set score
 	numbers[0].innerHTML = score;
 	leftPercentage.innerHTML = 0;
@@ -6479,7 +6479,7 @@ socket.on('leftVoteResult', function(score) {
 	leftPercentage.classList.remove('green');
 });
 
-socket.on('rightVoteResult', function(score) {
+socket.on('rightVoteResult', function (score) {
 	numbers[2].innerHTML = score;
 	leftPercentage.innerHTML = 0;
 	rightPercentage.innerHTML = 0;
@@ -6488,7 +6488,7 @@ socket.on('rightVoteResult', function(score) {
 	rightPercentage.classList.remove('green');
 });
 
-socket.on('percentage', function(obj) {
+socket.on('percentage', function (obj) {
 	leftPercentage.innerHTML = obj.leftPercentage;
 	rightPercentage.innerHTML = obj.rightPercentage;
 
@@ -6513,18 +6513,18 @@ function sendScore() {
 	if (this === votes[0]) {
 		scoreObj = {
 			leftUpVotes: 1
-		}
+		};
 		socket.emit('upVote', scoreObj);
 	} else {
 		scoreObj = {
 			rightUpVotes: 1
-		}
+		};
 		socket.emit('upVote', scoreObj);
- 	}
+	}
 }
 
 start.addEventListener('click', sendEvent);
-votes.forEach(function(vote) {
+votes.forEach(function (vote) {
 	return vote.addEventListener('click', sendScore);
 });
 
