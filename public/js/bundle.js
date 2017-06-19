@@ -6430,13 +6430,26 @@ var rightPercentage = document.querySelector('.rightPrc');
 socket.on('disconnect', function() {
 	document.body.insertAdjacentHTML('afterbegin', `
 		<div class="overlay">
-			<div id="serverDown">
+			<div class="alert">
 				<h1>Server down</h1>
 				<p>Try <a href="/">refreshing</a> the page or come back later!</p>
 			</div>
 		</div>
 	`);
 });
+
+setInterval(function() {
+	if (navigator.onLine === false) {
+		document.body.insertAdjacentHTML('afterbegin', `
+			<div class="overlay">
+				<div class="alert">
+					<h1>You seem to be offline</h1>
+					<p>Try to reconnect and <a href="/">refresh</a> the page</p>
+				</div>
+			</div>
+		`);
+	}
+}, 1000);
 
 // get the unique game number from the URL
 var location = window.location.href;

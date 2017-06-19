@@ -440,7 +440,7 @@
 	transition: .5s;
 }
 
-#serverDown {
+.alert {
 	position: relative;
 	top: 25%;
 	margin: 0 auto;
@@ -452,7 +452,7 @@
 	color: grey;
 }
 
-#serverDown h1 {
+.alert h1 {
 	color: #666;
 	font-size: 1.5em;
     font-family: 'BoldSans';
@@ -460,7 +460,7 @@
     line-height: 1.2em;
 }
 
-#serverDown a {
+.alert a {
 	color: #4ADB95;
 	text-decoration: underline;
 }
