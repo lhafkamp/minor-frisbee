@@ -6427,6 +6427,17 @@ var numbers = document.querySelectorAll('#score p');
 var leftPercentage = document.querySelector('.leftPrc');
 var rightPercentage = document.querySelector('.rightPrc');
 
+socket.on('disconnect', function() {
+	document.body.insertAdjacentHTML('afterbegin', `
+		<div class="overlay">
+			<div id="serverDown">
+				<h1>Server down</h1>
+				<p>Try <a href="/">refreshing</a> the page or come back later!</p>
+			</div>
+		</div>
+	`);
+});
+
 // get the unique game number from the URL
 var location = window.location.href;
 var locationIndex = location.indexOf('/score/');

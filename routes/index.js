@@ -12,4 +12,8 @@ router.get('/success', authController.authSuccess);
 router.get('/score/:id/', scoreController.scorePage);
 router.post('/score/:id/result', scoreController.form);
 
+router.get('*', (req, res) => {
+	res.render('error');
+});
+
 module.exports = router;
