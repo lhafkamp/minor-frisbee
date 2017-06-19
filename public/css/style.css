@@ -340,20 +340,6 @@ progress::-webkit-progress-value {
 	}
 }
 
-.swap {
-	animation: swap .8s;
-}
-
-@keyframes swap {
-	0% {
-		margin-right: -50em;
-	}
-
-	100% {
-		margin-right: 0;
-	}
-}
-
 /* form */
 
 form {
@@ -438,3 +424,18 @@ form button:focus {
 .scoreUpdate {
 	animation: score 2s;
 }
+
+.swap {
+	animation: swap .8s;
+}
+
+@keyframes swap {
+	0% {
+		margin-right: -50em;
+	}
+
+	100% {
+		margin-right: 0;
+	}
+}
+
