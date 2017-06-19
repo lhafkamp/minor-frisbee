@@ -6426,28 +6426,30 @@ var votes = document.querySelectorAll('#score div button');
 var numbers = document.querySelectorAll('#score p');
 var leftPercentage = document.querySelector('.leftPrc');
 var rightPercentage = document.querySelector('.rightPrc');
+var error = document.querySelector('#error');
 
+// TODO ES6 > ES5
 socket.on('disconnect', function() {
-	document.body.insertAdjacentHTML('afterbegin', `
+	error.innerHTML = `
 		<div class="overlay">
 			<div class="alert">
 				<h1>Server down</h1>
-				<p>Try <a href="/">refreshing</a> the page or come back later!</p>
+				<p>Try <a href="${window.location.href}">refreshing</a> the page or come back later!</p>
 			</div>
 		</div>
-	`);
+	`;
 });
 
 setInterval(function() {
-	if (navigator.onLine === false) {
-		document.body.insertAdjacentHTML('afterbegin', `
+	if (navigator.onLine === false && !window.location.href.includes('localhost')) {
+		error.innerHTML = `
 			<div class="overlay">
 				<div class="alert">
 					<h1>You seem to be offline</h1>
-					<p>Try to reconnect and <a href="/">refresh</a> the page</p>
+					<p>Try to reconnect and <a href="${window.location.href}">refresh</a> the page</p>
 				</div>
 			</div>
-		`);
+		`;
 	}
 }, 1000);
 
