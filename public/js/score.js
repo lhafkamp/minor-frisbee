@@ -1,8 +1,8 @@
-const done = document.querySelector('.done');
-const form = document.querySelector('form');
-const inputs = document.querySelectorAll('form input');
-const numbers = document.querySelectorAll('#score p');
-const scoreContent = document.querySelector('container');
+var done = document.querySelector('.done');
+var form = document.querySelector('form');
+var inputs = document.querySelectorAll('form input');
+var numbers = document.querySelectorAll('#score p');
+var scoreContent = document.querySelector('container');
 
 // fill in form when done
 function fillInForm() {
@@ -12,6 +12,5 @@ function fillInForm() {
 	scoreContent.classList.add('hide');
 	form.classList.add('swap');
 }
-
 
 done.addEventListener('click', fillInForm);
