@@ -1,43 +1,48 @@
 <%- include ./part/header.ejs %>
 
-<% teams.forEach(team => { %>
-	<div id="vs">
-		<p><%= team.team_1.name %></p> 
-		<p>VS</p> 
-		<p><%= team.team_2.name %></p>
-	</div>
-<% }); %>
+<container>
+	<% teams.forEach(team => { %>
+		<div id="vs">
+			<p><%= team.team_1.name %></p> 
+			<p>VS</p> 
+			<p><%= team.team_2.name %></p>
+		</div>
+	<% }); %>
 
-<div id="score">
-	<div>
-		<h3 class="leftPrc"><%= leftPercentage || 0 %></h3>
-		<button disabled="true">v</button>
+	<div id="score">
+		<div>
+			<h3 class="leftPrc"><%= leftPercentage || 0 %></h3>
+			<button disabled="true">v</button>
+		</div>
+		<div>
+			<p><%= leftScore || 0 %></p>
+			<p>-</p>
+			<p><%= rightScore || 0 %></p>
+		</div>
+		<div>
+			<h3 class="rightPrc"><%= rightPercentage || 0 %></h3>
+			<button disabled="true">v</button>
+		</div>
 	</div>
-	<div>
-		<p><%= leftScore || 0 %></p>
-		<p>-</p>
-		<p><%= rightScore || 0 %></p>
+
+	<div class="test">
+		<span></span>
 	</div>
-	<div>
-		<h3 class="rightPrc"><%= rightPercentage || 0 %></h3>
-		<button disabled="true">v</button>
-	</div>
-</div>
 
-<div class="test">
-	<span></span>
-</div>
-
-<!-- <progress class="timer" value="0" max="15"></progress> -->
-<button class="start">Start voting</button>
-
-<button class="<%= admin %> done">Done</button>
+	<!-- <progress class="timer" value="0" max="15"></progress> -->
+	<button class="start">Start voting</button>
+	<button class="<%= admin %> done">Done</button>
+</container>
 
 <form class="hide" method="POST" action="/score/<%= teams[0].id %>/result">
-	<h2>Final score</h2>
-	<input type="text" name="team_1_score" value="">
-	<input type="text" name="team_2_score" value="">
-	<button type="submit" name="submit">Submit</button>
+	<h1>Match complete!</h1>
+	<h2>Confirm final score</h2>
+	<div>
+		<input type="text" name="team_1_score" value="">
+		<span>-</span>
+		<input type="text" name="team_2_score" value="">
+	</div>
+	<button type="submit" name="submit">Confirm</button>
 </form>
 
 <script src="/js/bundle.js"></script>
