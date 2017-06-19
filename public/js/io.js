@@ -21,12 +21,16 @@ socket.on('startVoting', function() {
 	numbers[2].classList.remove('scoreUpdate');
 
 	// enable voting options
-	votes.forEach(vote => vote.disabled = false);
+	votes.forEach(function(vote) {
+		return vote.disabled = true;
+	});
 });
 
 socket.on('endVoting', function() {
 	// disable voting options
-	votes.forEach(vote => vote.disabled = true);
+	votes.forEach(function(vote) {
+		return vote.disabled = true;
+	});
 });
 
 socket.on('timeStarted', function(counter) {
