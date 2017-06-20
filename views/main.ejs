@@ -2,14 +2,47 @@
 
 <h1 class="pool">Pool matches</h1>
 
+<style type="text/css">
+	.match input {
+		-webkit-appearance: none;
+	border: none;
+		height: 4em;
+		width: 5em;
+		-webkit-clip-path: polygon(24% 25%, 41% 25%, 50% 35%, 60% 26%, 76% 26%, 76% 50%, 65% 50%, 64% 88%, 35% 88%, 35% 50%, 24% 49%);
+		clip-path: polygon(24% 25%, 41% 25%, 50% 35%, 60% 26%, 76% 26%, 76% 50%, 65% 50%, 64% 88%, 35% 88%, 35% 50%, 24% 49%);
+	}
+</style>
+
 <% teams.objects.forEach(team => { %>
 	<a href="/score/<%= team.id %>">
 		<div class="match">
-			<p><%= team.team_1.name %> </p>
+			<div>
+				<input type="color"></input>
+				<p><%= team.team_1.name %> </p>
+			</div>
 			<p>vs</p>
-			<p><%= team.team_2.name %></p>
+			<div>
+				<p><%= team.team_2.name %> </p>
+			</div>
 		</div>
 	</a>
 <% }); %>
+
+<script src="/socket.io/socket.io.js"></script>
+<script type="text/javascript">
+	// var io = require('socket.io-client');
+	var socket = io();
+
+	var color = document.querySelector('.match input');
+
+	function test() {
+		var test = this.value;
+		socket.emit('test', test);
+	}
+
+
+	color.addEventListener('focus', test);
+
+</script>
 
 <%- include ./part/footer.ejs %>
