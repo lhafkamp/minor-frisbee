@@ -291,28 +291,7 @@
 
 	/* progress bar */
 
-	progress[value] {
-		width: 15em;
-		height: 1em;
-		border: none;
-		background: #efefef;
-		border-radius: .2em;
-		margin: 3em 0 1em;
-	}
-
-	progress::-webkit-progress-bar {
-		background: #efefef;
-		border-radius: .2em;
-	}
-
-	progress::-webkit-progress-value {
-		background: #4ADB95;
-		border-radius: .2em;
-	}
-
-	/* TODO test if this is a better progress option */
-
-	.test {
+	.progress {
 		height: 1em;
 		width: 15em;
 		background: #efefef;
@@ -429,7 +408,7 @@
 /* classList */
 
 .hide {
-	display: none;
+	display: none !important;
 }
 
 .green {

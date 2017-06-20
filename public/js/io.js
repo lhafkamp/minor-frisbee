@@ -6,6 +6,7 @@ var votes = document.querySelectorAll('#score div button');
 var numbers = document.querySelectorAll('#score p');
 var leftPercentage = document.querySelector('.leftPrc');
 var rightPercentage = document.querySelector('.rightPrc');
+var progress = document.querySelector('.progress span');
 
 // get the unique game number from the URL
 var location = window.location.href;
@@ -34,17 +35,10 @@ socket.on('endVoting', function () {
 });
 
 socket.on('timeStarted', function (counter) {
-	// small logic for a better visual experience
-	// let visual = 1;
-	// if (counter < 14) {
-	// 	visual = 0;
-	// }
-	// timer.value = counter + visual;
-
 	// TODO test if this is a better progress option
-	document.querySelector('.test span').classList.add('countdown');
+	progress.classList.add('countdown');
 	if (counter < 1) {
-		document.querySelector('.test span').classList.remove('countdown');
+		progress.classList.remove('countdown');
 	}
 });
 

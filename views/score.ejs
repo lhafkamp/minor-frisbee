@@ -10,7 +10,7 @@
 	<% }); %>
 
 	<div id="score">
-		<div>
+		<div class="hide">
 			<h3 class="leftPrc"><%= leftPercentage || 0 %></h3>
 			<button disabled="true">v</button>
 		</div>
@@ -19,22 +19,21 @@
 			<p>-</p>
 			<p><%= rightScore || 0 %></p>
 		</div>
-		<div>
+		<div class="hide">
 			<h3 class="rightPrc"><%= rightPercentage || 0 %></h3>
 			<button disabled="true">v</button>
 		</div>
 	</div>
 
-	<div class="test">
+	<div class="hide progress">
 		<span></span>
 	</div>
 
-	<!-- <progress class="timer" value="0" max="15"></progress> -->
-	<button class="start">Start voting</button>
-	<button class="<%= admin %> done">Done</button>
+	<button class="hide start">Start voting</button>
+	<button class="hide <%= admin %> done">Done</button>
 </container>
 
-<form class="hide" method="POST" action="/score/<%= teams[0].id %>/result">
+<form method="POST" action="/score/<%= teams[0].id %>/result">
 	<h1>Match complete!</h1>
 	<h2>Confirm final score</h2>
 	<div>
