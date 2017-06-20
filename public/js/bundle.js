@@ -6427,6 +6427,32 @@ var numbers = document.querySelectorAll('#score p');
 var leftPercentage = document.querySelector('.leftPrc');
 var rightPercentage = document.querySelector('.rightPrc');
 var progress = document.querySelector('.progress span');
+var error = document.querySelector('#error');
+
+// TODO ES6 > ES5
+socket.on('disconnect', function() {
+	error.innerHTML = `
+		<div class="overlay">
+			<div class="alert">
+				<h1>Server down</h1>
+				<p>Try <a href="${window.location.href}">refreshing</a> the page or come back later!</p>
+			</div>
+		</div>
+	`;
+});
+
+setInterval(function() {
+	if (navigator.onLine === false && !window.location.href.includes('localhost')) {
+		error.innerHTML = `
+			<div class="overlay">
+				<div class="alert">
+					<h1>You seem to be offline</h1>
+					<p>Try to reconnect and <a href="${window.location.href}">refresh</a> the page</p>
+				</div>
+			</div>
+		`;
+	}
+}, 1000);
 
 // get the unique game number from the URL
 var location = window.location.href;
