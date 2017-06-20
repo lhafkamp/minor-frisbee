@@ -9,7 +9,6 @@ var progress = document.querySelector('.progress');
 
 // show content when/if JS loads (PE)
 form.classList.add('hide');
-done.classList.remove('hide');
 startButton.classList.remove('hide');
 progress.classList.remove('hide');
 votingOptions.forEach(function(option) {
