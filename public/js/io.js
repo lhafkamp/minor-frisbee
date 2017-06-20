@@ -6,6 +6,7 @@ var votes = document.querySelectorAll('#score div button');
 var numbers = document.querySelectorAll('#score p');
 var leftPercentage = document.querySelector('.leftPrc');
 var rightPercentage = document.querySelector('.rightPrc');
+var progress = document.querySelector('.progress span');
 var error = document.querySelector('#error');
 
 // TODO ES6 > ES5
@@ -60,17 +61,10 @@ socket.on('endVoting', function () {
 });
 
 socket.on('timeStarted', function (counter) {
-	// small logic for a better visual experience
-	// let visual = 1;
-	// if (counter < 14) {
-	// 	visual = 0;
-	// }
-	// timer.value = counter + visual;
-
 	// TODO test if this is a better progress option
-	document.querySelector('.test span').classList.add('countdown');
+	progress.classList.add('countdown');
 	if (counter < 1) {
-		document.querySelector('.test span').classList.remove('countdown');
+		progress.classList.remove('countdown');
 	}
 });
 
@@ -133,21 +127,3 @@ start.addEventListener('click', sendEvent);
 votes.forEach(function (vote) {
 	return vote.addEventListener('click', sendScore);
 });
-
-// feature detection
-if ('classList' in document.documentElement) {
-	console.log('test');
-} else {
-	for (var i = 0; i < votes.length; i++) {
-		return vote[i].style.display = 'none';
-	}
-
-	for (var i = 0; i < numbers.length; i++) {
-		return number[i].style.display = 'none';
-	}
-
-	leftPercentage.style.display = 'none';
-	rightPercentage.style.display = 'none';
-
-	start.style.display = 'none';	
-}

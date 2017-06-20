@@ -291,28 +291,7 @@
 
 	/* progress bar */
 
-	progress[value] {
-		width: 15em;
-		height: 1em;
-		border: none;
-		background: #efefef;
-		border-radius: .2em;
-		margin: 3em 0 1em;
-	}
-
-	progress::-webkit-progress-bar {
-		background: #efefef;
-		border-radius: .2em;
-	}
-
-	progress::-webkit-progress-value {
-		background: #4ADB95;
-		border-radius: .2em;
-	}
-
-	/* TODO test if this is a better progress option */
-
-	.test {
+	.progress {
 		height: 1em;
 		width: 15em;
 		background: #efefef;
@@ -426,74 +405,10 @@
     font-size: 1.4em;
 }
 
-/* server down */
-
-.overlay {
-	height: 100%;
-	width: 100%;
-	position: fixed;
-	z-index: 9001;
-	top: 0;
-	left: 0;
-	background: rgba(0, 0, 0, .7);
-	overflow-x: hidden;
-	transition: .5s;
-}
-
-.alert {
-	position: relative;
-	top: 25%;
-	margin: 0 auto;
-    width: 50%;
-	text-align: center;
-    padding: 2em;
-    background: white;
-    border-radius: .4em;
-	color: grey;
-}
-
-.alert h1 {
-	color: #666;
-	font-size: 1.5em;
-    font-family: 'BoldSans';
-    font-style: italic;
-    line-height: 1.2em;
-}
-
-.alert a {
-	color: #4ADB95;
-	text-decoration: underline;
-}
-
-/* 404 */
-
-#err {
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-}
-
-#err h1 {
-	margin-top: 3em;
-	color: #666;
-    font-family: 'BoldSans';
-    font-style: italic;
-    line-height: 1.2em;
-}
-
-#err h2 {
-	font-size: 1.5em;
-}
-
-#err a {
-	color: #4ADB95;
-	text-decoration: underline;
-}
-
 /* classList */
 
 .hide {
-	display: none;
+	display: none !important;
 }
 
 .green {
@@ -533,4 +448,3 @@
 		margin-right: 0;
 	}
 }
-
