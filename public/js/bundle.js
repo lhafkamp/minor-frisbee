@@ -6471,6 +6471,7 @@ socket.on('startVoting', function () {
 	votes.forEach(function (vote) {
 		return vote.disabled = false;
 	});
+	start.disabled = true;
 });
 
 socket.on('endVoting', function () {
@@ -6478,6 +6479,11 @@ socket.on('endVoting', function () {
 	votes.forEach(function (vote) {
 		return vote.disabled = true;
 	});
+});
+
+socket.on('endEvent', function () {
+	// enable start event button
+	start.disabled = false;
 });
 
 socket.on('timeStarted', function (counter) {

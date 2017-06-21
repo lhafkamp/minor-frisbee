@@ -123,8 +123,8 @@ io.on('connection', (socket) => {
 					if (counter === 0) {
 						clearInterval(interval);
 
-						// disable all buttons again
 						io.sockets.in(room).emit('endVoting');
+						io.sockets.in(room).emit('endEvent');
 
 						Game.findOne({ game_id: room }, (err, result) => {
 							const leftTotal = result.leftUpVotes + result.rightUpVotes;

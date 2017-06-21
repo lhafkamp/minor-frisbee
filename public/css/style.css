@@ -277,6 +277,20 @@
 	    font-size: 1em;
 	}
 
+	.start:disabled {
+		margin-top: .5em;
+		background: #CCC;
+	    box-shadow: 0 4px grey;
+	    color: grey;
+	}
+
+	.start:disabled:hover {
+		margin-top: .5em;
+		background: #CCC;
+	    box-shadow: 0 4px grey;
+	    color: grey;
+	}
+
 	.start:hover,
 	.start:focus {
 		margin-top: .6em;
