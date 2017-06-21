@@ -3,10 +3,10 @@ const Game = mongoose.model('Game');
 const request = require('request');
 
 exports.mainPage = (req, res) => {
-	request(`http://api.playwithlv.com/v1/games/?tournament_id=20254&pool_id=20177&access_token=${req.session.token}`, (err, response, body) => {
+	request(`http://api.playwithlv.com/v1/games/?tournament_id=20254&pool_id=20177&access_token=${req.session.token}`, async (err, response, body) => {
 		const data = JSON.parse(body);
-		Game.find({}, (err, games) => {
-			if (games.length < 1) {
+		await Game.find({}, (err, games) => {
+			if (games.length < data.objects.length) {
 				data.objects.forEach(obj => {
 					const newGame = new Game({
 						game_id: obj.id,
@@ -28,17 +28,13 @@ exports.mainPage = (req, res) => {
 						console.log('new game created!');
 					});
 				});
-				newSmt()
-			} else {
-				console.log('nee');
-				newSmt()
 			}
+		});
 
-			function newSmt() {
-				res.render('main', {
-					games: games
-				});
-			}
+		Game.find({}, (err, games) => {
+			res.render('main', {
+				games: games
+			});
 		});
 	});
 }
