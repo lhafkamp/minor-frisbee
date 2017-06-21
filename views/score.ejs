@@ -1,13 +1,11 @@
 <%- include ./part/header.ejs %>
 
 <container>
-	<% teams.forEach(team => { %>
-		<div id="vs">
-			<p><%= team.team_1.name %></p> 
-			<p>VS</p> 
-			<p><%= team.team_2.name %></p>
-		</div>
-	<% }); %>
+	<div id="vs">
+		<p><%= leftTeam %></p>
+		<p>VS</p> 
+		<p><%= rightTeam %></p>
+	</div>
 
 	<div id="score">
 		<div class="hide">
@@ -33,7 +31,7 @@
 	<button class="<%= admin %> done">Done</button>
 </container>
 
-<form class="hide" method="POST" action="/score/<%= teams[0].id %>/result">
+<form class="hide" method="POST" action="/score/<%= game_id %>/result">
 	<h1>Match complete!</h1>
 	<h2>Confirm final score</h2>
 	<div>

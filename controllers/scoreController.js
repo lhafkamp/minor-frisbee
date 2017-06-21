@@ -4,7 +4,6 @@ const request = require('request');
 
 exports.scorePage = (req, res) => {
 	const params = req.params.id;
-	const gameData = poolData.filter(data => data.id === Number(params));
 	let admin;
 
 	if (!req.session.token) {
@@ -14,54 +13,18 @@ exports.scorePage = (req, res) => {
 	Game.find({ game_id: params }, async (err, game) => {
 		if (err) throw err;
 
-		if (game.length > 0) {
-			console.log('game found');
-			redirectRoom();
-		} else {
-			console.log('new game, creating game..');
-			const newGame = await new Game({
-				game_id: params,
-				leftScore: 0,
-				rightScore: 0,
-				leftUpVotes: 0,
-				leftDownVotes: 0,
-				rightUpVotes: 0,
-				rightDownVotes: 0,
-				leftPercentage: 0,
-				rightPercentage: 0,
-				counter: 0
-			});
-
-			await newGame.save((err) => {
-				if (err) throw err;
-				console.log('new game created!');
-				redirectNew();
-			});
-		}
-
-		function redirectNew() {
-			res.render('score', {
-				teams: gameData,
-				leftScore: 0,
-				rightScore: 0,
-				leftPercentage: 0,
-				rightPercentage: 0,
-				counter: 0,
-				admin: admin
-			});
-		}
-
-		function redirectRoom() {
-			res.render('score', {
-				teams: gameData,
-				leftScore: game[0].leftScore,
-				rightScore: game[0].rightScore,
-				leftPercentage: game[0].leftPercentage,
-				rightPercentage: game[0].rightPercentage,
-				counter: game[0].counter,
-				admin: admin
-			});
-		}
+		console.log('game found');
+		res.render('score', {
+			game_id: game[0].game_id,
+			leftTeam: game[0].leftTeam,
+			rightTeam: game[0].rightTeam,
+			leftScore: game[0].leftScore,
+			rightScore: game[0].rightScore,
+			leftPercentage: game[0].leftPercentage,
+			rightPercentage: game[0].rightPercentage,
+			counter: game[0].counter,
+			admin: admin
+		});
 	});
 }
 
