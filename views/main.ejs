@@ -1,13 +1,18 @@
 <%- include ./part/header.ejs %>
 
 <h1 class="pool">Pool matches</h1>
-
-<% teams.objects.forEach(team => { %>
-	<a href="/score/<%= team.id %>">
+<% games.forEach(game => { %>
+	<a href="/score/<%= game.game_id %>">
 		<div class="match">
-			<p><%= team.team_1.name %> </p>
-			<p>vs</p>
-			<p><%= team.team_2.name %></p>
+			<div>
+				<p><%= game.leftScore %></p>
+				<p><%= game.leftTeam %></p>
+			</div>
+			<p class="vs">vs</p>
+			<div>
+				<p><%= game.rightScore %></p>
+				<p><%= game.rightTeam %></p>
+			</div>
 		</div>
 	</a>
 <% }); %>
