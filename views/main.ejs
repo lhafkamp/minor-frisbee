@@ -4,11 +4,11 @@
 <% games.forEach(game => { %>
 	<a href="/score/<%= game.game_id %>">
 		<div class="match">
+			<p class="vs">vs</p>
 			<div>
 				<p><%= game.leftScore %></p>
 				<p><%= game.leftTeam %></p>
 			</div>
-			<p class="vs">vs</p>
 			<div>
 				<p><%= game.rightScore %></p>
 				<p><%= game.rightTeam %></p>
