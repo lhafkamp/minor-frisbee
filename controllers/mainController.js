@@ -4,8 +4,12 @@ const request = require('request');
 
 exports.mainPage = (req, res) => {
 	request(`http://api.playwithlv.com/v1/games/?tournament_id=20254&pool_id=20177&access_token=${req.session.token}`, async (err, response, body) => {
+		if (err) throw err;
+
 		const data = JSON.parse(body);
 		await Game.find({}, (err, games) => {
+			if (err) throw err;
+
 			if (games.length < data.objects.length) {
 				data.objects.forEach(obj => {
 					const newGame = new Game({

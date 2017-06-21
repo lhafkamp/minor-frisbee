@@ -54,6 +54,7 @@
 	    background: white;
 	    margin-bottom: 1em;
 	    border-bottom: 1px solid rgba(0,0,0,0.05);
+	    z-index: 9001;
 	}
 
 	nav a {
@@ -80,7 +81,7 @@
 	.match {
 		display: flex;
 		align-items: baseline;
-		justify-content: center;
+		justify-content: space-around;
 		padding: 1.5em 0 1.5em;
 	    background: white;
 	    width: 100vw;
@@ -103,20 +104,27 @@
 		transition: background .2s;
 	}
 
-	.match p {
+	.match div p {
 		color: grey;
-		margin: 1em;
+		margin: 0;
+		font-size: .8em;
 	}
 
-	.match p:last-of-type {
-		margin-top: .5em;
+	.match div p:first-of-type {
+		font-family: 'BoldSans', 'sans-serif';
+		color: #666;
+		font-size: 2em;
+		margin: 0;
 	}
 
-	.match p:nth-child(2) {
+	.match .vs {
+		position: absolute;
 		font-family: 'BoldSans', 'sans-serif';
 		color: #4ADB95;
+		font-size: 2em;
 		font-style: italic;
-		margin: 0em 1em 0em 1em;
+		margin: 0;
+		padding-right: .2em;
 		border-bottom: none;
 	}
 
@@ -381,6 +389,16 @@
     width: 100vw;
     border-bottom: 1px solid rgba(0,0,0,0.05);
     margin: .1em 0 .1em;
+}
+
+.match .vs {
+	font-family: 'BoldSans', 'sans-serif';
+	color: #4ADB95;
+	font-size: 2em;
+	font-style: italic;
+	margin: 0;
+	padding-right: .2em;
+	border-bottom: none;
 }
 
 #score {
