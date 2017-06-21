@@ -54,6 +54,10 @@ io.on('connection', (socket) => {
 		console.log(`A socket disconnected, ${connections.length} remaining socket(s) connected`);
 	});
 
+	socket.on('test', (test) => {
+		console.log(test);
+	});
+
 	// socket rooms
 	socket.on('create', (room) => {
 		Game.find({ game_id: room }, (err, game) => {
