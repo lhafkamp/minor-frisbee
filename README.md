@@ -7,10 +7,10 @@
 <br>
 
 ## Live version
-<a href="http://minor-frisbee.herokuapp.com/">Live demo here</a>
+<a href="http://minor-frisbee.herokuapp.com/">Live demo here</a>. Go to /admin and log in to get extra functions like updating the final score.
 
 ## Concept
-One of the most remarkable things about Ultimate Frisbee is that there is no referee on the field to blow a whistle when something goes wrongs. In Ultimate Frisbee, anyone can decide whether it was a goal or not. In this app I want to enhance this honorable task by giving the users the option to vote for goals. The users can all decide if a point should be increased or stay the same whether on what they think is right, the majority vote wins and settles the score.
+One of the most remarkable things about Ultimate Frisbee is that there is no referee on the field to blow a whistle when something goes wrongs. In Ultimate Frisbee, its not always clear which team made a goal or not. In this app I want to enhance this honorable task by giving the users the option to vote for which team made the goal so that its clear for everyone. The users can all decide if a point should be increased or stay the same whether on what they think is right, the majority vote wins and settles the score.
 
 ## Core functionality
 -  [x] oauth2 login with the Leaguevine API
@@ -21,8 +21,8 @@ One of the most remarkable things about Ultimate Frisbee is that there is no ref
 -  [x] voting interface is only enabled during the time-based event
 -  [x] an option to adjust the score
 -  [x] an option to send the score to the Leaguevine API
+-  [x] time event button shouldn't be accessible during the time event
 -  [ ] user needs to be notified when entering a room when there's an ongoing time event
--  [ ] time event button shouldn't be accessible during the time even
 
 ## Core flow
 <img src="media/coreflow.png"/>
@@ -31,24 +31,9 @@ One of the most remarkable things about Ultimate Frisbee is that there is no ref
 -  [x] real-time percentage of votes in the time-based events
 -  [x] cool animations
 -  [x] a progress bar for the time event
+-  [x] different roles for players/organizers
 -  [ ] display all tournament matches (pools/brackets/finals etc)
--  [ ] different roles for players/organizers
 -  [ ] stats on the teams that are competing during the voting event
-
-## TODO
--  [x] saving the voting events/game rooms in a database
--  [ ] synchronise the voting system or let incoming users wait
--  [x] enable the interface during the time-based event, disable it otherwise
--  [x] users should only be able to vote once during a time-based event
--  [x] feedback about the voting process
--  [ ] loading indicator
--  [ ] styling
--  [ ] UX
--  [ ] feature detection where a user that cannot vote won't see the voting interface
--  [ ] feature detection for sockets
--  [ ] see if a client is still online by polling every second
--  [ ] request doesn't work sometimes, probably the API but should look into it
--  [ ] save poolData somewhere for if users come back to a room
 
 ## Coding process
 ### Week 1
@@ -87,6 +72,21 @@ Only a few things left to do. I have to make a 'wait for voting' screen for when
 -  [x] made a progress bar instead of a countdown for the time event
 -  [x] styling for the score page
 -  [x] sweet animations for score updates/events
+
+### Week 4
+After talking to the client I refactored the code in a way that you now vote for 'which team scored' instead of 'if a team scored'. I created an admin page so that only admin users get the 'done' button that displays the final score page. Another thing that took me a while was getting the right scores on the main page, I found out that I had to refactor almost all my code in order to do that. I was using a global variable to spread the retrieved data to the score pages and created the score rooms once you clicked on one. Now all the rooms are created and saved to the DB once you go to the main page.
+
+Besides all that I took a look at accessability by creating a message once the server is down and once the client is offline to inform the user what he/she should do. I also made sure that the page is still intact if the users device doesn't support flexbox. If the users Javascript doesn't work I hide a couple of voting options so that the user doesn't get confused when it doesn't work.
+
+-  [x] what team scored > if a team scored (refactor)
+-  [x] refactored the code so that I could get scores on the main page
+-  [x] /admin page that grants the user the permission to go to the final score page
+-  [x] feature detection for JS
+-  [x] flexbox fallback
+-  [x] notification with instructions when the server is down
+-  [x] notification with instructions when the clien is offline
+-  [x] 404 page
+-  [x] styling the main/admin/final score page
 
 ## Build
 To run the application:
