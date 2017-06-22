@@ -6444,11 +6444,7 @@ function sendColor(e) {
 }
 
 socket.on('updateShirt', function(colorData) {
-	colors.forEach(function(color) {
-		if (color.name === colorData.team) {
-			color.value = colorData.color;
-		}
-	});
+	document.querySelector("[data-side='" + colorData.side + "']").value = colorData.color;
 
 	borders.forEach(function(name) {
 		if (name.textContent === colorData.team) {
