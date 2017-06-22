@@ -75,7 +75,7 @@ io.on('connection', (socket) => {
 						if (err) throw err;
 					});
 				}
-				socket.broadcast.emit('updateShirt', colorData);
+				io.sockets.in(room).emit('updateShirt', colorData);
 			});
 
 			// update votes

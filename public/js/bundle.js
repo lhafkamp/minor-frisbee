@@ -6432,6 +6432,7 @@ var error = document.querySelector('#error');
 
 // shirt test
 var colors = document.querySelectorAll('container input');
+var borders = document.querySelectorAll('#vs p');
 
 function sendColor(e) {
 	const obj = {
@@ -6446,6 +6447,12 @@ socket.on('updateShirt', function(colorData) {
 	colors.forEach(function(color) {
 		if (color.name === colorData.team) {
 			color.value = colorData.color;
+		}
+	});
+
+	borders.forEach(function(name) {
+		if (name.textContent === colorData.team) {
+			name.style.borderBottom = '2px solid ' + colorData.color;
 		}
 	});
 });

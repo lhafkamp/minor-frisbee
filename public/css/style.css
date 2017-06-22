@@ -137,8 +137,20 @@ container {
 
 /* x vs y */
 
-#vs {
+#shirts {
 	margin-top: 5em;
+	display: flex;
+	width: 15em;
+	justify-content: space-around;
+}
+
+#shirts input {
+	border: none;
+	background: #fbfbfb;
+	height: 2.4em;
+}
+
+#vs {
 	color: grey;
 	display: flex;
 	justify-content: center;
@@ -187,6 +199,7 @@ container {
 }
 
 #score div {
+	margin-top: 0;
 	display: flex;
 	flex-direction: column;
 }
