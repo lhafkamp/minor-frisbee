@@ -1,5 +1,5 @@
 <h1 align="center">
-  <img src="media/demo.png" alt="demo">
+  <img style="box-shadow: 2px 2px 10px #888888;" src="media/demo.png" alt="demo">
   <br>
   <br>
   Windmill score app
