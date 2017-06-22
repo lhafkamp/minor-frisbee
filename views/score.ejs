@@ -1,10 +1,15 @@
 <%- include ./part/header.ejs %>
 
 <container>
+	<div id="shirts">
+		<input data-side="left" type="color" value="<%= leftColor || "#4ADB95" %>" name="<%= leftTeam %>"></input>
+		<input data-side="right" type="color" value="<%= rightColor || "#4ADB95" %>" name="<%= rightTeam %>"></input>
+	</div>
+	
 	<div id="vs">
-		<p><%= leftTeam %></p>
+		<p style="border-bottom: 2px solid <%= leftColor %>;"><%= leftTeam %></p>
 		<p>VS</p> 
-		<p><%= rightTeam %></p>
+		<p style="border-bottom: 2px solid <%= rightColor %>;"><%= rightTeam %></p>
 	</div>
 
 	<div id="score">

@@ -6429,6 +6429,34 @@ var rightPercentage = document.querySelector('.rightPrc');
 var progress = document.querySelector('.progress span');
 var error = document.querySelector('#error');
 
+
+// shirt test
+var colors = document.querySelectorAll('container input');
+var borders = document.querySelectorAll('#vs p');
+
+function sendColor(e) {
+	const obj = {
+		side: this.dataset.side,
+		team: this.name,
+		color: this.value
+	}
+	socket.emit('shirtColor', obj);
+}
+
+socket.on('updateShirt', function(colorData) {
+	document.querySelector("[data-side='" + colorData.side + "']").value = colorData.color;
+
+	borders.forEach(function(name) {
+		if (name.textContent === colorData.team) {
+			name.style.borderBottom = '2px solid ' + colorData.color;
+		}
+	});
+});
+
+colors.forEach(function (color) {
+	return color.addEventListener('focus', sendColor);
+});
+
 // TODO ES6 > ES5
 socket.on('disconnect', function() {
 	error.innerHTML = `

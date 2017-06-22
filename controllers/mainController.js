@@ -18,6 +18,8 @@ exports.mainPage = (req, res) => {
 						rightScore: obj.team_2_score,
 						leftTeam: obj.team_1.name,
 						rightTeam: obj.team_2.name,
+						leftColor: obj.leftColor,
+						rightColor: obj.rightColor,
 						leftUpVotes: 0,
 						leftDownVotes: 0,
 						rightUpVotes: 0,
