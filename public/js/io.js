@@ -9,6 +9,25 @@ var rightPercentage = document.querySelector('.rightPrc');
 var progress = document.querySelector('.progress span');
 var error = document.querySelector('#error');
 
+
+// shirt test
+var color = document.querySelector('container input');
+
+function sendColor() {
+	const obj = {
+		team: this.name,
+		color: this.value
+	}
+	socket.emit('shirtColor', obj);
+}
+
+socket.on('updateShirt', function(colorData) {
+	color.value = colorData.color;
+	console.log(color.name);
+});
+
+color.addEventListener('focus', sendColor);
+
 // TODO ES6 > ES5
 socket.on('disconnect', function() {
 	error.innerHTML = `

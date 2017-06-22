@@ -6,6 +6,8 @@ const gameSchema = new Schema({
 	game_id: String,
 	leftTeam: String,
 	rightTeam: String,
+	leftColor: String,
+	rightColor: String,
 	leftScore: Number,
 	rightScore: Number,
 	leftUpVotes: Number,

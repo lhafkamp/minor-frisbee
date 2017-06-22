@@ -54,10 +54,6 @@ io.on('connection', (socket) => {
 		console.log(`A socket disconnected, ${connections.length} remaining socket(s) connected`);
 	});
 
-	socket.on('test', (test) => {
-		console.log(test);
-	});
-
 	// socket rooms
 	socket.on('create', (room) => {
 		Game.find({ game_id: room }, (err, game) => {
@@ -67,6 +63,14 @@ io.on('connection', (socket) => {
 			
 			socket.join(room);
 			console.log(`someone entered room: ${room}`);
+
+			// shirt test
+			socket.on('shirtColor', (colorData) => {
+				Game.findOneAndUpdate({ leftTeam: colorData.team }, { leftColor: colorData.color }, { new: true}, (err, game) => {
+					if (err) throw err;
+				});
+				socket.emit('updateShirt', colorData);
+			});
 
 			// update votes
 			socket.on('upVote', (obj) => {
