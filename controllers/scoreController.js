@@ -19,6 +19,7 @@ exports.scorePage = (req, res) => {
 			leftTeam: game[0].leftTeam,
 			rightTeam: game[0].rightTeam,
 			leftColor: game[0].leftColor,
+			rightColor: game[0].rightColor,
 			leftScore: game[0].leftScore,
 			rightScore: game[0].rightScore,
 			leftPercentage: game[0].leftPercentage,

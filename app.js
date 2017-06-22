@@ -66,10 +66,16 @@ io.on('connection', (socket) => {
 
 			// shirt test
 			socket.on('shirtColor', (colorData) => {
-				Game.findOneAndUpdate({ leftTeam: colorData.team }, { leftColor: colorData.color }, { new: true}, (err, game) => {
-					if (err) throw err;
-				});
-				socket.emit('updateShirt', colorData);
+				if (colorData.side === "left") {
+					Game.findOneAndUpdate({ leftTeam: colorData.team }, { leftColor: colorData.color }, { new: true}, (err, game) => {
+						if (err) throw err;
+					});
+				} else {
+					Game.findOneAndUpdate({ rightTeam: colorData.team }, { rightColor: colorData.color }, { new: true}, (err, game) => {
+						if (err) throw err;
+					});
+				}
+				socket.broadcast.emit('updateShirt', colorData);
 			});
 
 			// update votes

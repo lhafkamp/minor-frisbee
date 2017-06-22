@@ -6431,10 +6431,11 @@ var error = document.querySelector('#error');
 
 
 // shirt test
-var color = document.querySelector('container input');
+var colors = document.querySelectorAll('container input');
 
-function sendColor() {
+function sendColor(e) {
 	const obj = {
+		side: this.dataset.side,
 		team: this.name,
 		color: this.value
 	}
@@ -6442,11 +6443,16 @@ function sendColor() {
 }
 
 socket.on('updateShirt', function(colorData) {
-	color.value = colorData.color;
-	console.log(color.name);
+	colors.forEach(function(color) {
+		if (color.name === colorData.team) {
+			color.value = colorData.color;
+		}
+	});
 });
 
-color.addEventListener('focus', sendColor);
+colors.forEach(function (color) {
+	return color.addEventListener('focus', sendColor);
+});
 
 // TODO ES6 > ES5
 socket.on('disconnect', function() {
