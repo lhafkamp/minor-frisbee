@@ -38,14 +38,20 @@ exports.scorePage = (req, res) => {
 	});
 }
 
-exports.form = (req, res) => {
-	// TODO is_final = true
+exports.form = async (req, res) => {
 	const score = {
 		"game_id": req.params.id,
 	    "team_1_score": req.body.team_1_score,
 	    "team_2_score": req.body.team_2_score,
 	    "is_final": "False"
 	}
+
+	// update score in DB
+	await Game.findOneAndUpdate({ game_id: req.params.id }, 
+		{ leftScore: req.body.team_1_score, rightScore: req.body.team_2_score }, 
+		{ new: true }, (err, game) => {
+		if (err) throw err;
+	});
 
 	request({
 		url: `http://api.playwithlv.com/v1/game_scores/`,
