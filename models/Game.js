@@ -14,7 +14,8 @@ const gameSchema = new Schema({
 	rightUpVotes: Number,
 	leftPercentage: Number,
 	rightPercentage: Number,
-	counter: Number
+	counter: Number,
+	voting: Boolean
 });
 
 module.exports = mongoose.model('Game', gameSchema);

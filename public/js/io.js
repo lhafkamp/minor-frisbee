@@ -8,6 +8,7 @@ var leftPercentage = document.querySelector('.leftPrc');
 var rightPercentage = document.querySelector('.rightPrc');
 var progress = document.querySelector('.progress span');
 var error = document.querySelector('#error');
+var voting = document.querySelector('.voting');
 
 
 // shirt test
@@ -92,6 +93,7 @@ socket.on('endVoting', function () {
 socket.on('endEvent', function () {
 	// enable start event button
 	start.disabled = false;
+	voting.classList.add('hide');
 });
 
 socket.on('timeStarted', function (counter) {

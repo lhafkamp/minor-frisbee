@@ -11,7 +11,7 @@ exports.mainPage = (req, res) => {
 			if (err) throw err;
 
 			if (games.length < data.objects.length) {
-				data.objects.forEach(obj => {
+				data.objects.forEach((obj) => {
 					const newGame = new Game({
 						game_id: obj.id,
 						leftScore: obj.team_1_score,
@@ -26,7 +26,8 @@ exports.mainPage = (req, res) => {
 						rightDownVotes: 0,
 						leftPercentage: 0,
 						rightPercentage: 0,
-						counter: 0
+						counter: 0,
+						voting: false
 					});
 
 					newGame.save((err) => {
