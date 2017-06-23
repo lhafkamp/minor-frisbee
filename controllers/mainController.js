@@ -11,15 +11,16 @@ exports.mainPage = (req, res) => {
 			if (err) throw err;
 
 			if (games.length < data.objects.length) {
-				data.objects.forEach((obj) => {
+				data.objects.forEach(async (obj) => {
+
 					const newGame = new Game({
 						game_id: obj.id,
 						leftScore: obj.team_1_score,
 						rightScore: obj.team_2_score,
 						leftTeam: obj.team_1.name,
 						rightTeam: obj.team_2.name,
-						leftColor: obj.leftColor,
-						rightColor: obj.rightColor,
+						leftColor: '#4ADB95',
+						rightColor: '#4ADB95',
 						leftUpVotes: 0,
 						leftDownVotes: 0,
 						rightUpVotes: 0,
@@ -30,7 +31,7 @@ exports.mainPage = (req, res) => {
 						voting: false
 					});
 
-					newGame.save((err) => {
+					await newGame.save((err) => {
 						if (err) throw err;
 						console.log('new game created!');
 					});
@@ -38,10 +39,10 @@ exports.mainPage = (req, res) => {
 			}
 		});
 
-		Game.find({}, (err, games) => {
+		await Game.find({}, (err, games) => {
 			res.render('main', {
 				games: games
 			});
-		});
+		})
 	});
 }
