@@ -12,6 +12,13 @@ exports.scorePage = (req, res) => {
 
 	Game.find({ game_id: params }, async (err, game) => {
 		if (err) throw err;
+		let voting;
+
+		console.log(game[0].voting);
+
+		if (game[0].voting === false) {
+			voting = 'hide';
+		}
 
 		console.log('game found');
 		res.render('score', {
@@ -25,7 +32,8 @@ exports.scorePage = (req, res) => {
 			leftPercentage: game[0].leftPercentage,
 			rightPercentage: game[0].rightPercentage,
 			counter: game[0].counter,
-			admin: admin
+			admin: admin,
+			voting: voting
 		});
 	});
 }

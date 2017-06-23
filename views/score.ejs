@@ -47,6 +47,15 @@
 	<button type="submit" name="submit">Confirm</button>
 </form>
 
+<div class="<%= voting %> voting overlay">
+	<div class="alert">
+		<h1>Voting in process
+			<span>.</span><span>.</span><span>.</span>
+		</h1>
+		<p>Please wait a few seconds</p>
+	</div>
+</div>
+
 <div id="error"></div>
 <script src="/js/bundle.js"></script>
 <%- include ./part/footer.ejs %>

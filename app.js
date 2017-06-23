@@ -66,7 +66,7 @@ io.on('connection', (socket) => {
 
 			// shirt test
 			socket.on('shirtColor', (colorData) => {
-				if (colorData.side === "left") {
+				if (colorData.side === 'left') {
 					Game.findOneAndUpdate({ leftTeam: colorData.team }, { leftColor: colorData.color }, { new: true}, (err, game) => {
 						if (err) throw err;
 					});
@@ -127,6 +127,12 @@ io.on('connection', (socket) => {
 
 			// emit time event to the clients
 			socket.on('timeEvent', () => {
+
+				// disable the start voting button
+				Game.findOneAndUpdate({ game_id: room }, { voting: true }, { new: true }, (err, response) => {
+					if (err) throw err;
+				});
+
 				// enable all buttons
 				io.sockets.in(room).emit('startVoting');
 
@@ -136,6 +142,11 @@ io.on('connection', (socket) => {
 					// when the time event ends
 					if (counter === 0) {
 						clearInterval(interval);
+
+						// enable the start voting button
+						Game.findOneAndUpdate({ game_id: room }, { voting: false }, { new: true }, (err, response) => {
+							if (err) throw err;
+						});
 
 						io.sockets.in(room).emit('endVoting');
 						io.sockets.in(room).emit('endEvent');
