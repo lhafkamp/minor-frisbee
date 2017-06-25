@@ -1,8 +1,8 @@
 var done = document.querySelector('.done');
 var form = document.querySelector('form');
 var inputs = document.querySelectorAll('form input');
-var numbers = document.querySelectorAll('#score p');
-var votingOptions = document.querySelectorAll('#score div');
+var scores = document.querySelectorAll('#score p');
+var votingOptions = document.querySelectorAll('#score article');
 var scoreContent = document.querySelector('container');
 var startButton = document.querySelector('.start');
 var progress = document.querySelector('.progress');
@@ -27,8 +27,8 @@ votingOptions.forEach(function(option) {
 
 // fill in form when done
 function fillInForm() {
-	inputs[0].value = numbers[0].textContent;
-	inputs[1].value = numbers[2].textContent;
+	inputs[0].value = scores[0].textContent;
+	inputs[1].value = scores[2].textContent;
 	form.classList.remove('hide');
 	scoreContent.classList.add('hide');
 	form.classList.add('swap');

@@ -64,20 +64,6 @@ io.on('connection', (socket) => {
 			socket.join(room);
 			console.log(`someone entered room: ${room}`);
 
-			// shirt test
-			socket.on('shirtColor', (colorData) => {
-				if (colorData.side === 'left') {
-					Game.findOneAndUpdate({ leftTeam: colorData.team }, { leftColor: colorData.color }, { new: true }, (err, game) => {
-						if (err) throw err;
-					});
-				} else {
-					Game.findOneAndUpdate({ rightTeam: colorData.team }, { rightColor: colorData.color }, { new: true }, (err, game) => {
-						if (err) throw err;
-					});
-				}
-				io.sockets.in(room).emit('updateShirt', colorData);
-			});
-
 			// update votes
 			socket.on('upVote', (obj) => {
 				// 1 vote per user per event
@@ -96,8 +82,6 @@ io.on('connection', (socket) => {
 							{ upsert: true }, (err, data) => {
 							if (err) throw err;
 						});
-
-
 					} else {
 						rightUpVotes = result.rightUpVotes + 1;
 						leftUpVotes = result.leftUpVotes;
@@ -127,7 +111,6 @@ io.on('connection', (socket) => {
 
 			// emit time event to the clients
 			socket.on('timeEvent', () => {
-
 				// disable the start voting button
 				Game.findOneAndUpdate({ game_id: room }, { voting: true }, { new: true }, (err, response) => {
 					if (err) throw err;
@@ -188,14 +171,22 @@ io.on('connection', (socket) => {
 						});
 					}
 
-					Game.findOneAndUpdate({ game_id: room }, 
-						{ counter: counter }, 
-						{ upsert: true }, (err, result) => {
-						if (err) throw err;
-					});
-
 					io.sockets.in(room).emit('timeStarted', counter);
 				}, 1000);
+			});
+
+			// team color update
+			socket.on('shirtColor', (colorData) => {
+				if (colorData.side === 'left') {
+					Game.findOneAndUpdate({ leftTeam: colorData.team }, { leftColor: colorData.color }, { new: true }, (err, game) => {
+						if (err) throw err;
+					});
+				} else {
+					Game.findOneAndUpdate({ rightTeam: colorData.team }, { rightColor: colorData.color }, { new: true }, (err, game) => {
+						if (err) throw err;
+					});
+				}
+				io.sockets.in(room).emit('updateShirt', colorData);
 			});
 		});
 	});

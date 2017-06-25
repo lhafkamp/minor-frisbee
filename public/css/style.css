@@ -29,28 +29,6 @@ input:active {
 	outline: none;
 }
 
-/* login */
-
-.login {
-	margin-top: 6em;
-    margin-bottom: .5em;
-	border: none;
-	border-radius: .4em;
-    color: white;
-    text-decoration: none;
-    background-color: #4ADB95;
-    box-shadow: 0 4px #3FB47E;
-    padding: 1em 2em 1em 2em;
-    font-size: 1em;
-}
-
-.login:hover,
-.login:focus {
-	margin-top: 6.2em;
-	margin-bottom: .4em;
-    box-shadow: 0 1px #3FB47E;
-}
-
 /* navigation */
 
 nav {
@@ -77,6 +55,28 @@ nav a img {
 	width: 2.4em;
 }
 
+/* login */
+
+.login {
+	margin-top: 6em;
+	margin-bottom: .5em;
+	border: none;
+	border-radius: .4em;
+	color: white;
+	text-decoration: none;
+	background-color: #4ADB95;
+	box-shadow: 0 4px #3FB47E;
+	padding: 1em 2em 1em 2em;
+	font-size: 1em;
+}
+
+.login:hover,
+.login:focus {
+	margin-top: 6.2em;
+	margin-bottom: .4em;
+	box-shadow: 0 1px #3FB47E;
+}
+
 /* main matches */
 
 a {
@@ -85,12 +85,12 @@ a {
 
 .pool {
 	background: #4ADB95;
-    width: 100vw;
-    padding: .5em 0 .5em;
-    text-align: center;
-    color: white;
-    font-size: 1em;
-    margin: 3em 0 0 0;
+	width: 100vw;
+	padding: .5em 0 .5em;
+	text-align: center;
+	color: white;
+	font-size: 1em;
+	margin: 3em 0 0 0;
 }
 
 .match {
@@ -99,10 +99,10 @@ a {
 	align-items: baseline;
 	justify-content: space-around;
 	padding: 1.5em 0 1.5em;
-    background: white;
-    width: 100vw;
-    border-bottom: 1px solid rgba(0,0,0,0.05);
-    margin: .1em 0 .1em;
+	background: white;
+	width: 100vw;
+	border-bottom: 1px solid rgba(0,0,0,0.05);
+	margin: .1em 0 .1em;
 }
 
 a:focus .match {
@@ -115,17 +115,17 @@ a:focus .match {
 	transition: background .2s;
 }
 
-.match div {
+.match article {
 	width: 33vw;
 }
 
-.match div p {
+.match article p {
 	color: grey;
 	margin: 0;
 	font-size: .8em;
 }
 
-.match div p:first-of-type {
+.match article p:first-of-type {
 	font-family: 'BoldSans', 'sans-serif';
 	color: #666;
 	font-size: 2em;
@@ -164,7 +164,7 @@ container {
 	border: none;
 	background: #ccc;
 	box-shadow: 0 3px grey;
-    border-radius: .2em;
+	border-radius: .2em;
 	height: 2.4em;
 	padding: .1em .3em .1em .3em;
 }
@@ -172,8 +172,8 @@ container {
 #shirts input:hover,
 #shirts input:focus {
 	margin-top: .4em;
-    margin-bottom: -.3em;
-    box-shadow: 0 1px grey;
+	margin-bottom: -.3em;
+	box-shadow: 0 1px grey;
 }
 
 #vs {
@@ -224,121 +224,124 @@ container {
 	font-family: 'BoldSans', 'sans-serif';
 }
 
-#score div {
+#score article {
 	margin-top: 0;
 	display: flex;
 	flex-direction: column;
 }
 
-#score div .leftPrc,
-#score div .rightPrc {
+#score article .leftPrc,
+#score article .rightPrc {
+	margin: 1em 0 1em;
+	font-family: 'OSans', 'sans-serif';
+	font-size: 1.17em;
 	background: #ccc;
 	color: grey;
-    border-radius: .2em;
-    padding: .3em;
-    text-align: center;
-    transition: background .5s;
+	border-radius: .2em;
+	padding: .3em;
+	text-align: center;
+	transition: background .5s;
 }
 
-#score div:nth-child(2) {
+#score article:nth-child(2) {
 	display: flex;
-    flex-direction: initial;
-    margin: 0em 1em 1em 1em;
-    font-size: 1.4em;
+	flex-direction: initial;
+	margin: 0em 1em 1em 1em;
+	font-size: 1.4em;
 }
 
-#score div button {
+#score article button {
 	margin-top: .5em;
-    margin-bottom: .5em;
+	margin-bottom: .5em;
 	border: none;
-    padding: 1em 1.2em;
-    font-size: 1em;
-    border-radius: 50%;
-    background-color: #4ADB95;
-    box-shadow: 0 4px #3FB47E;
-    color: white;
-    transition: background 1s;
+	padding: 1em 1.2em;
+	font-size: 1em;
+	border-radius: 50%;
+	background-color: #4ADB95;
+	box-shadow: 0 4px #3FB47E;
+	color: white;
+	transition: background 1s;
 }
 
-#score div button:hover,
-#score div button:focus {
+#score article button:hover,
+#score article button:focus {
 	margin-top: .6em;
 	margin-bottom: .4em;
-    box-shadow: 0 2px #3FB47E;
+	box-shadow: 0 2px #3FB47E;
 }
 
-#score div button:last-of-type {
+#score article button:last-of-type {
 	background-color: #EA5906;
-    box-shadow: 0 4px #983903;
+	box-shadow: 0 4px #983903;
 }
 
-#score div button:last-of-type:hover,
-#score div button:last-of-type:focus {
+#score article button:last-of-type:hover,
+#score article button:last-of-type:focus {
 	margin-top: .6em;
 	margin-bottom: .4em;
-    box-shadow: 0 2px #983903;
+	box-shadow: 0 2px #983903;
 }
 
-#score div button:disabled {
+#score article button:disabled {
 	background: #CCC;
-    box-shadow: 0 4px grey;
-    color: grey;
+	box-shadow: 0 4px grey;
+	color: grey;
 }
 
-#score div button:disabled:hover {
+#score article button:disabled:hover {
 	margin-top: .5em;
 	margin-bottom: .5em;
 	background: #CCC;
-    box-shadow: 0 4px grey;
-    color: grey;
+	box-shadow: 0 4px grey;
+	color: grey;
 }
 
-/* done button */
+/* start/done buttons */
 
 .start {
 	margin-top: .5em;
-    margin-bottom: .5em;
+	margin-bottom: .5em;
 	border: none;
 	border-radius: .4em;
-    color: white;
-    background-color: #4ADB95;
-    box-shadow: 0 4px #3FB47E;
-    padding: 1em 4em 1em 4em;
-    font-size: 1em;
+	color: white;
+	background-color: #4ADB95;
+	box-shadow: 0 4px #3FB47E;
+	padding: 1em 4em 1em 4em;
+	font-size: 1em;
 }
 
 .start:disabled {
 	margin-top: .5em;
 	background: #CCC;
-    box-shadow: 0 4px grey;
-    color: grey;
+	box-shadow: 0 4px grey;
+	color: grey;
 }
 
 .start:disabled:hover {
 	margin-top: .5em;
-    margin-bottom: .5em;
+	margin-bottom: .5em;
 	background: #CCC;
-    box-shadow: 0 4px grey;
-    color: grey;
+	box-shadow: 0 4px grey;
+	color: grey;
 }
 
 .start:hover,
 .start:focus {
 	margin-top: .6em;
 	margin-bottom: .4em;
-    box-shadow: 0 2px #3FB47E;
+	box-shadow: 0 2px #3FB47E;
 }
 
 .done {
 	margin-top: .5em;
-    margin-bottom: .5em;
+	margin-bottom: .5em;
 	border: none;
 	border-radius: .4em;
-    color: grey;
+	color: grey;
 	background: #CCC;
 	box-shadow: 0 4px grey;
 	padding: 1em 2em 1em 2em;
-    font-size: 1em;
+	font-size: 1em;
 }
 
 
@@ -346,7 +349,7 @@ container {
 .done:focus {
 	margin-top: .6em;
 	margin-bottom: .4em;
-    box-shadow: 0 2px grey;
+	box-shadow: 0 2px grey;
 }
 
 /* progress bar */
@@ -390,9 +393,9 @@ form h1 {
 	color: #4ADB95;
 	line-height: 1.2em;
 	font-family: 'BoldSans', 'sans-serif';
-    width: 6em;
-    text-align: center;
-    font-style: italic;
+	width: 6em;
+	text-align: center;
+	font-style: italic;
 }
 
 form h2 {
@@ -402,7 +405,7 @@ form h2 {
 
 form span {
 	color: grey;
-    font-size: 3em;
+	font-size: 3em;
 }
 
 form input {
@@ -418,21 +421,21 @@ form input {
 
 form button {
 	margin-top: .5em;
-    margin-bottom: .5em;
+	margin-bottom: .5em;
 	border: none;
 	border-radius: .4em;
-    color: white;
-    background-color: #4ADB95;
-    box-shadow: 0 4px #3FB47E;
-    padding: 1em 4em 1em 4em;
-    font-size: 1em;
+	color: white;
+	background-color: #4ADB95;
+	box-shadow: 0 4px #3FB47E;
+	padding: 1em 4em 1em 4em;
+	font-size: 1em;
 }
 
 form button:hover,
 form button:focus {
 	margin-top: .6em;
 	margin-bottom: .4em;
-    box-shadow: 0 2px #3FB47E;
+	box-shadow: 0 2px #3FB47E;
 }
 
 /* overlay messages */
@@ -453,20 +456,20 @@ form button:focus {
 	position: relative;
 	top: 25%;
 	margin: 0 auto;
-    width: 50%;
+	width: 50%;
 	text-align: center;
-    padding: 2em;
-    background: white;
-    border-radius: .4em;
+	padding: 2em;
+	background: white;
+	border-radius: .4em;
 	color: grey;
 }
 
 .alert h1 {
 	color: #666;
 	font-size: 1.5em;
-    font-family: 'BoldSans';
-    font-style: italic;
-    line-height: 1.2em;
+	font-family: 'BoldSans';
+	font-style: italic;
+	line-height: 1.2em;
 }
 
 .alert a {
@@ -488,17 +491,17 @@ form button:focus {
 }
 
 @keyframes blink {
-    0% {
-      opacity: .2;
-    }
+	0% {
+	  opacity: .2;
+	}
 
-    20% {
-      opacity: 1;
-    }
+	20% {
+	  opacity: 1;
+	}
 
-    100% {
-      opacity: .2;
-    }
+	100% {
+	  opacity: .2;
+	}
 }
 
 /* 404 */
@@ -512,9 +515,9 @@ form button:focus {
 #err h1 {
 	margin-top: 3em;
 	color: #666;
-    font-family: 'BoldSans';
-    font-style: italic;
-    line-height: 1.2em;
+	font-family: 'BoldSans';
+	font-style: italic;
+	line-height: 1.2em;
 }
 
 #err h2 {
@@ -533,10 +536,10 @@ form button:focus {
 	.match {
 		text-align: center;
 		padding: 1.5em 0 1.5em;
-	    background: white;
-	    width: 100vw;
-	    border-bottom: 1px solid rgba(0,0,0,0.05);
-	    margin: .1em 0 .1em;
+		background: white;
+		width: 100vw;
+		border-bottom: 1px solid rgba(0,0,0,0.05);
+		margin: .1em 0 .1em;
 	}
 
 	.match .vs {
@@ -567,8 +570,8 @@ form button:focus {
 	}
 
 	#score div:nth-child(2) {
-	    margin: 0em 1em 1em 1em;
-	    font-size: 1.4em;
+		margin: 0em 1em 1em 1em;
+		font-size: 1.4em;
 	}
 }
 
