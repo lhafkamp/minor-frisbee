@@ -224,14 +224,17 @@ container {
 	font-family: 'BoldSans', 'sans-serif';
 }
 
-#score div {
+#score article {
 	margin-top: 0;
 	display: flex;
 	flex-direction: column;
 }
 
-#score div .leftPrc,
-#score div .rightPrc {
+#score article .leftPrc,
+#score article .rightPrc {
+	margin: 1em 0 1em;
+	font-family: 'OSans', 'sans-serif';
+	font-size: 1.17em;
 	background: #ccc;
 	color: grey;
 	border-radius: .2em;
@@ -240,14 +243,14 @@ container {
 	transition: background .5s;
 }
 
-#score div:nth-child(2) {
+#score article:nth-child(2) {
 	display: flex;
 	flex-direction: initial;
 	margin: 0em 1em 1em 1em;
 	font-size: 1.4em;
 }
 
-#score div button {
+#score article button {
 	margin-top: .5em;
 	margin-bottom: .5em;
 	border: none;
@@ -260,32 +263,32 @@ container {
 	transition: background 1s;
 }
 
-#score div button:hover,
-#score div button:focus {
+#score article button:hover,
+#score article button:focus {
 	margin-top: .6em;
 	margin-bottom: .4em;
 	box-shadow: 0 2px #3FB47E;
 }
 
-#score div button:last-of-type {
+#score article button:last-of-type {
 	background-color: #EA5906;
 	box-shadow: 0 4px #983903;
 }
 
-#score div button:last-of-type:hover,
-#score div button:last-of-type:focus {
+#score article button:last-of-type:hover,
+#score article button:last-of-type:focus {
 	margin-top: .6em;
 	margin-bottom: .4em;
 	box-shadow: 0 2px #983903;
 }
 
-#score div button:disabled {
+#score article button:disabled {
 	background: #CCC;
 	box-shadow: 0 4px grey;
 	color: grey;
 }
 
-#score div button:disabled:hover {
+#score article button:disabled:hover {
 	margin-top: .5em;
 	margin-bottom: .5em;
 	background: #CCC;

@@ -1,41 +1,47 @@
 <%- include ./part/header.ejs %>
 
 <container>
-	<div id="shirts">
+	<!-- team colors -->
+	<section id="shirts">
 		<input class="hide" data-side="left" type="color" value="<%= leftColor || "#4ADB95" %>" name="<%= leftTeam %>"></input>
 		<input class="hide" data-side="right" type="color" value="<%= rightColor || "#4ADB95" %>" name="<%= rightTeam %>"></input>
-	</div>
+	</section>
 	
-	<div id="vs">
+	<!-- team names -->
+	<section id="vs">
 		<p style="border-bottom: 2px solid <%= leftColor %>;"><%= leftTeam %></p>
 		<p>VS</p> 
 		<p style="border-bottom: 2px solid <%= rightColor %>;"><%= rightTeam %></p>
-	</div>
+	</section>
 
-	<div id="score">
-		<div class="hide">
-			<h3 class="leftPrc"><%= leftPercentage || 0 %></h3>
-			<button disabled="true">&#10003;</button>
-		</div>
-		<div>
+	<!-- score + voting options -->
+	<section id="score">
+		<article class="hide">
+			<span class="leftPrc"><%= leftPercentage || 0 %></span>
+			<button aria-label="vote left" disabled="true">&#10003;</button>
+		</article>
+		<article>
 			<p><%= leftScore || 0 %></p>
 			<p>-</p>
 			<p><%= rightScore || 0 %></p>
-		</div>
-		<div class="hide">
-			<h3 class="rightPrc"><%= rightPercentage || 0 %></h3>
-			<button disabled="true">&#10003;</button>
-		</div>
-	</div>
+		</article>
+		<article class="hide">
+			<span class="rightPrc"><%= rightPercentage || 0 %></span>
+			<button aria-label="vote right" disabled="true">&#10003;</button>
+		</article>
+	</section>
 
-	<div class="hide progress">
+	<!-- progress bar -->
+	<div aria-label="progress bar" class="hide progress">
 		<span></span>
 	</div>
 
+	<!-- start/done buttons -->
 	<button class="hide start">Start voting</button>
 	<button class="<%= admin %> done">Done</button>
 </container>
 
+<!-- final score form -->
 <form class="hide" method="POST" action="/score/<%= game_id %>/result">
 	<h1>Match complete!</h1>
 	<h2>Confirm final score</h2>
@@ -47,15 +53,18 @@
 	<button type="submit" name="submit">Confirm</button>
 </form>
 
-<div class="<%= voting %> voting overlay">
-	<div class="alert">
+<!-- overlay message during a voting event -->
+<section class="<%= voting %> voting overlay">
+	<article class="alert">
 		<h1>Voting in process
 			<span>.</span><span>.</span><span>.</span>
 		</h1>
 		<p>Please wait a few seconds</p>
-	</div>
-</div>
+	</article>
+</section>
 
-<div id="error"></div>
+<!-- error message when the server is down/client is offline -->
+<section id="error"></section>
+
 <script src="/js/bundle.js"></script>
 <%- include ./part/footer.ejs %>

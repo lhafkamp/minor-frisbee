@@ -6422,7 +6422,7 @@ var io = require('socket.io-client');
 var socket = io.connect();
 var start = document.querySelector('.start');
 var timer = document.querySelector('.timer');
-var votes = document.querySelectorAll('#score div button');
+var votes = document.querySelectorAll('#score article button');
 var scores = document.querySelectorAll('#score p');
 var leftPercentage = document.querySelector('.leftPrc');
 var rightPercentage = document.querySelector('.rightPrc');
@@ -6435,12 +6435,12 @@ var teamBorders = document.querySelectorAll('#vs p');
 // on server disconnect
 socket.on('disconnect', function() {
 	error.innerHTML = `
-		<div class="overlay">
-			<div class="alert">
+		<section class="overlay">
+			<article class="alert">
 				<h1>Server down</h1>
 				<p>Try <a href="${window.location.href}">refreshing</a> the page or come back later!</p>
-			</div>
-		</div>
+			</article>
+		</section>
 	`;
 });
 
@@ -6448,12 +6448,12 @@ socket.on('disconnect', function() {
 setInterval(function() {
 	if (navigator.onLine === false && !window.location.href.includes('localhost')) {
 		error.innerHTML = `
-			<div class="overlay">
-				<div class="alert">
+			<section class="overlay">
+				<article class="alert">
 					<h1>You seem to be offline</h1>
 					<p>Try to reconnect and <a href="${window.location.href}">refresh</a> the page</p>
-				</div>
-			</div>
+				</article>
+			</section>
 		`;
 	}
 }, 1000);
@@ -6589,7 +6589,7 @@ var done = document.querySelector('.done');
 var form = document.querySelector('form');
 var inputs = document.querySelectorAll('form input');
 var scores = document.querySelectorAll('#score p');
-var votingOptions = document.querySelectorAll('#score div');
+var votingOptions = document.querySelectorAll('#score article');
 var scoreContent = document.querySelector('container');
 var startButton = document.querySelector('.start');
 var progress = document.querySelector('.progress');
