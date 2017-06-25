@@ -18,6 +18,17 @@ body {
 	background: #fbfbfb;
 }
 
+a:focus,
+button:focus,
+input:focus {
+	outline: 1px dashed #4ADB95;
+}
+
+button:active,
+input:active {
+	outline: none;
+}
+
 /* login */
 
 .login {
@@ -94,8 +105,12 @@ a {
     margin: .1em 0 .1em;
 }
 
+a:focus .match {
+	background: #F4F4F4;
+	transition: background .2s;
+}
+
 .match:hover {
-	outline: none;
 	background: #F4F4F4;
 	transition: background .2s;
 }
@@ -159,7 +174,6 @@ container {
 	margin-top: .4em;
     margin-bottom: -.3em;
     box-shadow: 0 1px grey;
-    outline: none;
 }
 
 #vs {
@@ -251,7 +265,6 @@ container {
 	margin-top: .6em;
 	margin-bottom: .4em;
     box-shadow: 0 2px #3FB47E;
-    outline: none;
 }
 
 #score div button:last-of-type {
@@ -264,7 +277,6 @@ container {
 	margin-top: .6em;
 	margin-bottom: .4em;
     box-shadow: 0 2px #983903;
-    outline: none;
 }
 
 #score div button:disabled {
@@ -279,12 +291,6 @@ container {
 	background: #CCC;
     box-shadow: 0 4px grey;
     color: grey;
-}
-
-/* temporary styling */
-h2 {
-	color: #666;
-    margin-top: 0;
 }
 
 /* done button */
@@ -320,7 +326,6 @@ h2 {
 	margin-top: .6em;
 	margin-bottom: .4em;
     box-shadow: 0 2px #3FB47E;
-    outline: none;
 }
 
 .done {
@@ -335,12 +340,12 @@ h2 {
     font-size: 1em;
 }
 
+
 .done:hover,
 .done:focus {
 	margin-top: .6em;
 	margin-bottom: .4em;
     box-shadow: 0 2px grey;
-    outline: none;
 }
 
 /* progress bar */
@@ -389,6 +394,11 @@ form h1 {
     font-style: italic;
 }
 
+form h2 {
+	color: #666;
+	margin-top: 0;
+}
+
 form span {
 	color: grey;
     font-size: 3em;
@@ -422,7 +432,6 @@ form button:focus {
 	margin-top: .6em;
 	margin-bottom: .4em;
     box-shadow: 0 2px #3FB47E;
-    outline: none;
 }
 
 /* overlay messages */
