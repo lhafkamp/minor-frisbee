@@ -6423,42 +6423,16 @@ var socket = io.connect();
 var start = document.querySelector('.start');
 var timer = document.querySelector('.timer');
 var votes = document.querySelectorAll('#score div button');
-var numbers = document.querySelectorAll('#score p');
+var scores = document.querySelectorAll('#score p');
 var leftPercentage = document.querySelector('.leftPrc');
 var rightPercentage = document.querySelector('.rightPrc');
 var progress = document.querySelector('.progress span');
 var error = document.querySelector('#error');
 var voting = document.querySelector('.voting');
-
-
-// shirt test
 var colors = document.querySelectorAll('container input');
-var borders = document.querySelectorAll('#vs p');
+var teamBorders = document.querySelectorAll('#vs p');
 
-function sendColor(e) {
-	const obj = {
-		side: this.dataset.side,
-		team: this.name,
-		color: this.value
-	}
-	socket.emit('shirtColor', obj);
-}
-
-socket.on('updateShirt', function(colorData) {
-	document.querySelector("[data-side='" + colorData.side + "']").value = colorData.color;
-
-	borders.forEach(function(name) {
-		if (name.textContent === colorData.team) {
-			name.style.borderBottom = '2px solid ' + colorData.color;
-		}
-	});
-});
-
-colors.forEach(function (color) {
-	return color.addEventListener('focus', sendColor);
-});
-
-// TODO ES6 > ES5
+// on server disconnect
 socket.on('disconnect', function() {
 	error.innerHTML = `
 		<div class="overlay">
@@ -6470,6 +6444,7 @@ socket.on('disconnect', function() {
 	`;
 });
 
+// poll if the client is still online
 setInterval(function() {
 	if (navigator.onLine === false && !window.location.href.includes('localhost')) {
 		error.innerHTML = `
@@ -6493,8 +6468,8 @@ socket.emit('create', params);
 
 socket.on('startVoting', function () {
 	// remove eventual scoreUpdate classes
-	numbers[0].classList.remove('scoreUpdate');
-	numbers[2].classList.remove('scoreUpdate');
+	scores[0].classList.remove('scoreUpdate');
+	scores[2].classList.remove('scoreUpdate');
 
 	// enable voting options
 	votes.forEach(function (vote) {
@@ -6526,21 +6501,21 @@ socket.on('timeStarted', function (counter) {
 
 socket.on('leftVoteResult', function (score) {
 	// set score
-	numbers[0].innerHTML = score;
+	scores[0].innerHTML = score;
 	leftPercentage.innerHTML = 0;
 	rightPercentage.innerHTML = 0;
 
 	// add score update animation and remove percentage colors
-	numbers[0].classList.add('scoreUpdate');
+	scores[0].classList.add('scoreUpdate');
 	leftPercentage.classList.remove('green');
 });
 
 socket.on('rightVoteResult', function (score) {
-	numbers[2].innerHTML = score;
+	scores[2].innerHTML = score;
 	leftPercentage.innerHTML = 0;
 	rightPercentage.innerHTML = 0;
 
-	numbers[2].classList.add('scoreUpdate');
+	scores[2].classList.add('scoreUpdate');
 	rightPercentage.classList.remove('green');
 });
 
@@ -6584,11 +6559,36 @@ votes.forEach(function (vote) {
 	return vote.addEventListener('click', sendScore);
 });
 
+// send the team color to the server
+function sendColor(e) {
+	const obj = {
+		side: this.dataset.side,
+		team: this.name,
+		color: this.value
+	}
+	socket.emit('shirtColor', obj);
+}
+
+// check which team was selected and update
+socket.on('updateShirt', function(colorData) {
+	document.querySelector("[data-side='" + colorData.side + "']").value = colorData.color;
+
+	teamBorders.forEach(function(name) {
+		if (name.textContent === colorData.team) {
+			name.style.borderBottom = '2px solid ' + colorData.color;
+		}
+	});
+});
+
+colors.forEach(function (color) {
+	return color.addEventListener('focus', sendColor);
+});
+
 },{"socket.io-client":34}],47:[function(require,module,exports){
 var done = document.querySelector('.done');
 var form = document.querySelector('form');
 var inputs = document.querySelectorAll('form input');
-var numbers = document.querySelectorAll('#score p');
+var scores = document.querySelectorAll('#score p');
 var votingOptions = document.querySelectorAll('#score div');
 var scoreContent = document.querySelector('container');
 var startButton = document.querySelector('.start');
@@ -6614,8 +6614,8 @@ votingOptions.forEach(function(option) {
 
 // fill in form when done
 function fillInForm() {
-	inputs[0].value = numbers[0].textContent;
-	inputs[1].value = numbers[2].textContent;
+	inputs[0].value = scores[0].textContent;
+	inputs[1].value = scores[2].textContent;
 	form.classList.remove('hide');
 	scoreContent.classList.add('hide');
 	form.classList.add('swap');
