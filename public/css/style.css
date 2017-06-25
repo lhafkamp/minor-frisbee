@@ -115,17 +115,17 @@ a:focus .match {
 	transition: background .2s;
 }
 
-.match div {
+.match article {
 	width: 33vw;
 }
 
-.match div p {
+.match article p {
 	color: grey;
 	margin: 0;
 	font-size: .8em;
 }
 
-.match div p:first-of-type {
+.match article p:first-of-type {
 	font-family: 'BoldSans', 'sans-serif';
 	color: #666;
 	font-size: 2em;

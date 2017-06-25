@@ -4,17 +4,17 @@
 
 <% games.forEach(game => { %>
 	<a href="/score/<%= game.game_id %>">
-		<div class="match">
-			<div>
+		<section class="match">
+			<article>
 				<p><%= game.leftScore %></p>
 				<p><%= game.leftTeam %></p>
-			</div>
+			</article>
 			<p class="vs">vs</p>
-			<div>
+			<article>
 				<p><%= game.rightScore %></p>
 				<p><%= game.rightTeam %></p>
-			</div>
-		</div>
+			</article>
+		</section>
 	</a>
 <% }); %>
 
