@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="204px" height="180px" viewBox="0 0 204 180" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 44.1 (41455) - http://www.bohemiancoding.com/sketch -->
+    <title>Artboard 2</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <ellipse id="path-1" cx="119.563453" cy="114.35359" rx="68.2089844" ry="98.4375"></ellipse>
+    </defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Artboard-2">
+            <g id="Group-Copy" transform="translate(-20.000000, -30.000000)">
+                <ellipse id="Oval-Copy-2" stroke="#666666" stroke-width="10" transform="translate(130.563453, 126.353590) rotate(52.000000) translate(-130.563453, -126.353590) " cx="130.563453" cy="126.35359" rx="63.2089844" ry="93.4375"></ellipse>
+                <g id="Oval" transform="translate(119.563453, 114.353590) rotate(52.000000) translate(-119.563453, -114.353590) ">
+                    <use fill="#FAFAFA" fill-rule="evenodd" xlink:href="#path-1"></use>
+                    <ellipse stroke="#FFFFFF" stroke-width="10" cx="119.563453" cy="114.35359" rx="63.2089844" ry="93.4375"></ellipse>
+                </g>
+            </g>
+            <g id="Group" transform="translate(6.000000, 50.000000)" fill="#666666">
+                <rect id="Rectangle" x="0" y="26" width="91" height="8" rx="4"></rect>
+                <rect id="Rectangle-Copy" transform="translate(77.277142, 17.125995) rotate(50.000000) translate(-77.277142, -17.125995) " x="58.2771424" y="13.1259949" width="38" height="8" rx="4"></rect>
+                <rect id="Rectangle-Copy-2" transform="translate(77.277142, 42.125995) scale(-1, 1) rotate(50.000000) translate(-77.277142, -42.125995) " x="58.2771424" y="38.1259949" width="38" height="8" rx="4"></rect>
+            </g>
+        </g>
+    </g>
+</svg>
