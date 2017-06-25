@@ -335,6 +335,14 @@ h2 {
     font-size: 1em;
 }
 
+.done:hover,
+.done:focus {
+	margin-top: .6em;
+	margin-bottom: .4em;
+    box-shadow: 0 2px grey;
+    outline: none;
+}
+
 /* progress bar */
 
 .progress {
