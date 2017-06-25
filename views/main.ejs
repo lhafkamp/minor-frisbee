@@ -18,21 +18,4 @@
 	</a>
 <% }); %>
 
-<script src="/socket.io/socket.io.js"></script>
-<script type="text/javascript">
-	// var io = require('socket.io-client');
-	var socket = io();
-
-	var color = document.querySelector('.match input');
-
-	function test() {
-		var test = this.value;
-		socket.emit('test', test);
-	}
-
-
-	color.addEventListener('focus', test);
-
-</script>
-
 <%- include ./part/footer.ejs %>
