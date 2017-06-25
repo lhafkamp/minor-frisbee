@@ -316,6 +316,7 @@ container {
 
 .start:disabled:hover {
 	margin-top: .5em;
+    margin-bottom: .5em;
 	background: #CCC;
     box-shadow: 0 4px grey;
     color: grey;
