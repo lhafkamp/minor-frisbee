@@ -57,7 +57,7 @@ nav {
 }
 
 nav a {
-	color: #333;
+	color: #666;
     text-decoration: none;
     font-weight: 600;
 }
@@ -94,19 +94,14 @@ a {
     margin: .1em 0 .1em;
 }
 
-.match a:after {
-	position: absolute;
-	left: 0;
-	right: 0;
-	top: 0;
-	bottom: 0;
-	content: '';
-}
-
 .match:hover {
 	outline: none;
 	background: #F4F4F4;
 	transition: background .2s;
+}
+
+.match div {
+	width: 33vw;
 }
 
 .match div p {
