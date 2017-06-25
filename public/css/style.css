@@ -209,7 +209,7 @@ container {
 	text-shadow: -.5px 3px #3FB47E;
 }
 
-/* score buttons */
+/* scores */
 
 #score {
 	color: #666;
@@ -565,11 +565,11 @@ form button:focus {
 		font-family: 'BoldSans', 'sans-serif';
 	}
 
-	#score div {
+	#score article {
 		float: left;
 	}
 
-	#score div:nth-child(2) {
+	#score article:nth-child(2) {
 		margin: 0em 1em 1em 1em;
 		font-size: 1.4em;
 	}
