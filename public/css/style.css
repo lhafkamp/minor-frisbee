@@ -8,6 +8,18 @@
 	src: url('../fonts/OpenSans-Bold.ttf');
 }
 
+/* in case of no viewport units */
+
+@supports not (width: 100vw) {
+	.pool {
+		width: 100%;
+	}
+
+	.match {
+		width: 100%;
+	}
+}
+
 /* in case of no flexbox */
 
 @supports not (display: -webkit-flex) or (display: -moz-flex) or (display: flex) {
@@ -150,7 +162,6 @@ a {
 	justify-content: space-around;
 	padding: 1.5em 0 1.5em;
 	background: white;
-	width: 100%;
 	width: 100vw;
 	border-bottom: 1px solid rgba(0,0,0,0.05);
 	margin: .1em 0 .1em;
