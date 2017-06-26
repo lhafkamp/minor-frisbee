@@ -158,9 +158,12 @@ a {
 	padding: 1.5em 0 1.5em;
 	background: white;
 	width: 100%;
-	width: 100vw;
 	border-bottom: 1px solid rgba(0,0,0,0.05);
 	margin: .1em 0 .1em;
+}
+
+body > a {
+	width: 100%;
 }
 
 a:focus .match {
@@ -302,10 +305,15 @@ container {
 }
 
 #score article:nth-child(2) {
+	display: block;
 	display: flex;
 	flex-direction: initial;
 	margin: 0em 1em 1em 1em;
 	font-size: 1.4em;
+}
+
+#score article:nth-child(2) p {
+	float: left;
 }
 
 #score article button {
