@@ -5,6 +5,7 @@ const socketio = require('socket.io');
 const session = require('express-session');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
+const flash = require('connect-flash');
 
 // require models
 require('./models/Game');
@@ -40,6 +41,14 @@ app.use(session({
 	resave: false,
 	saveUninitialized: false,
 }));
+
+app.use(flash());
+
+// add var to every request
+app.use((req, res, next) => {
+	res.locals.flash = req.flash();
+	next();
+});
 
 // sockets
 const connections = [];

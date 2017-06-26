@@ -9,6 +9,10 @@
 <body>
 <nav>
 	<a href="/"><img src="/images/frisbee.svg" onerror="this.onerror=null,this.src="/images/frisbee.png""/></a>
-	<a href="/">- Windmill -</a>
+	<% if (flash.success) { %>
+		<a class="flash" href="/"><%= flash.success %></a>
+	<% } else { %>
+		<a href="/">- Windmill -</a>
+	<% } %>
 	<a href="/admin"><img src="/images/login.svg" onerror="this.onerror=null,this.src="/images/login.png""/></a>
 </nav>

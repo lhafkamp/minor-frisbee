@@ -563,6 +563,28 @@ form button:focus {
 	}
 }
 
+/* flash message */
+.flash {
+	animation: update 3s;
+}
+
+@keyframes update {
+	0% {
+		margin-top: -10em;
+		color: #4ADB95;
+	}
+	
+	30% {
+		margin-top: 0em;
+		color: #4ADB95;
+	}
+
+	90% {
+		margin-top: 0em;
+		color: #666;
+	}
+}
+
 /* 404 */
 
 #err {
