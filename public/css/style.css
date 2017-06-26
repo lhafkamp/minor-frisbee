@@ -40,13 +40,8 @@
 		margin-top: 1em;
 	}
 
-	#score article {
-		display: block;
-		float: left;
-	}
-
 	#score article p {
-		float: left;
+		display: inline-block;
 		padding: .1em;
 		font-size: 2em;
 		font-family: 'BoldSans', 'sans-serif';
@@ -277,7 +272,7 @@ container {
 }
 
 #score article p {
-	float: left;
+	display: inline-block;
 	padding: .1em;
 	font-size: 2em;
 	font-family: 'BoldSans', 'sans-serif';
