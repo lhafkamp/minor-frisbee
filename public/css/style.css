@@ -15,7 +15,6 @@
 		text-align: center;
 		padding: 1.5em 0 1.5em;
 		background: white;
-		width: 100%;
 		border-bottom: 1px solid rgba(0,0,0,0.05);
 		margin: .1em 0 .1em;
 	}
@@ -30,15 +29,12 @@
 		border-bottom: none;
 	}
 
-	.pool {
-		width: 100%;
-	}
-
 	#vs p {
 		float: left;
 	}
 
 	#score {
+		display: block;
 		color: #666;
 		height: 11em;
 		margin-top: 1em;
@@ -56,12 +52,18 @@
 	}
 
 	#score article:nth-child(2) {
+		display: block;
 		margin: 0em 1em 1em 1em;
 		font-size: 1.4em;
+	}
+
+	#score article:nth-child(2) p {
+		float: left;
 	}
 }
 
 body {
+	display: block;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
@@ -139,6 +141,7 @@ a {
 
 .pool {
 	background: #4ADB95;
+	width: 100%;
 	width: 100vw;
 	padding: .5em 0 .5em;
 	text-align: center;
@@ -154,6 +157,7 @@ a {
 	justify-content: space-around;
 	padding: 1.5em 0 1.5em;
 	background: white;
+	width: 100%;
 	width: 100vw;
 	border-bottom: 1px solid rgba(0,0,0,0.05);
 	margin: .1em 0 .1em;
