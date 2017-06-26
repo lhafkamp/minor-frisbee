@@ -110,6 +110,7 @@ nav a img {
 /* login */
 
 .login {
+	width: 10em;
 	margin-top: 6em;
 	margin-bottom: .5em;
 	border: none;
