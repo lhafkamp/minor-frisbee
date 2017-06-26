@@ -552,6 +552,10 @@ form button:focus {
 		border-bottom: none;
 	}
 
+	#vs p {
+		float: left;
+	}
+
 	#score {
 		color: #666;
 		height: 11em;
