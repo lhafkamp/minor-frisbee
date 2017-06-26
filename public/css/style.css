@@ -8,6 +8,55 @@
 	src: url('../fonts/OpenSans-Bold.ttf');
 }
 
+/* in case of no flexbox */
+
+@supports not (display: -webkit-flex) or (display: -moz-flex) or (display: flex) {
+	.match {
+		text-align: center;
+		padding: 1.5em 0 1.5em;
+		background: white;
+		width: 100vw;
+		border-bottom: 1px solid rgba(0,0,0,0.05);
+		margin: .1em 0 .1em;
+	}
+
+	.match .vs {
+		font-family: 'BoldSans', 'sans-serif';
+		color: #4ADB95;
+		font-size: 2em;
+		font-style: italic;
+		margin: 0;
+		padding-right: .2em;
+		border-bottom: none;
+	}
+
+	#vs p {
+		float: left;
+	}
+
+	#score {
+		color: #666;
+		height: 11em;
+		margin-top: 1em;
+	}
+
+	#score p {
+		float: left;
+		padding: .1em;
+		font-size: 2em;
+		font-family: 'BoldSans', 'sans-serif';
+	}
+
+	#score article {
+		float: left;
+	}
+
+	#score article:nth-child(2) {
+		margin: 0em 1em 1em 1em;
+		font-size: 1.4em;
+	}
+}
+
 body {
 	display: flex;
 	flex-direction: column;
@@ -39,7 +88,7 @@ nav {
     justify-content: space-around;
     align-items: center;
     height: 3em;
-    width: 100vw;
+    width: 100%;
     background: white;
     margin-bottom: 1em;
     border-bottom: 1px solid rgba(0,0,0,0.05);
@@ -528,56 +577,6 @@ form button:focus {
 #err a {
 	color: #4ADB95;
 	text-decoration: underline;
-}
-
-
-/* in case of no flexbox */
-
-@supports not (display: -webkit-flex) or (display: -moz-flex) or (display: flex) {
-	.match {
-		text-align: center;
-		padding: 1.5em 0 1.5em;
-		background: white;
-		width: 100vw;
-		border-bottom: 1px solid rgba(0,0,0,0.05);
-		margin: .1em 0 .1em;
-	}
-
-	.match .vs {
-		font-family: 'BoldSans', 'sans-serif';
-		color: #4ADB95;
-		font-size: 2em;
-		font-style: italic;
-		margin: 0;
-		padding-right: .2em;
-		border-bottom: none;
-	}
-
-	#vs p {
-		float: left;
-	}
-
-	#score {
-		color: #666;
-		height: 11em;
-		margin-top: 1em;
-	}
-
-	#score p {
-		float: left;
-		padding: .1em;
-		font-size: 2em;
-		font-family: 'BoldSans', 'sans-serif';
-	}
-
-	#score article {
-		float: left;
-	}
-
-	#score article:nth-child(2) {
-		margin: 0em 1em 1em 1em;
-		font-size: 1.4em;
-	}
 }
 
 /* classList */
