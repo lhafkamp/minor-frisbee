@@ -40,25 +40,21 @@
 		margin-top: 1em;
 	}
 
-	#score p {
+	#score article {
+		display: block;
+		float: left;
+	}
+
+	#score article p {
 		float: left;
 		padding: .1em;
 		font-size: 2em;
 		font-family: 'BoldSans', 'sans-serif';
 	}
 
-	#score article {
-		float: left;
-	}
-
 	#score article:nth-child(2) {
-		display: block;
 		margin: 0em 1em 1em 1em;
 		font-size: 1.4em;
-	}
-
-	#score article:nth-child(2) p {
-		float: left;
 	}
 }
 
@@ -279,7 +275,8 @@ container {
 	margin-top: 1em;
 }
 
-#score p {
+#score article p {
+	float: left;
 	padding: .1em;
 	font-size: 2em;
 	font-family: 'BoldSans', 'sans-serif';
