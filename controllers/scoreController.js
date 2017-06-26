@@ -66,6 +66,7 @@ exports.form = async (req, res) => {
 			console.error('Updating result failed');
 		} else {
 			console.log('Result updated!');
+			req.flash('success', 'Score updated!');
 			res.redirect('/');
 		}
 	});
