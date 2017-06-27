@@ -88,6 +88,20 @@ Besides all that I took a look at accessability by creating a message once the s
 -  [x] 404 page
 -  [x] styling the main/admin/final score page
 
+### Week 5 (final week)
+In the last week I had to focus on fixing bugs, improving the interface and creating fallbacks for other browsers. Feature-wise I managed to tackle the last big problem which was that users could still press the 'start voting' button during a time-event. I fixed this problem by making a 'wait for voting' message once the user enters a room during an event. This way an event won't be manipulated by users that weren't there during the initial start of the event.
+
+I also made sure that I improved the perfomance, the app was already quite fast aside from the API so I just added gzip compression and uglyfied bundle.js. To improve the mobile experience on Android I also removed the URL bar on android once you download it to your home screen for a more native feel.
+
+-  [x] 'wait for voting' message once the user enters a room during an event
+-  [x] success flash message on the main page once you submit the final score
+-  [x] fallback for input type="color"
+-  [x] added icons and a login button in the nav
+-  [x] cleaned up all files
+-  [x] added gzip
+-  [x] uglified bundle.js
+-  [x] removed the URL bar on android for a more native feel (PWA)
+
 ## Build
 To run the application:
 ```bash
