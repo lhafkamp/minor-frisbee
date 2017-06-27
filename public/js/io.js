@@ -13,12 +13,12 @@ var colors = document.querySelectorAll('container input');
 var teamBorders = document.querySelectorAll('#vs p');
 
 // on server disconnect
-socket.on('disconnect', function () {
+socket.on('disconnect', function() {
 	error.innerHTML = '<section class="overlay"><article class="alert"><h1>Server down</h1><p>Try <a href="' + window.location.href + '">refreshing</a> the page or come back later!</p></article></section>';
 });
 
 // poll if the client is still online
-setInterval(function () {
+setInterval(function() {
 	if (navigator.onLine === false && !window.location.href.includes('localhost')) {
 		error.innerHTML = '<section class="overlay"><article class="alert"><h1>You seem to be offline</h1><p>Try to reconnect and <a href="' + window.location.href + '">refresh</a> the page</p></article></section>';
 	}
@@ -32,32 +32,32 @@ var params = location.slice(locationIndex + 7);
 // create socket room
 socket.emit('create', params);
 
-socket.on('startVoting', function () {
+socket.on('startVoting', function() {
 	// remove eventual scoreUpdate classes
 	scores[0].classList.remove('scoreUpdate');
 	scores[2].classList.remove('scoreUpdate');
 
 	// enable voting options
-	votes.forEach(function (vote) {
+	votes.forEach(function(vote) {
 		return vote.disabled = false;
 	});
 	start.disabled = true;
 });
 
-socket.on('endVoting', function () {
+socket.on('endVoting', function() {
 	// disable voting options
 	votes.forEach(function (vote) {
 		return vote.disabled = true;
 	});
 });
 
-socket.on('endEvent', function () {
+socket.on('endEvent', function() {
 	// enable start event button
 	start.disabled = false;
 	voting.classList.add('hide');
 });
 
-socket.on('timeStarted', function (counter) {
+socket.on('timeStarted', function(counter) {
 	// TODO test if this is a better progress option
 	progress.classList.add('countdown');
 	if (counter < 1) {
@@ -65,7 +65,7 @@ socket.on('timeStarted', function (counter) {
 	}
 });
 
-socket.on('leftVoteResult', function (score) {
+socket.on('leftVoteResult', function(score) {
 	// set score
 	scores[0].innerHTML = score;
 	leftPercentage.innerHTML = 0;
@@ -76,7 +76,7 @@ socket.on('leftVoteResult', function (score) {
 	leftPercentage.classList.remove('green');
 });
 
-socket.on('rightVoteResult', function (score) {
+socket.on('rightVoteResult', function(score) {
 	scores[2].innerHTML = score;
 	leftPercentage.innerHTML = 0;
 	rightPercentage.innerHTML = 0;
@@ -85,7 +85,7 @@ socket.on('rightVoteResult', function (score) {
 	rightPercentage.classList.remove('green');
 });
 
-socket.on('percentage', function (obj) {
+socket.on('percentage', function(obj) {
 	leftPercentage.innerHTML = obj.leftPercentage;
 	rightPercentage.innerHTML = obj.rightPercentage;
 
@@ -121,7 +121,7 @@ function sendScore() {
 }
 
 start.addEventListener('click', sendEvent);
-votes.forEach(function (vote) {
+votes.forEach(function(vote) {
 	return vote.addEventListener('click', sendScore);
 });
 
@@ -146,6 +146,6 @@ socket.on('updateShirt', function(colorData) {
 	});
 });
 
-colors.forEach(function (color) {
+colors.forEach(function(color) {
 	return color.addEventListener('input', sendColor);
 });
