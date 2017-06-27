@@ -13,28 +13,14 @@ var colors = document.querySelectorAll('container input');
 var teamBorders = document.querySelectorAll('#vs p');
 
 // on server disconnect
-socket.on('disconnect', function() {
-	error.innerHTML = `
-		<section class="overlay">
-			<article class="alert">
-				<h1>Server down</h1>
-				<p>Try <a href="${window.location.href}">refreshing</a> the page or come back later!</p>
-			</article>
-		</section>
-	`;
+socket.on('disconnect', function () {
+	error.innerHTML = '<section class="overlay"><article class="alert"><h1>Server down</h1><p>Try <a href="' + window.location.href + '">refreshing</a> the page or come back later!</p></article></section>';
 });
 
 // poll if the client is still online
-setInterval(function() {
+setInterval(function () {
 	if (navigator.onLine === false && !window.location.href.includes('localhost')) {
-		error.innerHTML = `
-			<section class="overlay">
-				<article class="alert">
-					<h1>You seem to be offline</h1>
-					<p>Try to reconnect and <a href="${window.location.href}">refresh</a> the page</p>
-				</article>
-			</section>
-		`;
+		error.innerHTML = '<section class="overlay"><article class="alert"><h1>You seem to be offline</h1><p>Try to reconnect and <a href="' + window.location.href + '">refresh</a> the page</p></article></section>';
 	}
 }, 1000);
 
@@ -141,7 +127,7 @@ votes.forEach(function (vote) {
 
 // send the team color to the server
 function sendColor(e) {
-	const obj = {
+	var obj = {
 		side: this.dataset.side,
 		team: this.name,
 		color: this.value
