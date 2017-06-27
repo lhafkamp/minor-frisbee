@@ -161,5 +161,5 @@ socket.on('updateShirt', function(colorData) {
 });
 
 colors.forEach(function (color) {
-	return color.addEventListener('focus', sendColor);
+	return color.addEventListener('input', sendColor);
 });
