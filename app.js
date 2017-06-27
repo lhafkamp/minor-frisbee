@@ -5,6 +5,7 @@ const socketio = require('socket.io');
 const session = require('express-session');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
+const compression = require('compression');
 const flash = require('connect-flash');
 
 // require models
@@ -15,6 +16,9 @@ const app = express();
 const server = http(app);
 const io = socketio(server);
 const port = process.env.PORT || 3000;
+
+// gzip
+app.use(compression());
 
 // get the public files
 app.use(express.static(path.join(__dirname, 'public')));
