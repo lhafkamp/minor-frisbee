@@ -37,6 +37,24 @@ One of the most remarkable things about Ultimate Frisbee is that there is no ref
 -  [x] user gets notified when the server is offline
 -  [x] looks like a native app when you put it on your homescreen (Android)
 
+## Wishlist
+See <a href="https://github.com/lhafkamp/minor-frisbee/issues">issues</a>.
+
+## Tools and packages
+-  [x] <a href="https://www.npmjs.com/package/express">Express</a>
+-  [x] Express-session
+-  [x] Body-parser
+-  [x] Request
+-  [x] MongoDB
+-  [x] Mongoose
+-  [x] Socket.io
+-  [x] Socket.io-client
+-  [x] Dot.env
+-  [x] Compression (gzip)
+-  [x] Browserify
+-  [x] Watchify
+-  [x] Uglify-js
+
 ## Core flow
 <img src="media/coreflow.png"/>
 
@@ -62,7 +80,7 @@ Users that go to the admin page and log in with their Leaguevine account will be
 
 ## Success message
 <img src="media/success.png" width="20%"/>
-Once the final score is submitted, the user gets redirected to the main page and can see what match just had its score updated.
+Once the final score is submitted, the user gets redirected to the main page and can see what match just had its score updated. This is done with the <a href="https://www.npmjs.com/package/connect-flash">connect-flash</a> package.
 
 ## Server/Internet down
 <img src="media/server.png" width="20%"/>
