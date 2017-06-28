@@ -108,11 +108,11 @@ On the main page you can see the pool matches that I get from the <a href="http:
 <img src="media/color.png" width="20%"/>
 Here you can change the team colors so that other users know what color shirts to look out for when walking around the tournament. The color picker doesn't work on every browser but the browsers who don't have the option still get to see the colors you picked for them.
 
-## Voting (<a href="https://github.com/lhafkamp/minor-frisbee/blob/master/app.js#L81">server side code</a>)/(a href="https://github.com/lhafkamp/minor-frisbee/blob/master/public/js/io.js">client side code</a>)
+## Voting
 <img src="media/voting.png" width="20%"/>
 The core of the app. A user can start a voting event, during this event every user can cast one vote, after that the voting options get disabled until the event is over. If more than 50% of the users upvoted one side, the score gets updated.
 
-## Wait for voting to end (<a href="https://github.com/lhafkamp/minor-frisbee/blob/master/app.js#L126">server side code</a>)/(<a href="https://github.com/lhafkamp/minor-frisbee/blob/master/app.js#L126">client side code</a>)
+## Wait for voting to end
 <img src="media/wait.png" width="20%"/>
 To make sure a voting event isn't intervened, the user gets a message when he enters a room during an event. Once the event is over the message dissapears and the user can participate.
 
