@@ -626,6 +626,26 @@ form button:focus {
 	color: white !important;
 }
 
+@keyframes swapFromLeft {
+	0% {
+		margin-left: -100em;
+	}
+
+	100% {
+		margin-left: 0em;
+	}
+}
+
+.success {
+	width: 100% !important;
+	padding: .5em;
+	animation: swapFromLeft 3s;
+}
+
+.success p {
+	font-size: 1em !important;
+}
+
 @keyframes score {
 	0% {
 		transform: rotate(-370deg);

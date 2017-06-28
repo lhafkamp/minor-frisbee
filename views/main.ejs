@@ -3,18 +3,29 @@
 <h1 class="pool">Pool matches</h1>
 
 <% games.forEach(game => { %>
+	<% const gameId = game.game_id %>
+
 	<a href="/score/<%= game.game_id %>">
-		<section class="match">
-			<article>
-				<p><%= game.leftScore %></p>
-				<p><%= game.leftTeam %></p>
-			</article>
-			<p class="vs">vs</p>
-			<article>
-				<p><%= game.rightScore %></p>
-				<p><%= game.rightTeam %></p>
-			</article>
-		</section>
+		<% if (flash.update == game.game_id) { %>
+			<section class="match">
+				<article class="success">
+					<p><%= game.leftTeam %> - <%= game.rightTeam %></p>
+					<p>Final score: <%= game.leftScore %> - <%= game.rightScore %></p>
+				</article>
+			</section>
+		<% } else { %>
+			<section class="match">
+				<article>
+					<p><%= game.leftScore %></p>
+					<p><%= game.leftTeam %></p>
+				</article>
+				<p class="vs">vs</p>
+				<article>
+					<p><%= game.rightScore %></p>
+					<p><%= game.rightTeam %></p>
+				</article>
+			</section>
+		<% } %>
 	</a>
 <% }); %>
 
