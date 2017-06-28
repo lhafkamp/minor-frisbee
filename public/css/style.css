@@ -513,7 +513,7 @@ form button:focus {
 
 .alert {
 	position: relative;
-	top: 25%;
+	top: 10%;
 	margin: 0 auto;
 	width: 50%;
 	text-align: center;
@@ -529,6 +529,11 @@ form button:focus {
 	font-family: 'BoldSans';
 	font-style: italic;
 	line-height: 1.2em;
+	margin: 0;
+}
+
+.alert p {
+	margin-bottom: 0;
 }
 
 .alert a {
