@@ -22,7 +22,7 @@ One of the most remarkable things about Ultimate Frisbee is that there is no ref
 -  [x] an option to adjust the score
 -  [x] an option to send the score to the Leaguevine API
 -  [x] time event button shouldn't be accessible during the time event
--  [ ] user needs to be notified when entering a room when there's an ongoing time event
+-  [x] user needs to be notified when entering a room when there's an ongoing time event
 
 ## Core flow
 <img src="media/coreflow.png"/>
@@ -34,6 +34,66 @@ One of the most remarkable things about Ultimate Frisbee is that there is no ref
 -  [x] different roles for players/organizers
 -  [ ] display all tournament matches (pools/brackets/finals etc)
 -  [ ] stats on the teams that are competing during the voting event
+
+
+## Getting the matches from the Leaguevine API
+<img src="matches.png"/>
+
+## Changing team colors
+<img src="color.png"/>
+
+## Voting
+<img src="voting.png"/>
+
+## Wait for voting to end
+<img src="wait.png"/>
+
+## Submit final score (admin)
+<img src="finalscore"/>
+
+## Success message
+<img src="success"/>
+
+## Server/Internet down
+<img src="server"/>
+<img src="offline"/>
+
+## Feature detection/progressive enhancement
+Here I make sure the voting options are only available when you have Javascript. These elements have 'display = none' class on them and once the Javascript gets loaded this class gets removed:
+```Javascript
+startButton.classList.remove('hide');
+progress.classList.remove('hide');
+votingOptions.forEach(function(option) {
+	return option.classList.remove('hide');
+});
+```
+
+Progressive enhancement for when the user supports input type="color":
+```Javascript
+colorInputs.forEach(function(input) {
+	if (input.type === 'color') {
+		input.classList.remove('hide');
+	} else {
+		input.value = null;
+	}
+});
+```
+
+A fallback for if a browser doesn't support SVG:
+```HTML
+<img src="/images/frisbee.svg" onerror="this.onerror=null,this.src="/images/frisbee.png""/>
+```
+
+Flexbox fallback:
+```CSS
+@supports not (display: -webkit-flex) or (display: -moz-flex) or (display: flex) {
+}
+```
+
+
+## Performance
+-  [x] Gzip
+-  [x] Uglify bundle.js
 
 ## Coding process
 ### Week 1
@@ -95,12 +155,14 @@ I also made sure that I improved the perfomance, the app was already quite fast 
 
 -  [x] 'wait for voting' message once the user enters a room during an event
 -  [x] success flash message on the main page once you submit the final score
+-  [x] success message is emphasized in the match you submitted the score for
 -  [x] fallback for input type="color"
 -  [x] added icons and a login button in the nav
 -  [x] cleaned up all files
 -  [x] added gzip
 -  [x] uglified bundle.js
 -  [x] removed the URL bar on android for a more native feel (PWA)
+-  [x] ad
 
 ## Build
 To run the application:
