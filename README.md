@@ -42,25 +42,32 @@ One of the most remarkable things about Ultimate Frisbee is that there is no ref
 
 ## Getting the matches from the Leaguevine API
 <img src="media/matches.png" width="20%"/>
+On the main page you can see the pool matches that I get from the Leaguevine API. Once you click on one you get directed to the scoring room for that match.
 
-## Changing team colors
+## Changing team colors (real-time)
 <img src="media/color.png" width="20%"/>
+Here you can change the team colors so that other users know what color shirts to look out for when walking around the tournament. The color picker doesn't work on every browser but the browsers who don't have the option still get to see the colors you picked for them.
 
 ## Voting
 <img src="media/voting.png" width="20%"/>
+The core of the app. A user can start a voting event, during this event every user can cast one vote, after that the voting options get disabled until the event is over. If more than 50% of the users upvoted one side, the score gets updated.
 
 ## Wait for voting to end
 <img src="media/wait.png" width="20%"/>
+To make sure a voting event isn't intervened, the user gets a message when he enters a room during an event. Once the event is over the message dissapears and the user can participate.
 
 ## Submit final score (admin)
 <img src="media/finalscore.png" width="20%"/>
+Users that go to the admin page and log in with their Leaguevine account will be able to end the match and submit the final score. These users can adjust the final score in case something went wrong.
 
 ## Success message
 <img src="media/success.png" width="20%"/>
+Once the final score is submitted, the user gets redirected to the main page and can see what match just had its score updated.
 
 ## Server/Internet down
 <img src="media/server.png" width="20%"/>
 <img src="media/offline.png" width="20%"/>
+Notifications for when the server is down or when the user doesn't have a connection.
 
 ## Feature detection/progressive enhancement
 Here I make sure the voting options are only available when you have Javascript. These elements have 'display = none' class on them and once the Javascript gets loaded this class gets removed:
@@ -94,10 +101,48 @@ For when a browser doesn't support flexbox:
 }
 ```
 
-
 ## Performance
 -  [x] Gzip
 -  [x] Uglify bundle.js
+
+## Build
+To run the application:
+```bash
+git clone
+```
+
+In order to get this app working you need to fill in the following <a href="https://www.npmjs.com/package/dotenv">dotenv</a> variables:  
+
+```bash
+CLIENT_ID={your client id here}
+```  
+```bash
+CLIENT_SECRET={your client secret here}
+```  
+```bash
+REDIRECT_URI={your redirect uri here}
+```  
+
+You can receive theses variables by making a new "Sandbox" on the Leaguevine development site:  
+<a href="http://www.playwithlv.com/docs/api/">http://www.playwithlv.com/docs/api/</a>  
+  
+Now you only have to make sure to pass in your <a href="https://www.mongodb.com/">MongoDB</a> database. Simply place your database link inside the mongoose.connect braces:
+
+```javascript
+mongoose.connect({your link here})
+```  
+
+Finally, to use the app you need to run the following commands:  
+```bash
+npm install
+```
+To install the Node dependencies.
+
+```bash
+npm start
+```  
+
+To start the server.
 
 ## Coding process
 ### Week 1
@@ -166,46 +211,10 @@ I also made sure that I improved the perfomance, the app was already quite fast 
 -  [x] added gzip
 -  [x] uglified bundle.js
 -  [x] removed the URL bar on android for a more native feel (PWA)
--  [x] ad
 
-## Build
-To run the application:
-```bash
-git clone
-```
+## What am I proud of?
+I really like how this app flows, the voting, the animations, it works and it looks sexy. Of course the most difficult challenge was mainting all the <a href="https://github.com/lhafkamp/minor-frisbee/blob/master/public/js/io.js">sockets</a> together with the data from the <a href="https://github.com/lhafkamp/minor-frisbee/blob/master/app.js">API/MongoDB</a>. I learned a lot making this app but it also shows how far I got these last couple of months. I made this app on my own and thats what I'm most proud of.
 
-In order to get this app working you need to fill in the following <a href="https://www.npmjs.com/package/dotenv">dotenv</a> variables:  
-
-```bash
-CLIENT_ID={your client id here}
-```  
-```bash
-CLIENT_SECRET={your client secret here}
-```  
-```bash
-REDIRECT_URI={your redirect uri here}
-```  
-
-You can receive theses variables by making a new "Sandbox" on the Leaguevine development site:  
-<a href="http://www.playwithlv.com/docs/api/">http://www.playwithlv.com/docs/api/</a>  
-  
-Now you only have to make sure to pass in your <a href="https://www.mongodb.com/">MongoDB</a> database. Simply place your database link inside the mongoose.connect braces:
-
-```javascript
-mongoose.connect({your link here})
-```  
-
-Finally, to use the app you need to run the following commands:  
-```bash
-npm install
-```
-To install the Node dependencies.
-
-```bash
-npm start
-```  
-
-To start the server.
 
 ## License
 
