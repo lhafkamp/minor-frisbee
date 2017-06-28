@@ -37,26 +37,26 @@ One of the most remarkable things about Ultimate Frisbee is that there is no ref
 
 
 ## Getting the matches from the Leaguevine API
-<img src="matches.png"/>
+<img src="media/matches.png"/>
 
 ## Changing team colors
-<img src="color.png"/>
+<img src="media/color.png"/>
 
 ## Voting
-<img src="voting.png"/>
+<img src="media/voting.png"/>
 
 ## Wait for voting to end
-<img src="wait.png"/>
+<img src="media/wait.png"/>
 
 ## Submit final score (admin)
-<img src="finalscore"/>
+<img src="media/finalscore"/>
 
 ## Success message
-<img src="success"/>
+<img src="media/success"/>
 
 ## Server/Internet down
-<img src="server"/>
-<img src="offline"/>
+<img src="media/server"/>
+<img src="media/offline"/>
 
 ## Feature detection/progressive enhancement
 Here I make sure the voting options are only available when you have Javascript. These elements have 'display = none' class on them and once the Javascript gets loaded this class gets removed:
@@ -79,12 +79,12 @@ colorInputs.forEach(function(input) {
 });
 ```
 
-A fallback for if a browser doesn't support SVG:
+A fallback for when a browser doesn't support SVG:
 ```HTML
 <img src="/images/frisbee.svg" onerror="this.onerror=null,this.src="/images/frisbee.png""/>
 ```
 
-Flexbox fallback:
+For when a browser doesn't support flexbox:
 ```CSS
 @supports not (display: -webkit-flex) or (display: -moz-flex) or (display: flex) {
 }
