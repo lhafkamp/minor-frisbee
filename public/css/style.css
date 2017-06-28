@@ -257,7 +257,8 @@ container {
 	top: 2em;
 	color: #4ADB95;
 	font-style: italic;
-	margin: 0em .2em 0em 0em;
+	margin: 0em .2em 0em .2em;
+	padding-right: .2em;
 	border-bottom: none;
 	text-shadow: -.5px 3px #3FB47E;
 }
