@@ -10,17 +10,19 @@
 <a href="http://minor-frisbee.herokuapp.com/">Live demo here</a>. Go to /admin and log in to get extra functions like updating the final score.
 
 ## Concept
-One of the most remarkable things about Ultimate Frisbee is that there is no referee on the field to blow a whistle when something goes wrongs. In Ultimate Frisbee, its not always clear which team made a goal or not. In this app I want to enhance this honorable task by giving the users the option to vote for which team made the goal so that its clear for everyone. The users can all decide if a point should be increased or stay the same whether on what they think is right, the majority vote wins and settles the score.
+One of the most remarkable things about Ultimate Frisbee is that there is no referee on the field. There is usually a volunteer that keeps up with the score.  
+
+This means that when you walk around the tournament, its not always clear which team made the goal. In this app, the users have the option to vote for which team scored a goal so that its clear for everyone. To make it even more helpfull for other users there is an option to pick a color for a team, that way other users that walk around the tournament can identify a team by if their shirt aligns with the color in the app.
 
 ## Core functionality
--  [x] oauth2 login with the Leaguevine API
+-  [x] oauth2 login with the <a href="http://www.playwithlv.com/docs/api/">Leaguevine API</a>
 -  [x] a page that displays the matches in the tournament
 -  [x] the ability to go to that match in order to participate in the score event
 -  [x] a 15 second time-based event where users can vote real-time to increase/halt the score of both teams
 -  [x] socket rooms with their own unique time-based events
 -  [x] voting interface is only enabled during the time-based event
 -  [x] an option to adjust the score in the end
--  [x] an option to send the score to the Leaguevine API
+-  [x] an option to send the score to the <a href="http://www.playwithlv.com/docs/api/">Leaguevine API</a>
 -  [x] time event button shouldn't be accessible during the time event
 -  [x] user needs to be notified when entering a room during a time event
 
@@ -42,35 +44,75 @@ See <a href="https://github.com/lhafkamp/minor-frisbee/issues">issues</a>.
 
 ## Tools and packages
 -  [x] <a href="https://www.npmjs.com/package/express">Express</a>
--  [x] Express-session
--  [x] Body-parser
--  [x] Request
--  [x] MongoDB
--  [x] Mongoose
--  [x] Socket.io
--  [x] Socket.io-client
--  [x] Dot.env
--  [x] Compression (gzip)
--  [x] Browserify
--  [x] Watchify
--  [x] Uglify-js
+-  [x] <a href="https://www.npmjs.com/package/express">Express-session</a>
+-  [x] <a href="https://www.npmjs.com/package/body-parser">Body-parser</a>
+-  [x] <a href="https://www.npmjs.com/package/request">Request</a>
+-  [x] <a href="https://www.mongodb.com/">MongoDB</a>
+-  [x] <a href="http://mongoosejs.com/">Mongoose</a>
+-  [x] <a href="https://socket.io/">Socket.io</a>
+-  [x] <a href="https://www.npmjs.com/package/socket.io-client">Socket.io-client</a>
+-  [x] <a href="https://www.npmjs.com/package/dotenv">Dotenv</a>
+-  [x] <a href="https://www.npmjs.com/package/compression">Compression (gzip)</a>
+-  [x] <a href="browserify.org">Browserify</a>
+-  [x] <a href="https://www.npmjs.com/package/watchify">Watchify</a>
+-  [x] <a href="https://www.npmjs.com/package/uglify-js">Uglify-js</a>
+
+## Build
+To run the application:
+```bash
+git clone
+```
+
+In order to get this app working you need to fill in the following <a href="https://www.npmjs.com/package/dotenv">dotenv</a> variables:  
+
+```bash
+CLIENT_ID={your client id here}
+```  
+```bash
+CLIENT_SECRET={your client secret here}
+```  
+```bash
+REDIRECT_URI={your redirect uri here}
+```  
+
+You can receive theses variables by making a new "Sandbox" on the Leaguevine development site:  
+<a href="http://www.playwithlv.com/docs/api/">http://www.playwithlv.com/docs/api/</a>  
+  
+Now you only have to make sure to pass in your <a href="https://www.mongodb.com/">MongoDB</a> database. Simply place your database link inside the mongoose.connect braces:
+
+```javascript
+mongoose.connect({your link here})
+```  
+
+Finally, to use the app you need to run the following commands:  
+```bash
+npm install
+```
+To install the Node dependencies.
+
+```bash
+npm start
+```  
+
+To start the server.
 
 ## Core flow
 <img src="media/coreflow.png"/>
 
-## Getting the matches from the Leaguevine API
+## Getting the matches from the Leaguevine API <a href="https://github.com/lhafkamp/minor-frisbee/blob/master/controllers/mainController.js">(code)</a>
 <img src="media/matches.png" width="20%"/>
-On the main page you can see the pool matches that I get from the Leaguevine API. Once you click on one you get directed to the scoring room for that match.
+On the main page you can see the pool matches that I get from the <a href="http://www.playwithlv.com/docs/api/">Leaguevine API</a>
+. Once you click on one you get directed to the scoring room for that match.
 
 ## Changing team colors (real-time)
 <img src="media/color.png" width="20%"/>
 Here you can change the team colors so that other users know what color shirts to look out for when walking around the tournament. The color picker doesn't work on every browser but the browsers who don't have the option still get to see the colors you picked for them.
 
-## Voting
+## Voting (<a href="https://github.com/lhafkamp/minor-frisbee/blob/master/app.js#L81">server side code</a>)/(a href="https://github.com/lhafkamp/minor-frisbee/blob/master/public/js/io.js">client side code</a>)
 <img src="media/voting.png" width="20%"/>
 The core of the app. A user can start a voting event, during this event every user can cast one vote, after that the voting options get disabled until the event is over. If more than 50% of the users upvoted one side, the score gets updated.
 
-## Wait for voting to end
+## Wait for voting to end (<a href="https://github.com/lhafkamp/minor-frisbee/blob/master/app.js#L126">server side code</a>)/(<a href="https://github.com/lhafkamp/minor-frisbee/blob/master/app.js#L126">client side code</a>)
 <img src="media/wait.png" width="20%"/>
 To make sure a voting event isn't intervened, the user gets a message when he enters a room during an event. Once the event is over the message dissapears and the user can participate.
 
@@ -122,45 +164,6 @@ For when a browser doesn't support flexbox:
 ## Performance
 -  [x] Gzip
 -  [x] Uglify bundle.js
-
-## Build
-To run the application:
-```bash
-git clone
-```
-
-In order to get this app working you need to fill in the following <a href="https://www.npmjs.com/package/dotenv">dotenv</a> variables:  
-
-```bash
-CLIENT_ID={your client id here}
-```  
-```bash
-CLIENT_SECRET={your client secret here}
-```  
-```bash
-REDIRECT_URI={your redirect uri here}
-```  
-
-You can receive theses variables by making a new "Sandbox" on the Leaguevine development site:  
-<a href="http://www.playwithlv.com/docs/api/">http://www.playwithlv.com/docs/api/</a>  
-  
-Now you only have to make sure to pass in your <a href="https://www.mongodb.com/">MongoDB</a> database. Simply place your database link inside the mongoose.connect braces:
-
-```javascript
-mongoose.connect({your link here})
-```  
-
-Finally, to use the app you need to run the following commands:  
-```bash
-npm install
-```
-To install the Node dependencies.
-
-```bash
-npm start
-```  
-
-To start the server.
 
 ## Coding process
 ### Week 1
