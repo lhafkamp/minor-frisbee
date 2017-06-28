@@ -41,26 +41,26 @@ One of the most remarkable things about Ultimate Frisbee is that there is no ref
 <img src="media/coreflow.png"/>
 
 ## Getting the matches from the Leaguevine API
-<img src="media/matches.png" width="15em"/>
+<img src="media/matches.png" width="50%"/>
 
 ## Changing team colors
-<img src="media/color.png" width="15em"/>
+<img src="media/color.png" width="50%"/>
 
 ## Voting
-<img src="media/voting.png" width="15em"/>
+<img src="media/voting.png" width="50%"/>
 
 ## Wait for voting to end
-<img src="media/wait.png" width="15em"/>
+<img src="media/wait.png" width="50%"/>
 
 ## Submit final score (admin)
-<img src="media/finalscore.png" width="15em"/>
+<img src="media/finalscore.png" width="50%"/>
 
 ## Success message
-<img src="media/success.png" width="15em"/>
+<img src="media/success.png" width="50%"/>
 
 ## Server/Internet down
-<img src="media/server.png" width="15em"/>
-<img src="media/offline.png" width="15em"/>
+<img src="media/server.png" width="50%"/>
+<img src="media/offline.png" width="50%"/>
 
 ## Feature detection/progressive enhancement
 Here I make sure the voting options are only available when you have Javascript. These elements have 'display = none' class on them and once the Javascript gets loaded this class gets removed:
