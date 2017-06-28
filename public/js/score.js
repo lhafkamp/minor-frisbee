@@ -28,6 +28,7 @@ votingOptions.forEach(function(option) {
 // fill in form when done
 function fillInForm() {
 	inputs[0].value = scores[0].textContent;
+	// 2 stands for right score
 	inputs[1].value = scores[2].textContent;
 	form.classList.remove('hide');
 	scoreContent.classList.add('hide');

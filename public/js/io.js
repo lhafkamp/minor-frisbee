@@ -35,6 +35,7 @@ socket.emit('create', params);
 socket.on('startVoting', function() {
 	// remove eventual scoreUpdate classes
 	scores[0].classList.remove('scoreUpdate');
+	// 2 stands for right score
 	scores[2].classList.remove('scoreUpdate');
 
 	// enable voting options
@@ -77,6 +78,7 @@ socket.on('leftVoteResult', function(score) {
 });
 
 socket.on('rightVoteResult', function(score) {
+	// 2 stands for right score
 	scores[2].innerHTML = score;
 	leftPercentage.innerHTML = 0;
 	rightPercentage.innerHTML = 0;
