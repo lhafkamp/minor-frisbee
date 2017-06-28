@@ -243,12 +243,12 @@ container {
 }
 
 #vs p:first-of-type {
-	min-width: 50%;
+	min-width: 7.4em;
 	text-align: right;
 }
 
 #vs p:last-of-type {
-	min-width: 50%;
+	min-width: 7.4em;
 }
 
 #vs p:nth-child(2) {
