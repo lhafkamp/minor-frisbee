@@ -19,44 +19,48 @@ One of the most remarkable things about Ultimate Frisbee is that there is no ref
 -  [x] a 15 second time-based event where users can vote real-time to increase/halt the score of both teams
 -  [x] socket rooms with their own unique time-based events
 -  [x] voting interface is only enabled during the time-based event
--  [x] an option to adjust the score
+-  [x] an option to adjust the score in the end
 -  [x] an option to send the score to the Leaguevine API
 -  [x] time event button shouldn't be accessible during the time event
--  [x] user needs to be notified when entering a room when there's an ongoing time event
-
-## Core flow
-<img src="media/coreflow.png"/>
+-  [x] user needs to be notified when entering a room during a time event
 
 ## Extra features
 -  [x] real-time percentage of votes in the time-based events
 -  [x] cool animations
 -  [x] a progress bar for the time event
--  [x] different roles for players/organizers
--  [ ] display all tournament matches (pools/brackets/finals etc)
--  [ ] stats on the teams that are competing during the voting event
+-  [x] admin role
+-  [x] success message after submitting the score
+-  [x] see what match just got updated on the main page
+-  [x] ability to change the team colors real-time
+-  [x] scores on the main page (not real-time)
+-  [x] user gets notified when offline
+-  [x] user gets notified when the server is offline
+-  [x] looks like a native app when you put it on your homescreen (Android)
 
+## Core flow
+<img src="media/coreflow.png"/>
 
 ## Getting the matches from the Leaguevine API
-<img src="media/matches.png"/>
+<img src="media/matches.png" width="15em"/>
 
 ## Changing team colors
-<img src="media/color.png"/>
+<img src="media/color.png" width="15em"/>
 
 ## Voting
-<img src="media/voting.png"/>
+<img src="media/voting.png" width="15em"/>
 
 ## Wait for voting to end
-<img src="media/wait.png"/>
+<img src="media/wait.png" width="15em"/>
 
 ## Submit final score (admin)
-<img src="media/finalscore"/>
+<img src="media/finalscore.png" width="15em"/>
 
 ## Success message
-<img src="media/success"/>
+<img src="media/success.png" width="15em"/>
 
 ## Server/Internet down
-<img src="media/server"/>
-<img src="media/offline"/>
+<img src="media/server.png" width="15em"/>
+<img src="media/offline.png" width="15em"/>
 
 ## Feature detection/progressive enhancement
 Here I make sure the voting options are only available when you have Javascript. These elements have 'display = none' class on them and once the Javascript gets loaded this class gets removed:
